@@ -39,7 +39,7 @@ public class PathTile : Tile {
 			//Straight path on map borders.Use for start and end
 			case 1:
 				Ttype = TileType.PathStraight;
-				this.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/TempSprites/path_straight");
+				this.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/MapSprites/path_straight");
 				if(this.x == 0 || this.x == mapsize_x){
 					print(this.x);
 					this.transform.rotation = Quaternion.Euler(0,0,90);
@@ -53,7 +53,7 @@ public class PathTile : Tile {
 					//Ίσιο μονοπάτι στο εσωτερικό του χάρτη
 					//Straight path inside map
 			   		Ttype = TileType.PathStraight;
-					this.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/TempSprites/path_straight");
+					this.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/MapSprites/path_straight");
 					if(checkY){
 						this.transform.rotation = Quaternion.Euler(0,0,90);
 					}
@@ -61,7 +61,7 @@ public class PathTile : Tile {
 					//Απλή γωνία 
 					//Simple Corner
 					Ttype = TileType.PathCorner;
-					this.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/TempSprites/path_corner");	
+					this.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/MapSprites/path_corner");	
 					bool Xbigger = PrevTiles[0].GetComponent<PathTile>().getX() > this.x || NextTiles[0].GetComponent<PathTile>().getX() > this.x;
 					bool Ybigger = PrevTiles[0].GetComponent<PathTile>().getY() > this.y || NextTiles[0].GetComponent<PathTile>().getY() > this.y;
 					if(Xbigger && Ybigger){
@@ -77,7 +77,7 @@ public class PathTile : Tile {
 				//Μονοπάτι σχήματος "Τ"
 				//T formation 
 				Ttype = TileType.PathTShape;
-				this.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/TempSprites/path_tshape");	
+				this.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/MapSprites/path_tshape");	
 				if(GameObject.Find("G " + x + "," + (y-1).ToString()) != null){
 					this.transform.rotation = Quaternion.Euler(0,0,180);
 				}else if(GameObject.Find("G " + (x+1).ToString() + "," + y) != null){
@@ -90,7 +90,7 @@ public class PathTile : Tile {
 				//Σταυροδρόμι
 				//Crossroads
 				Ttype = TileType.PathCrossroad;
-				this.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/TempSprites/path_cross");	
+				this.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/MapSprites/path_cross");	
 				break;
 		}
 	}

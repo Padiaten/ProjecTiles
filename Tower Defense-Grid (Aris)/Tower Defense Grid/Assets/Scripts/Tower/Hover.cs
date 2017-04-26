@@ -19,8 +19,8 @@ public class Hover : MonoBehaviour {
 	void Update () {
 
         //Τοποθέτηση Πύργων
-        var position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        position.z = transform.position.z;
+        Vector2 position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+		position = new Vector2(Mathf.Round(position.x),Mathf.Round(position.y));
 
         if (Input.GetMouseButtonUp(0) && canPlace)
         {
