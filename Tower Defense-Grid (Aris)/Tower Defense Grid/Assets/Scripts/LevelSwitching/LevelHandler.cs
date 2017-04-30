@@ -7,6 +7,7 @@ using UnityEngine;
 public static class LevelHandler{
 
 	private static List<List<string>> Selected_Level = new List<List<string>>();
+	private static int DimX=10,DimY=10;
 
 	public static void PickLevel(int i){
 		Selected_Level.Clear();
@@ -36,6 +37,8 @@ public static class LevelHandler{
 				break;
 		}
 
+		DimX = Selected_Level[0].Count;
+		DimY = Selected_Level.Count;
 	}
 
 
@@ -43,4 +46,13 @@ public static class LevelHandler{
 		return Selected_Level;
 	}
 
+	public static int getDimX(){
+		return DimX;
+	}
+
+	public static int getDimY(){
+		return DimY;
+	}
 }
+
+

@@ -10,6 +10,7 @@ public class Movement : MonoBehaviour {
 	private Vector2 vectorEnemy;
 	private Vector2 vectorNext;
 	private Vector2 v2;
+	GameObject GameFlow;
 
     private bool flag;
 
@@ -17,7 +18,8 @@ public class Movement : MonoBehaviour {
 	void Start () {
 		vectorEnemy = transform.position;
 		speed = 1f;
-        List<GameObject> go = Camera.main.GetComponent<GridController>().GetStartTiles();
+		GameFlow = GameObject.Find("GameFlow");
+		List<GameObject> go = GameFlow.GetComponent<GridController>().GetStartTiles();
         g = go[0];
 		g = g.GetComponent<PathTile> ().getNextTile_Random ();
 		vectorNext = g.GetComponent<Tile> ().getCoords ();

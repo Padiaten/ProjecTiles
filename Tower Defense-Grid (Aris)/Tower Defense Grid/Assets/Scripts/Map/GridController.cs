@@ -20,13 +20,10 @@ public class GridController : MonoBehaviour {
 				GameObject go = new GameObject();
 				go.AddComponent<SpriteRenderer>();
 				//go.AddComponent<SpriteRenderer>();
-				if(map[i][j] == "X" || map[i][j] == "B" ){
+				if(map[i][j] == "X"){
 					go.AddComponent<GrassTile>();
 					go.GetComponent<GrassTile>().initializeTile(j,map[j].Count-1-i);
 					go.name = "G" + " " + j + "," + (map[j].Count-1-i).ToString();
-					if(map[i][j] == "B"){
-						go.GetComponent<GrassTile>().set_canPlaceTower(false);
-					}
 				}else{
 					go.AddComponent<PathTile>();
 					go.GetComponent<PathTile>().initializeTile(j,map[j].Count-1-i);
@@ -96,6 +93,8 @@ public class GridController : MonoBehaviour {
 			
 			}
 		}
+
+		GetComponent<FlowController>().startWaveControler();
 
 	}
 

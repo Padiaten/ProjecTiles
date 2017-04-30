@@ -46,16 +46,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\Enemies\Enemy1.cs" />
+     <Compile Include="Assets\Scripts\Enemies\Enemy2.cs" />
+     <Compile Include="Assets\Scripts\Enemies\Enemy3.cs" />
+     <Compile Include="Assets\Scripts\Enemies\Enemy4.cs" />
+     <Compile Include="Assets\Scripts\Enemies\Enemy5.cs" />
+     <Compile Include="Assets\Scripts\Enemies\MainEnemy.cs" />
      <Compile Include="Assets\Scripts\Enemies\Movement.cs" />
+     <Compile Include="Assets\Scripts\Enemies\WaveControler.cs" />
      <Compile Include="Assets\Scripts\Enemies\enemyScript.cs" />
-     <Compile Include="Assets\Scripts\GameController.cs" />
+     <Compile Include="Assets\Scripts\FlowController.cs" />
+     <Compile Include="Assets\Scripts\LevelSwitching\LevelHandler.cs" />
+     <Compile Include="Assets\Scripts\LevelSwitching\LevelSelector.cs" />
      <Compile Include="Assets\Scripts\Map\GrassTile.cs" />
      <Compile Include="Assets\Scripts\Map\GridController.cs" />
-     <Compile Include="Assets\Scripts\Map\LevelHandler.cs" />
-     <Compile Include="Assets\Scripts\Map\LevelSelector.cs" />
      <Compile Include="Assets\Scripts\Map\PathTile.cs" />
      <Compile Include="Assets\Scripts\Map\Tile.cs" />
-     <Compile Include="Assets\Scripts\ObjectPool.cs" />
      <Compile Include="Assets\Scripts\Tower\Hover.cs" />
      <Compile Include="Assets\Scripts\Tower\Projectile.cs" />
      <Compile Include="Assets\Scripts\Tower\Tower.cs" />

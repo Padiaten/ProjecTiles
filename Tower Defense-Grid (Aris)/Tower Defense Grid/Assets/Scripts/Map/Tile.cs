@@ -9,7 +9,6 @@ public abstract class Tile : MonoBehaviour {
 
 	protected int x,y;
 	protected TileType Ttype;
-    protected bool canPlaceTower = true;
 
     // Use this for initialization
     void Start () {
@@ -42,11 +41,12 @@ public abstract class Tile : MonoBehaviour {
 
     public void set_canPlaceTower(bool t)
     {
-        canPlaceTower = t;
+       // canPlaceTower = t;
     }
 
     public bool getcanPlaceTower()
     {
-        return canPlaceTower;
+		return false;
+      //  return canPlaceTower;
     }
 }

@@ -10,7 +10,7 @@ public class PathTile : Tile {
 
 	// Use this for initialization
 	void Start () {
-        canPlaceTower = false;
+        //canPlaceTower = false;
         tag = "Path";
 	}
 	

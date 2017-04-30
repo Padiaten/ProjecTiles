@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class Hover : MonoBehaviour {
 
-    bool canPlace, f;
-    SpriteRenderer childSR;
+	bool hovering = true;
+
 
     // Use this for initialization
     void Start () {
-        canPlace = true;
-        f = true;
-        childSR = transform.GetChild(0).GetComponent<SpriteRenderer>();
-        childSR.enabled = true;
+		GetComponentInChildren<Tower>().enabled = false;
     }
 	
 	// Update is called once per frame
@@ -22,23 +19,54 @@ public class Hover : MonoBehaviour {
         Vector2 position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		position = new Vector2(Mathf.Round(position.x),Mathf.Round(position.y));
 
-        if (Input.GetMouseButtonUp(0) && canPlace)
-        {
-            f = false;
-            childSR.enabled = false;
-        }
-        if (f) transform.position = Vector2.Lerp(transform.position, position, 1f);
+		if(hovering){
 
+
+			//Restrict tower position within map border
+			if(position.x < 0){
+				position.x = 0;
+			}else if(position.x > LevelHandler.getDimX()-1){
+				position.x = LevelHandler.getDimX()-1;
+			}
+
+			if(position.y < 0){
+				position.y = 0;
+			}else if(position.y > LevelHandler.getDimY()-1){
+				position.y = LevelHandler.getDimY()-1;
+			}
+
+			transform.position = position;
+
+			//Left click to place
+			if(Input.GetMouseButtonDown(0)){
+				string Pname_test = "P " + position.x + "," + position.y;
+				string Gname_test = "G " + position.x + "," + position.y;
+				//Dont place on the path!
+				if(GameObject.Find(Pname_test)){
+					print("Cannot place on path :(");
+				//Dont place on occupied tiles!
+				}else if(GameObject.Find(Gname_test).GetComponent<GrassTile>().getCanPlaceBuilding() == false){
+					print("Cannot place on occupied grasstile :(");
+				//You can place here bro.
+				}else{
+					print("Tower placed @ "+ position.x +"," +position.y);
+					GameObject.Find(Gname_test).GetComponent<GrassTile>().setCanPlaceBuilding(false);
+					GetComponentInChildren<Tower>().enabled = true;
+					hovering = false;
+					this.GetComponent<Hover>().enabled = false;
+				}
+
+			}
+			//Right click to cancel placement
+			if(Input.GetMouseButtonDown(1)){
+				print("Cancelled");
+				Destroy(this.gameObject);
+				hovering = false;
+			}
+
+		}
     }
 
-    public void OnTriggerEnter2D(Collider2D c)
-    {
-        if (c.tag == "Tower") canPlace = false;
-    }
 
-    public void OnTriggerExit2D(Collider2D c)
-    {
-        if (c.tag == "Tower") canPlace = true;
-    }
 
 }
