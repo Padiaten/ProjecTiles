@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Controls the whole game
 public class FlowController : MonoBehaviour {
 
 	private int kills = 0;
