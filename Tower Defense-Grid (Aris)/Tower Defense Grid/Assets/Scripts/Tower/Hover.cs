@@ -39,6 +39,7 @@ public class Hover : MonoBehaviour {
 
 			//Left click to place
 			if(Input.GetMouseButtonDown(0)){
+
 				string Pname_test = "P " + position.x + "," + position.y;
 				string Gname_test = "G " + position.x + "," + position.y;
 				//Dont place on the path!
@@ -60,13 +61,15 @@ public class Hover : MonoBehaviour {
 			//Right click to cancel placement
 			if(Input.GetMouseButtonDown(1)){
 				print("Cancelled");
-				Destroy(this.gameObject);
-				hovering = false;
+				hovering = CancelPlacement();
 			}
 
 		}
     }
 
-
+	public bool CancelPlacement(){
+		Destroy(this.gameObject);
+		return false;
+	}
 
 }

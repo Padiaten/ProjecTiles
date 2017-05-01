@@ -15,14 +15,13 @@ public class WaveControler : MonoBehaviour {
 	private float oldTiBeEn = 0;
 
 	private bool outWave = true;
-	private int coef = 1;
 
 	void Start()
 	{
 		List<GameObject> startTiles = GetComponent<GridController> ().GetStartTiles();
 		spawnPoint = startTiles [0].GetComponent<PathTile> ().transform;
 
-		waves.Add (new List<string>(){"1-100-4-3","1-3-1-1","1-3-2-1","1-3-3-1","1-3-4-1"});
+		waves.Add (new List<string>(){"1-100-1-1","1-3-1-1","1-3-2-1","1-3-3-1","1-3-4-1"});
 		waves.Add (new List<string>(){"3-2-0-3","3-3-4-3","3-1-2-3"});
 		waves.Add (new List<string>(){"2-3-4-1","2-3-4-2","3-5-3-3"});
 		/*waves.Add (new List<string>(){"---","---","---"});
@@ -66,10 +65,10 @@ public class WaveControler : MonoBehaviour {
 				timeBetweenEnemies = float.Parse (values);
 
 
-				yield return new WaitForSeconds((countdown-oldTiBeEn)/coef);
+				yield return new WaitForSeconds(countdown-oldTiBeEn);
 				for (int j = 0; j < countEnemy; j++) {
-					Instantiate (enemies[enemyIndex],spawnPoint.position,spawnPoint.rotation);
-					yield return new WaitForSeconds(timeBetweenEnemies/coef);
+					Instantiate (enemies[enemyIndex],spawnPoint.position,spawnPoint.rotation).tag = "Enemy";
+					yield return new WaitForSeconds(timeBetweenEnemies);
 				}
 				oldTiBeEn = timeBetweenEnemies;
 			}
@@ -82,11 +81,5 @@ public class WaveControler : MonoBehaviour {
 	{
 		get{ return outWave;}
 		set{ outWave = value;}
-	}
-
-	public int Coef
-	{
-		get{ return coef;}
-		set{ coef = value;}
 	}
 }

@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class FlowController : MonoBehaviour {
 
+	private int kills = 0;
+	private int money = 0;
+	private int lives = 100;//ενδεικτικο
+
+
 	// Use this for initialization
 	void Start () {
 		GetComponent<GridController>().enabled = true;
@@ -21,7 +26,7 @@ public class FlowController : MonoBehaviour {
 	}
 
 	public void TowerHover(int i){
-		GameObject tower1,tower2,tower3,tower4,tower5;
+		GameObject tower1,tower2,tower3,tower4,tower5,tower6;
 		GameObject new_tower = null;
 
 		tower1 = (GameObject)Resources.Load("Prefabs/Tower",typeof(GameObject));
@@ -29,6 +34,7 @@ public class FlowController : MonoBehaviour {
 		tower3 = (GameObject)Resources.Load("Prefabs/Tower",typeof(GameObject));
 		tower4 = (GameObject)Resources.Load("Prefabs/Tower",typeof(GameObject));
 		tower5 = (GameObject)Resources.Load("Prefabs/Tower",typeof(GameObject));
+		tower6 = null;
 
 		Vector2 coords =  Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		coords = new Vector2(Mathf.Round(coords.x),Mathf.Round(coords.y));
@@ -49,11 +55,15 @@ public class FlowController : MonoBehaviour {
 			case 5:
 				new_tower = Instantiate(tower5,coords,Quaternion.identity);
 				break;
+			case 6:
+				new_tower = Instantiate(tower6,coords,Quaternion.identity);
+				break;
 			}
 		new_tower.GetComponent<Hover>().enabled = true;
 
 
 	}
+		
 
 	public void AdjustGameSpeed(){
 		if(Time.timeScale == 1){
@@ -61,5 +71,20 @@ public class FlowController : MonoBehaviour {
 		}else if(Time.timeScale == 2){
 			Time.timeScale = 1;
 		}
+	}
+
+	public int Kill{
+		get{ return kills;}
+		set{ kills = value;}
+	}
+
+	public int Money{
+		get{ return money;}
+		set{ money = value;}
+	}
+
+	public int Lives{
+		get{ return lives;}
+		set{ lives = value;}
 	}
 }

@@ -8,9 +8,12 @@ public class Enemy1 : MainEnemy {
 	private Vector2 vectorNext;
 	private bool flag;
 	GameObject GameFlow;
+	private int health = 5;
+	private int worth = 10;
 
 	// Use this for initialization
 	void Start () {
+		base.Start();
 		GameFlow = GameObject.Find("GameFlow");
 		coefSpeed = 1;
 		flag = false;
@@ -18,9 +21,14 @@ public class Enemy1 : MainEnemy {
 		g = listStarTiles[0].GetComponent<PathTile> ().getNextTile_Random ();
 		vectorNext = g.GetComponent<Tile> ().getCoords ();
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		Movement (coefSpeed,ref vectorNext,ref flag,ref g);
+	}
+
+	public void Hit(int hitpoints)//hitpoints: το hit του tower η συναρτηση καλειται καθε φορα που το enemy χτυπηθει
+	{
+		MainHit (hitpoints,health,worth);
 	}
 }
