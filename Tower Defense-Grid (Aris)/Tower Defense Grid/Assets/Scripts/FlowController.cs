@@ -30,11 +30,11 @@ public class FlowController : MonoBehaviour {
 		GameObject tower1,tower2,tower3,tower4,tower5,tower6;
 		GameObject new_tower = null;
 
-		tower1 = (GameObject)Resources.Load("Prefabs/Tower",typeof(GameObject));
-		tower2 = (GameObject)Resources.Load("Prefabs/Tower",typeof(GameObject));
-		tower3 = (GameObject)Resources.Load("Prefabs/Tower",typeof(GameObject));
-		tower4 = (GameObject)Resources.Load("Prefabs/Tower",typeof(GameObject));
-		tower5 = (GameObject)Resources.Load("Prefabs/Tower",typeof(GameObject));
+		tower1 = (GameObject)Resources.Load("Prefabs/Towers/Tower",typeof(GameObject));
+		tower2 = (GameObject)Resources.Load("Prefabs/Towers/Slow Tower", typeof(GameObject));
+		tower3 = (GameObject)Resources.Load("Prefabs/Towers/Buff Tower", typeof(GameObject));
+		tower4 = (GameObject)Resources.Load("Prefabs/Towers/Canon Tower", typeof(GameObject));
+		tower5 = (GameObject)Resources.Load("Prefabs/Towers/Global Tower", typeof(GameObject));
 		tower6 = null;
 
 		Vector2 coords =  Camera.main.ScreenToWorldPoint(Input.mousePosition);

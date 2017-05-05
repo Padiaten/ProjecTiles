@@ -4,15 +4,45 @@ using UnityEngine;
 
 public class MainEnemy: MonoBehaviour {
 
-	private GameObject gameFlow;
+    [SerializeField]
+    private int health;
 
-	// Use this for initialization
-	protected void Start () {
+    [SerializeField]
+    private float coefSpeed;
+
+   // private float cStemp;
+
+    [SerializeField]
+    private int worth;
+
+    private GameObject gameFlow;   
+    private GameObject g;
+    private Vector2 vectorNext;
+    private bool flag;
+    GameObject GameFlow;
+
+    
+
+    // Use this for initialization
+    protected void Start () {
 		print("yea started boi");
 		gameFlow = GameObject.Find("GameFlow");
-	}
 
-	public void Movement(float coefSpeed,ref Vector2 vectorNext,ref bool flag,ref GameObject g){
+        GameFlow = GameObject.Find("GameFlow");
+        flag = false;
+        List<GameObject> listStarTiles = GameFlow.GetComponent<GridController>().GetStartTiles();
+        g = listStarTiles[0].GetComponent<PathTile>().getNextTile_Random();
+        vectorNext = g.GetComponent<Tile>().getCoords();
+    }
+
+
+    void Update()
+    {
+        Movement(coefSpeed, ref vectorNext, ref flag, ref g);
+    }
+
+
+    public void Movement(float coefSpeed,ref Vector2 vectorNext,ref bool flag,ref GameObject g){
 
 		Vector3 dir = g.transform.position - this.transform.position;
 		float angle = (Mathf.Atan2 (dir.y, dir.x) * Mathf.Rad2Deg)+90;
@@ -35,7 +65,7 @@ public class MainEnemy: MonoBehaviour {
 		}
 	}
 
-	public void MainHit(int hitpoints,int health,int worth)
+	public void MainHit(int hitpoints)
 	{
 		health -= hitpoints;
 		if (health <= 0) {
@@ -43,7 +73,21 @@ public class MainEnemy: MonoBehaviour {
 			gameFlow.GetComponent<FlowController> ().Kill++;
 			gameFlow.GetComponent<FlowController> ().Money += worth;
 		}
+        
 	}
+
+    public void EffectHit(string effect, int value)
+    {
+
+        if(effect == "Slow")
+        {
+            coefSpeed /= value;
+        }
+        else if(effect == "Restore Movement")
+        {
+            coefSpeed *= value;
+        }
+    }
 }
 //Vector2 dir = new Vector2(vectorNext.x-transform.position.x,vectorNext.y-transform.position.y);
 //transform.Translate(speed*Time.deltaTime*dir.normalized,Space.World);

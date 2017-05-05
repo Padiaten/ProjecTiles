@@ -75,18 +75,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\CameraResize.cs" />
+    <Compile Include="Assets\Scripts\Enemies\MainEnemy.cs" />
     <Compile Include="Assets\Scripts\Enemies\Movement.cs" />
+    <Compile Include="Assets\Scripts\Enemies\WaveControler.cs" />
     <Compile Include="Assets\Scripts\Enemies\enemyScript.cs" />
-    <Compile Include="Assets\Scripts\GameController.cs" />
+    <Compile Include="Assets\Scripts\FlowController.cs" />
+    <Compile Include="Assets\Scripts\LevelSwitching\LevelHandler.cs" />
+    <Compile Include="Assets\Scripts\LevelSwitching\LevelSelector.cs" />
     <Compile Include="Assets\Scripts\Map\GrassTile.cs" />
     <Compile Include="Assets\Scripts\Map\GridController.cs" />
     <Compile Include="Assets\Scripts\Map\PathTile.cs" />
     <Compile Include="Assets\Scripts\Map\Tile.cs" />
-    <Compile Include="Assets\Scripts\ObjectPool.cs" />
-    <Compile Include="Assets\Scripts\Tower\Hover.cs" />
-    <Compile Include="Assets\Scripts\Tower\Projectile.cs" />
-    <Compile Include="Assets\Scripts\Tower\Tower.cs" />
-    <Compile Include="Assets\Scripts\Tower\TowerController.cs" />
+    <Compile Include="Assets\Scripts\Towers\Hover.cs" />
+    <Compile Include="Assets\Scripts\Towers\Projectile.cs" />
+    <Compile Include="Assets\Scripts\Towers\Tower.cs" />
+    <Compile Include="Assets\Scripts\Towers\TowerController.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
