@@ -44,7 +44,7 @@ public class GridController : MonoBehaviour {
 					string cur_tile_name ="P" + " " + j + "," + i;
 					//print("Current Tile:" + cur_tile_name);
 					GameObject cur_tile = GameObject.Find(cur_tile_name);
-
+					print("Cur Tile:" + cur_tile_name);
 					if(map[map.Count-1-i][j].Contains("U")){
 						string next_tile_name = "P" + " " + j + "," + (i+1).ToString();
 						GameObject p = GameObject.Find(next_tile_name);
