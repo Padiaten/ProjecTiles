@@ -1,29 +1,58 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 //Controls the whole game
 public class FlowController : MonoBehaviour {
 
-	private int kills = 0;
-	private int money = 0;
-	private int lives = 100;//ενδεικτικο
 
+	private int kills = 0;
+	private int money = 200;
+	private int lives = 100;//ενδεικτικο
+	public GameObject gameOverUI;
+	public GameObject pauseUI;
+	public GameObject levelCompleteUI;
+	private float oldTimeScale;
+	private int numberOFEnemies = 0;
+	private GameObject gameFlow;
+	private bool waveStart = false;
+	private bool completeLevel = false;
 
 	// Use this for initialization
 	void Start () {
 		GetComponent<GridController>().enabled = true;
+		gameFlow = GameObject.Find("GameFlow");
+		UpdateHealth();
+		UpdateGold();
 		//GetComponent<WaveControler>().enabled = true;
-
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
-		
+		if ((Input.GetKeyUp (KeyCode.Escape) || Input.GetKeyUp(KeyCode.P)) && !gameOverUI.activeSelf) {
+			pauseUI.SetActive (!pauseUI.activeSelf);
+			if (pauseUI.activeSelf) {
+				oldTimeScale = Time.timeScale;
+				Time.timeScale = 0f;
+			} else {
+				Time.timeScale = oldTimeScale;
+			}
+		}
+		if (waveStart) {
+			print("CompleteLevel:" + completeLevel);
+			print("End of waves:" + gameFlow.GetComponent<WaveControler> ().EndOfWaves);
+			print("numberOFEnemies" + numberOFEnemies);
+			if (!completeLevel && gameFlow.GetComponent<WaveControler> ().EndOfWaves && numberOFEnemies == 0) {
+				LevelComplete ();
+				completeLevel = true;
+			}
+		}
 	}
 
 	public void startWaveControler(){
 		GetComponent<WaveControler>().enabled = true;
+		waveStart = true;
 	}
 
 	public void TowerHover(int i){
@@ -31,40 +60,49 @@ public class FlowController : MonoBehaviour {
 		GameObject new_tower = null;
 
 		tower1 = (GameObject)Resources.Load("Prefabs/Towers/Tower",typeof(GameObject));
-		tower2 = (GameObject)Resources.Load("Prefabs/Towers/Slow Tower", typeof(GameObject));
-		tower3 = (GameObject)Resources.Load("Prefabs/Towers/Buff Tower", typeof(GameObject));
-		tower4 = (GameObject)Resources.Load("Prefabs/Towers/Canon Tower", typeof(GameObject));
-		tower5 = (GameObject)Resources.Load("Prefabs/Towers/Global Tower", typeof(GameObject));
+		tower2 = (GameObject)Resources.Load("Prefabs/Towers/Slow Tower",typeof(GameObject));
+		tower3 = (GameObject)Resources.Load("Prefabs/Towers/Buff Tower",typeof(GameObject));
+		tower4 = (GameObject)Resources.Load("Prefabs/Towers/Canon Tower",typeof(GameObject));
+		tower5 = (GameObject)Resources.Load("Prefabs/Towers/Global Tower",typeof(GameObject));
 		tower6 = null;
 
 		Vector2 coords =  Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		coords = new Vector2(Mathf.Round(coords.x),Mathf.Round(coords.y));
-	
+
 		switch(i){
-			case 1:
-				new_tower = Instantiate(tower1,coords,Quaternion.identity);
-				break;
-			case 2:
-				new_tower = Instantiate(tower2,coords,Quaternion.identity);
-				break;
-			case 3:
-				new_tower = Instantiate(tower3,coords,Quaternion.identity);
-				break;
-			case 4:
-				new_tower = Instantiate(tower4,coords,Quaternion.identity);
-				break;
-			case 5:
-				new_tower = Instantiate(tower5,coords,Quaternion.identity);
-				break;
-			case 6:
-				new_tower = Instantiate(tower6,coords,Quaternion.identity);
-				break;
-			}
+		case 1:
+			new_tower = Instantiate(tower1,coords,Quaternion.identity);
+			break;
+		case 2:
+			new_tower = Instantiate(tower2,coords,Quaternion.identity);
+			break;
+		case 3:
+			new_tower = Instantiate(tower3,coords,Quaternion.identity);
+			break;
+		case 4:
+			new_tower = Instantiate(tower4,coords,Quaternion.identity);
+			break;
+		case 5:
+			new_tower = Instantiate(tower5,coords,Quaternion.identity);
+			break;
+		case 6:
+			new_tower = Instantiate(tower6,coords,Quaternion.identity);
+			break;
+		}
 		new_tower.GetComponent<Hover>().enabled = true;
+		new_tower.GetComponent<Hover>().setTowerCost(TowerCost.getCost(i));
+
 
 
 	}
-		
+
+	public void  UpdateHealth(){
+		GameObject.Find("HealthText").GetComponent<Text>().text = lives.ToString();
+	}
+
+	public void UpdateGold(){
+		GameObject.Find("GoldText").GetComponent<Text>().text = money.ToString();
+	}
 
 	public void AdjustGameSpeed(){
 		if(Time.timeScale == 1){
@@ -72,6 +110,35 @@ public class FlowController : MonoBehaviour {
 		}else if(Time.timeScale == 2){
 			Time.timeScale = 1;
 		}
+	}
+
+	public void EndGame()
+	{
+		Time.timeScale = 0;
+		gameOverUI.SetActive (true);
+	}
+
+	public void Continue(){
+		pauseUI.SetActive (false);
+		Time.timeScale = oldTimeScale;
+	}
+
+	public void Restart()
+	{
+		Application.LoadLevel("MainGame");
+		Time.timeScale = 1f;
+	}
+
+	public void Menu()
+	{
+		Application.LoadLevel ("MainMenu");
+		Time.timeScale = 1f;
+	}
+
+	public void LevelComplete(){
+		levelCompleteUI.SetActive (true);
+		Time.timeScale = 0;//στα κουμπια να αλλαζει το τιμε.σκαλε = 1;
+		print ("LEVEL COMPLETE!!!");
 	}
 
 	public int Kill{
@@ -88,4 +155,10 @@ public class FlowController : MonoBehaviour {
 		get{ return lives;}
 		set{ lives = value;}
 	}
+
+	public int NumbersOfEnemies{
+		get{ return numberOFEnemies;}
+		set{ numberOFEnemies = value;}
+	}
 }
+

@@ -62,6 +62,9 @@ public class MainEnemy: MonoBehaviour {
 			Destroy (this.gameObject);
 
 			gameFlow.GetComponent<FlowController> ().Lives--;
+			gameFlow.GetComponent<FlowController> ().NumbersOfEnemies--;
+			gameFlow.GetComponent<FlowController> ().UpdateHealth();
+			if (gameFlow.GetComponent<FlowController> ().Lives <= 0) gameFlow.GetComponent<FlowController>().EndGame();
 		}
 	}
 
@@ -72,6 +75,8 @@ public class MainEnemy: MonoBehaviour {
 			Destroy (this.gameObject);
 			gameFlow.GetComponent<FlowController> ().Kill++;
 			gameFlow.GetComponent<FlowController> ().Money += worth;
+			gameFlow.GetComponent<FlowController> ().UpdateGold();
+			gameFlow.GetComponent<FlowController> ().NumbersOfEnemies--;
 		}
         
 	}

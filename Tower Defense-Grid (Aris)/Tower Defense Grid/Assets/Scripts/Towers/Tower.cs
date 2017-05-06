@@ -5,6 +5,7 @@ using UnityEngine;
 public class Tower : MonoBehaviour {
 
 
+
     [SerializeField]
     private bool hits;
 
@@ -60,11 +61,16 @@ public class Tower : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		UpdateRange();
 
         if(hits == true) Attack();
 
     }
       
+	public void UpdateRange(){
+		GetComponent<CircleCollider2D>().radius = Mathf.Max(transform.localScale.x,transform.localScale.y);
+		//transform.s = new Vector3(GetComponent<CircleCollider2D>().radius,GetComponent<CircleCollider2D>().radius,transform.position.z);
+	}
 
     private void Attack()
     {

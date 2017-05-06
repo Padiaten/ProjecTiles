@@ -6,7 +6,7 @@ public class Hover : MonoBehaviour {
 
 	bool hovering = true;
 
-
+	private int towerCost;
     // Use this for initialization
     void Start () {        
 		GetComponentInChildren<CircleCollider2D>().enabled = false;
@@ -15,7 +15,6 @@ public class Hover : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
         //Τοποθέτηση Πύργων
         Vector2 position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		position = new Vector2(Mathf.Round(position.x),Mathf.Round(position.y));
@@ -50,11 +49,17 @@ public class Hover : MonoBehaviour {
 				}else if(GameObject.Find(Gname_test).GetComponent<GrassTile>().getCanPlaceBuilding() == false){
 					print("Cannot place on occupied grasstile :(");
 				//You can place here bro.
+				}else if(GameObject.Find("GameFlow").GetComponent<FlowController>().Money < towerCost){
+						print("Not enough money");		
 				}else{
+					GameObject.Find("GameFlow").GetComponent<FlowController>().Money -= towerCost;
+					GameObject.Find("GameFlow").GetComponent<FlowController>().UpdateGold();
 					print("Tower placed @ "+ position.x +"," +position.y);
 					GameObject.Find(Gname_test).GetComponent<GrassTile>().setCanPlaceBuilding(false);
 					GetComponentInChildren<CircleCollider2D>().enabled = true;
                     GetComponentInChildren<BoxCollider2D>().enabled = true;
+					GetComponentInChildren<Tower>().enabled = true;
+					GetComponent<TowerInteractions>().enabled = true;
                     hovering = false;
 					this.GetComponent<Hover>().enabled = false;
 				}
@@ -68,6 +73,10 @@ public class Hover : MonoBehaviour {
 
 		}
     }
+
+	public void setTowerCost(int i){
+		towerCost = i;
+	}
 
 	public bool CancelPlacement(){
 		Destroy(this.gameObject);
