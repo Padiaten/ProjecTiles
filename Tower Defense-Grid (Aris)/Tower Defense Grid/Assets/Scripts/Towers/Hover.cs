@@ -5,12 +5,15 @@ using UnityEngine;
 public class Hover : MonoBehaviour {
 
 	bool hovering = true;
+	private GameObject InfoMessage;
 
 	private int towerCost;
     // Use this for initialization
     void Start () {        
 		GetComponentInChildren<CircleCollider2D>().enabled = false;
         GetComponentInChildren<BoxCollider2D>().enabled = false;
+		InfoMessage = GameObject.Find("InfoMessage");
+		print("InfoMessage:" + InfoMessage);
     }
 	
 	// Update is called once per frame
@@ -44,13 +47,16 @@ public class Hover : MonoBehaviour {
 				string Gname_test = "G " + position.x + "," + position.y;
 				//Dont place on the path!
 				if(GameObject.Find(Pname_test)){
-					print("Cannot place on path :(");
+					InfoMessage.GetComponent<ShowInfoText>().displayMessage(1);
+					//print("Cannot place on path :(");
 				//Dont place on occupied tiles!
 				}else if(GameObject.Find(Gname_test).GetComponent<GrassTile>().getCanPlaceBuilding() == false){
-					print("Cannot place on occupied grasstile :(");
+					InfoMessage.GetComponent<ShowInfoText>().displayMessage(2);
+					//print("Cannot place on occupied tile");
 				//You can place here bro.
 				}else if(GameObject.Find("GameFlow").GetComponent<FlowController>().Money < towerCost){
-						print("Not enough money");		
+					InfoMessage.GetComponent<ShowInfoText>().displayMessage(3);
+					//print("Not enough money");		
 				}else{
 					GameObject.Find("GameFlow").GetComponent<FlowController>().Money -= towerCost;
 					GameObject.Find("GameFlow").GetComponent<FlowController>().UpdateGold();

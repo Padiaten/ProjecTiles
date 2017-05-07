@@ -6,7 +6,6 @@ public class TowerController : MonoBehaviour {
 
     public GameObject TT;
     private Tower selectedTower;
-    private Movement enemy;
     private Projectile p;
 
     // Use this for initialization

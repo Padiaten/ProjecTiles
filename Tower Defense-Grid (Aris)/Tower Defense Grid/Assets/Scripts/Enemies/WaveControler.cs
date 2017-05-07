@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class WaveControler : MonoBehaviour {
 	public List<GameObject> enemies = new List<GameObject> ();
@@ -16,11 +18,13 @@ public class WaveControler : MonoBehaviour {
 	private float oldTiBeEn = 0;
 	private bool endOfWaves = false;
 	private bool outWave = true;
+	
+	private List<GameObject> startTiles;
+
 
 	void Start()
 	{
-		List<GameObject> startTiles = GetComponent<GridController> ().GetStartTiles();
-		spawnPoint = startTiles [0].GetComponent<PathTile> ().transform;
+		startTiles = GetComponent<GridController> ().GetStartTiles();
 		waves = LevelHandler.GetSelectedWave ();
 		gameFlow = GameObject.Find("GameFlow");
 	}
@@ -28,6 +32,7 @@ public class WaveControler : MonoBehaviour {
 	public void callWave()
 	{
 		if (outWave) {
+			GameObject.Find("WaveText").GetComponent<WaveTextController>().updateText(waveIndex+1);
 			StartCoroutine (next_Wave ());
 		}
 	}
@@ -62,7 +67,11 @@ public class WaveControler : MonoBehaviour {
 
 				yield return new WaitForSeconds (countdown - oldTiBeEn);
 				for (int j = 0; j < countEnemy; j++) {
-					Instantiate (enemies [enemyIndex], spawnPoint.position, spawnPoint.rotation).tag = "Enemy";
+					int startTileIndex = Random.Range(0,startTiles.Count);
+					spawnPoint = startTiles [startTileIndex].GetComponent<PathTile> ().transform;
+					GameObject enem = Instantiate (enemies [enemyIndex], spawnPoint.position, spawnPoint.rotation) as GameObject;
+					enem.tag = "Enemy";
+					enem.GetComponent<MainEnemy>().Initialize(startTileIndex);
 					gameFlow.GetComponent<FlowController> ().NumbersOfEnemies++;
 					yield return new WaitForSeconds (timeBetweenEnemies);
 				}
@@ -73,6 +82,7 @@ public class WaveControler : MonoBehaviour {
 				endOfWaves = true;
 			}
 		}
+		GameObject.Find("Start_and_Speed_Button").GetComponent<Image>().sprite = (Sprite)Resources.Load("Sprites/GUI/startlevel",typeof(Sprite));
 		outWave = true;
 	}
 
@@ -80,5 +90,14 @@ public class WaveControler : MonoBehaviour {
 	{
 		get{ return endOfWaves; }
 		set{ endOfWaves = value; }
+	}
+
+	//xtypouse error me ton allo tropo, :(
+	public bool getOutWave(){
+		return outWave;
+	}
+
+	public int getWaveIndex(){
+		return waveIndex;
 	}
 }

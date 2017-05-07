@@ -39,6 +39,7 @@ public class Tower : MonoBehaviour {
     [SerializeField]
     private int effectValue;
 
+	[SerializeField]
     private Projectile projectileObject;
 
     private SpriteRenderer sr;
@@ -98,7 +99,9 @@ public class Tower : MonoBehaviour {
 
     private void Shoot()
     {
-        projectileObject = (Projectile)Resources.Load("Prefabs/Towers/Projectiles/Projectile", typeof(Projectile));
+		if(projectileObject == null){
+			projectileObject = (Projectile)Resources.Load("Prefabs/Towers/Projectiles/Projectile", typeof(Projectile));
+		}
         Projectile proj = Instantiate(projectileObject, this.transform.position, Quaternion.identity)as Projectile;
         proj.Initialize(this);
 

@@ -19,19 +19,15 @@ public class MainEnemy: MonoBehaviour {
     private GameObject g;
     private Vector2 vectorNext;
     private bool flag;
-    GameObject GameFlow;
 
     
 
     // Use this for initialization
-    protected void Start () {
-		print("yea started boi");
+    public void Initialize (int i) {
 		gameFlow = GameObject.Find("GameFlow");
-
-        GameFlow = GameObject.Find("GameFlow");
         flag = false;
-        List<GameObject> listStarTiles = GameFlow.GetComponent<GridController>().GetStartTiles();
-        g = listStarTiles[0].GetComponent<PathTile>().getNextTile_Random();
+        List<GameObject> listStarTiles = gameFlow.GetComponent<GridController>().GetStartTiles();
+        g = listStarTiles[i].GetComponent<PathTile>().getNextTile_Random();
         vectorNext = g.GetComponent<Tile>().getCoords();
     }
 

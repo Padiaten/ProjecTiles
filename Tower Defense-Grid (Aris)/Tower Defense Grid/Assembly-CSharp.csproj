@@ -48,9 +48,8 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\CameraResize.cs" />
      <Compile Include="Assets\Scripts\Enemies\MainEnemy.cs" />
-     <Compile Include="Assets\Scripts\Enemies\Movement.cs" />
      <Compile Include="Assets\Scripts\Enemies\WaveControler.cs" />
-     <Compile Include="Assets\Scripts\Enemies\enemyScript.cs" />
+     <Compile Include="Assets\Scripts\Enemies\WaveTextController.cs" />
      <Compile Include="Assets\Scripts\FlowController.cs" />
      <Compile Include="Assets\Scripts\LevelSwitching\LevelHandler.cs" />
      <Compile Include="Assets\Scripts\LevelSwitching\LevelSelector.cs" />
@@ -62,7 +61,9 @@
      <Compile Include="Assets\Scripts\Music\ChangeMusicState.cs" />
      <Compile Include="Assets\Scripts\Music\DonotDestroyOnLoad.cs" />
      <Compile Include="Assets\Scripts\Music\SliderMusic.cs" />
+     <Compile Include="Assets\Scripts\ShowInfoText.cs" />
      <Compile Include="Assets\Scripts\Towers\Hover.cs" />
+     <Compile Include="Assets\Scripts\Towers\LookAtTarget.cs" />
      <Compile Include="Assets\Scripts\Towers\Projectile.cs" />
      <Compile Include="Assets\Scripts\Towers\SetTowerCosts.cs" />
      <Compile Include="Assets\Scripts\Towers\Tower.cs" />

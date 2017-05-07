@@ -18,6 +18,7 @@ public class FlowController : MonoBehaviour {
 	private GameObject gameFlow;
 	private bool waveStart = false;
 	private bool completeLevel = false;
+	private bool flagEnd = false;
 
 	// Use this for initialization
 	void Start () {
@@ -30,7 +31,10 @@ public class FlowController : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if ((Input.GetKeyUp (KeyCode.Escape) || Input.GetKeyUp(KeyCode.P)) && !gameOverUI.activeSelf) {
+
+	
+
+		if ((Input.GetKeyUp (KeyCode.Escape) || Input.GetKeyUp(KeyCode.P)) && !gameOverUI.activeSelf && !levelCompleteUI.activeSelf) {
 			pauseUI.SetActive (!pauseUI.activeSelf);
 			if (pauseUI.activeSelf) {
 				oldTimeScale = Time.timeScale;
@@ -40,10 +44,7 @@ public class FlowController : MonoBehaviour {
 			}
 		}
 		if (waveStart) {
-			print("CompleteLevel:" + completeLevel);
-			print("End of waves:" + gameFlow.GetComponent<WaveControler> ().EndOfWaves);
-			print("numberOFEnemies" + numberOFEnemies);
-			if (!completeLevel && gameFlow.GetComponent<WaveControler> ().EndOfWaves && numberOFEnemies == 0) {
+			if (!completeLevel && gameFlow.GetComponent<WaveControler> ().EndOfWaves && numberOFEnemies == 0 && !flagEnd) {
 				LevelComplete ();
 				completeLevel = true;
 			}
@@ -96,6 +97,15 @@ public class FlowController : MonoBehaviour {
 
 	}
 
+	public void StartWaves_UpdateSpeed(){
+		if(GetComponent<WaveControler>().getOutWave()){
+			GetComponent<WaveControler>().callWave();
+			GameObject.Find("Start_and_Speed_Button").GetComponent<Image>().sprite = (Sprite)Resources.Load("Sprites/GUI/speedup",typeof(Sprite));
+		}else{
+			AdjustGameSpeed();
+		}
+	}
+
 	public void  UpdateHealth(){
 		GameObject.Find("HealthText").GetComponent<Text>().text = lives.ToString();
 	}
@@ -107,8 +117,10 @@ public class FlowController : MonoBehaviour {
 	public void AdjustGameSpeed(){
 		if(Time.timeScale == 1){
 			Time.timeScale = 2;
+			GameObject.Find("Start_and_Speed_Button").GetComponent<Image>().sprite = (Sprite)Resources.Load("Sprites/GUI/speedup_full",typeof(Sprite));
 		}else if(Time.timeScale == 2){
 			Time.timeScale = 1;
+			GameObject.Find("Start_and_Speed_Button").GetComponent<Image>().sprite = (Sprite)Resources.Load("Sprites/GUI/speedup",typeof(Sprite));
 		}
 	}
 
@@ -132,6 +144,12 @@ public class FlowController : MonoBehaviour {
 	public void Menu()
 	{
 		Application.LoadLevel ("MainMenu");
+		Time.timeScale = 1f;
+	}
+	
+	public void ContinueLevelCompleteUI()
+	{
+		Application.LoadLevel ("LevelSelect");
 		Time.timeScale = 1f;
 	}
 
