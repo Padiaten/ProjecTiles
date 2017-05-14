@@ -33,7 +33,6 @@ public class FlowController : MonoBehaviour {
 	void Update () {
 
 	
-
 		if ((Input.GetKeyUp (KeyCode.Escape) || Input.GetKeyUp(KeyCode.P)) && !gameOverUI.activeSelf && !levelCompleteUI.activeSelf) {
 			pauseUI.SetActive (!pauseUI.activeSelf);
 			if (pauseUI.activeSelf) {
@@ -63,11 +62,11 @@ public class FlowController : MonoBehaviour {
 		tower1 = (GameObject)Resources.Load("Prefabs/Towers/Tower",typeof(GameObject));
 		tower2 = (GameObject)Resources.Load("Prefabs/Towers/Slow Tower",typeof(GameObject));
 		tower3 = (GameObject)Resources.Load("Prefabs/Towers/Buff Tower",typeof(GameObject));
-		tower4 = (GameObject)Resources.Load("Prefabs/Towers/Canon Tower",typeof(GameObject));
+		tower4 = (GameObject)Resources.Load("Prefabs/Towers/Roundhouse Tower",typeof(GameObject));
 		tower5 = (GameObject)Resources.Load("Prefabs/Towers/Global Tower",typeof(GameObject));
-		tower6 = null;
+		tower6 = (GameObject)Resources.Load("Prefabs/Towers/Canon Tower", typeof(GameObject));
 
-		Vector2 coords =  Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 coords =  Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		coords = new Vector2(Mathf.Round(coords.x),Mathf.Round(coords.y));
 
 		switch(i){
