@@ -148,7 +148,7 @@ public class FlowController : MonoBehaviour {
 	
 	public void ContinueLevelCompleteUI()
 	{
-		Application.LoadLevel ("LevelSelect");
+		Application.LoadLevel ("GameModeSelection");
 		Time.timeScale = 1f;
 	}
 

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 
 
 public static class LevelHandler{
@@ -81,6 +81,40 @@ public static class LevelHandler{
 		DimY = Selected_Level.Count;
 	}
 
+	//Reads custom levels from CustomLevels folder,which is located in the same dir as the exe
+	public static string[] ReadCustomLevels(){
+		//get path
+		string path = System.IO.Directory.GetCurrentDirectory() + "\\CustomLevels";
+		//if directory !exists create it
+		if(!System.IO.Directory.Exists(path)){
+			System.IO.Directory.CreateDirectory(path);
+		}
+		//get all files with ptl extension
+		string[] contents = System.IO.Directory.GetFiles(path,"*.ptl");
+		//return list of paths
+		return contents;
+	}
+
+	//Reads a custom level
+	public static void ReadCustom(string path){
+		Selected_Level.Clear();
+		Selected_Wave.Clear ();
+
+		string[] lines = System.IO.File.ReadAllLines(path);
+		//Add to selected level
+		for(int i =0;i<lines.Length;i++){
+			Selected_Level.Add(new List<string>());
+			string[] parts = lines[i].Split(' ');
+			foreach(string p in parts){
+				Selected_Level[i].Add(p);
+			}
+
+
+			DimX = Selected_Level[0].Count;
+			DimY = Selected_Level.Count;
+
+		}
+	}
 
 	public static List<List<string>> GetSelectedLevel(){
 		return Selected_Level;

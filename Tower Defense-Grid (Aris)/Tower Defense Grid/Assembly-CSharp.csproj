@@ -54,6 +54,7 @@
      <Compile Include="Assets\Scripts\LevelSwitching\LevelHandler.cs" />
      <Compile Include="Assets\Scripts\LevelSwitching\LevelSelector.cs" />
      <Compile Include="Assets\Scripts\LevelSwitching\MenuManager.cs" />
+     <Compile Include="Assets\Scripts\LevelSwitching\SurvivalMenuController.cs" />
      <Compile Include="Assets\Scripts\Map\GrassTile.cs" />
      <Compile Include="Assets\Scripts\Map\GridController.cs" />
      <Compile Include="Assets\Scripts\Map\PathTile.cs" />
