@@ -5,11 +5,19 @@ using UnityEngine.UI;
 
 public class WaveTextController : MonoBehaviour {
 
+	private bool survival = LevelHandler.IsSurvival;
+
 	void Start(){
-		GetComponent<Text>().text = "WAVE:" + GameObject.Find("GameFlow").GetComponent<WaveControler>().WavesIndex.ToString() + "/" + LevelHandler.GetSelectedWave()[0].Count.ToString();
+		if (!survival)
+			GetComponent<Text> ().text = "WAVE:" + GameObject.Find ("GameFlow").GetComponent<WaveControler> ().WavesIndex.ToString () + "/" + LevelHandler.GetSelectedWave () [0].Count.ToString ();
+		else
+			GetComponent<Text> ().text = "WAVE:" + GameObject.Find ("GameFlow").GetComponent<WaveControler> ().WavesIndex.ToString ();
 	}
 
 	public void updateText(int i){
-		GetComponent<Text>().text = "WAVE:" + i + "/" + LevelHandler.GetSelectedWave()[0].Count.ToString();
+		if (!survival)
+			GetComponent<Text> ().text = "WAVE:" + i + "/" + LevelHandler.GetSelectedWave () [0].Count.ToString ();
+		else
+			GetComponent<Text> ().text = "WAVE:" + i;
 	}
 }

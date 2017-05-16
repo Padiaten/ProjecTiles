@@ -54,12 +54,12 @@ public class Hover : MonoBehaviour {
 					InfoMessage.GetComponent<ShowInfoText>().displayMessage(2);
 					//print("Cannot place on occupied tile");
 				//You can place here bro.
-				}else if(GameObject.Find("GameFlow").GetComponent<FlowController>().Money < towerCost){
+				}else if(GameObject.Find("GameFlow").GetComponent<Player>().Money < towerCost){
 					InfoMessage.GetComponent<ShowInfoText>().displayMessage(3);
 					//print("Not enough money");		
 				}else{
-					GameObject.Find("GameFlow").GetComponent<FlowController>().Money -= towerCost;
-					GameObject.Find("GameFlow").GetComponent<FlowController>().UpdateGold();
+					GameObject.Find("GameFlow").GetComponent<Player>().Money -= towerCost;
+					GameObject.Find("GameFlow").GetComponent<Player>().UpdateGold();
 					print("Tower placed @ "+ position.x +"," +position.y);
 					GameObject.Find(Gname_test).GetComponent<GrassTile>().setCanPlaceBuilding(false);
 					GetComponentInChildren<CircleCollider2D>().enabled = true;

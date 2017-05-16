@@ -14,14 +14,17 @@ public class SurvivalMenuController : MonoBehaviour {
 		GameObject button = (GameObject)Resources.Load("Prefabs/UI/SurvivalButtonPrefab",typeof(GameObject));
 		GameObject Grid = GameObject.Find("Grid");
 
-		for(int i=0;i<3;i++){
+		int num = LevelHandler.NumbersOfTracks;
+		for(int i=0;i<num;i++){
 			GameObject newbutton = Instantiate(button,new Vector3(0,0,0),Quaternion.identity);
-			newbutton.transform.Find("Text").GetComponent<Text>().text = "LEVEL" + (i+1);
+			newbutton.transform.Find("Text").GetComponent<Text>().text = "TRACK" + (i+1);
 			newbutton.transform.SetParent(Grid.transform);
-			newbutton.name = "Level " + (i+1) + " Button";
+			newbutton.name = "Track " + (i+1) + " Button";
 			print(i);
 			int par = i+1;
 			newbutton.GetComponent<Button>().onClick.AddListener(() => GameObject.Find("GridManager").GetComponent<LevelSelector>().SelectLevel(par));
+			newbutton.GetComponent<Button>().onClick.AddListener(() => GameObject.Find("GridManager").GetComponent<LevelSelector>().Survival(true));
+			LevelHandler.IsSurvival = true;
 		}
 
 		string[] customlevels = LevelHandler.ReadCustomLevels();

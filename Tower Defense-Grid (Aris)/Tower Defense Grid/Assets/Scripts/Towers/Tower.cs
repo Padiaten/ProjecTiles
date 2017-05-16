@@ -55,13 +55,13 @@ public class Tower : MonoBehaviour {
 
     private SpriteRenderer sr;
 
-    private MainEnemy enemy;
-    public MainEnemy Enemy
+	private Enemy enem2;
+    public Enemy Enem2
     {
-        get { return enemy; }
+        get { return enem2; }
     }
 
-    private Queue<MainEnemy> enemies = new Queue<MainEnemy>();
+    private Queue<Enemy> enemies = new Queue<Enemy>();
 
     private float attackTimer;
     private bool canAttack;
@@ -113,12 +113,12 @@ public class Tower : MonoBehaviour {
             }
         }
 
-        if (enemy == null && enemies.Count > 0)
+        if (enem2 == null && enemies.Count > 0)
         {
-            enemy = enemies.Dequeue();
+            enem2 = enemies.Dequeue();
         }
 
-        if(enemy != null && enemy.isActiveAndEnabled && canAttack)
+        if(enem2 != null && enem2.isActiveAndEnabled && canAttack)
         {
             Shoot();
         }
@@ -169,12 +169,12 @@ public class Tower : MonoBehaviour {
         {           
             if (hits == true)
             {
-                enemies.Enqueue(o.GetComponent<MainEnemy>());
+                enemies.Enqueue(o.GetComponent<Enemy>());
             }
 
             if (effect == "Slow")
             {
-                o.GetComponent<MainEnemy>().EffectHit("Slow", effectValue);
+                o.GetComponent<Enemy>().EffectHit("Slow", effectValue);
             }
         }
 
@@ -194,12 +194,12 @@ public class Tower : MonoBehaviour {
         {
             if (hits == true)
             {
-                enemy = null;
+                enem2 = null;
             }
 
             if (effect == "Slow")
             {
-                o.GetComponent<MainEnemy>().EffectHit("Restore Movement", effectValue);
+                o.GetComponent<Enemy>().EffectHit("Restore Movement", effectValue);
             }
         }
 

@@ -8,13 +8,13 @@ public class Projectile : MonoBehaviour {
 
     private Vector3 direction;
 
-    private MainEnemy enemy;
+	private Enemy enem;
     private Tower sourceTower;
 
     private BoxCollider2D bCol;
     private CircleCollider2D cCol;
 
-    private List<MainEnemy> damagedEnemies;
+    private List<Enemy> damagedEnemies;
 
     // Use this for initialization
     void Start() {
@@ -34,25 +34,25 @@ public class Projectile : MonoBehaviour {
     public void Initialize(Tower sourceTower, Vector2 dir)
     {
         this.sourceTower = sourceTower;
-        enemy = sourceTower.Enemy;
+        enem = sourceTower.Enem2;
         direction = dir;
     }
 
     void MovetoEnemy()
     {
-        if (enemy != null && enemy.isActiveAndEnabled)
+        if (enem != null && enem.isActiveAndEnabled)
         {
 
-            Vector3 diff = enemy.transform.position - transform.position;
+            Vector3 diff = enem.transform.position - transform.position;
             diff.Normalize();
 
             float rot_z = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.Euler(0f, 0f, rot_z - 90);
 
-            transform.position = Vector3.MoveTowards(transform.position, enemy.transform.position,
+            transform.position = Vector3.MoveTowards(transform.position, enem.transform.position,
                                                      Time.deltaTime * sourceTower.ProjectileSpeed);
         }
-        else if (enemy == null)
+        else if (enem == null)
         {
             Destroy(this.gameObject);
         }
@@ -71,18 +71,18 @@ public class Projectile : MonoBehaviour {
         {
             if(o.tag == "Enemy")
             {
-                o.GetComponent<MainEnemy>().MainHit(sourceTower.Damage);
+                o.GetComponent<Enemy>().Hit(sourceTower.Damage);
                 Destroy(this.gameObject);
             }
         }
-        else if (o.gameObject == enemy.gameObject)
+        else if (o.gameObject == enem.gameObject)
         {         
            /* if (sourceTower.HitAOE)
             {
-                if (o.tag == "Enemy") o.GetComponent<MainEnemy>().MainHit(sourceTower.Damage);               
+                if (o.tag == "Enemy") o.GetComponent<Enemy>().Hit(sourceTower.Damage);               
                 Destroy(this.gameObject);
             }*/
-            enemy.MainHit(sourceTower.Damage);
+            enem.Hit(sourceTower.Damage);
             Destroy(this.gameObject);                         
         }
     }

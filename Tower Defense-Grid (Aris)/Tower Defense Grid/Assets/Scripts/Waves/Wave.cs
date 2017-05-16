@@ -54,10 +54,7 @@ public class Wave : MonoBehaviour {
 
 				yield return new WaitForSeconds (countdown - oldTiBeEn);
 				for (int j = 0; j < countEnemy; j++) {
-					GameObject enem = Instantiate (enemies [enemyIndex], spawnPoint.position, spawnPoint.rotation);
-					enem.tag = "Enemy";
-					enem.GetComponent<MainEnemy> ().Initialize (starTileIndex);
-					gameFlow.GetComponent<FlowController> ().NumbersOfEnemies++;
+					CreateEnemy (enemyIndex,spawnPoint,starTileIndex);
 					yield return new WaitForSeconds (timeBetweenEnemies);
 				}
 				oldTiBeEn = timeBetweenEnemies;
@@ -68,6 +65,14 @@ public class Wave : MonoBehaviour {
 			}
 		}
 		outWave = true;
+	}
+
+	public void CreateEnemy(int index,Transform point,int starTileIndex)
+	{
+		GameObject enem = Instantiate (enemies [index], point.position, point.rotation);
+		enem.tag = "Enemy";
+		enem.GetComponent<Enemy> ().Initialize (starTileIndex);
+		gameFlow.GetComponent<FlowController> ().NumbersOfEnemies++;
 	}
 
 	public bool OutWave

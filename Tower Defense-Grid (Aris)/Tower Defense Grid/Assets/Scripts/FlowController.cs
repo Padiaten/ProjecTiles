@@ -6,28 +6,21 @@ using UnityEngine.UI;
 //Controls the whole game
 public class FlowController : MonoBehaviour {
 
-	//PLAYER
-	private int kills = 0;
-	private int money = 200;
-	private int lives = 100;
 	//SCENES
 	public GameObject gameOverUI;
 	public GameObject pauseUI;
 	public GameObject levelCompleteUI;
-	//DIFFRENTS
+	//
 	private float oldTimeScale;
 	private int numberOFEnemies = 0;
 	private GameObject gameFlow;
+	private bool completeLevel = false;//εχει συμπληρωθει το level;
 	private bool waveStart = false;
-	private bool completeLevel = false;
-	private bool flagEnd = false;
 
 	// Use this for initialization
 	void Start () {
 		GetComponent<GridController>().enabled = true;
 		gameFlow = GameObject.Find("GameFlow");
-		UpdateHealth();
-		UpdateGold();
 		//GetComponent<WaveControler>().enabled = true;
 	}
 
@@ -35,6 +28,15 @@ public class FlowController : MonoBehaviour {
 	void Update () {
 		if ((Input.GetKeyUp (KeyCode.Escape) || Input.GetKeyUp(KeyCode.P)) && !gameOverUI.activeSelf && !levelCompleteUI.activeSelf) {
 			Pause();
+		}
+		if (waveStart) {
+			if (numberOFEnemies == 0 && GetComponent<WaveControler> ().OutOfWaves && !GetComponent<WaveControler> ().EndOfWaves)
+				GameObject.Find ("Start_and_Speed_Button").GetComponent<Image> ().sprite = (Sprite)Resources.Load ("Sprites/GUI/startlevel", typeof(Sprite));
+			else if (!completeLevel && gameFlow.GetComponent<WaveControler> ().EndOfWaves && numberOFEnemies == 0 && gameFlow.GetComponent<Player>().Lives > 0) {
+				//!completeLevel:για να ειμαστε σιγουροι πως δεν θα καλεστει ξανα 
+				completeLevel = true;
+				LevelComplete ();
+			}
 		}
 	}
 
@@ -52,7 +54,7 @@ public class FlowController : MonoBehaviour {
 		tower3 = (GameObject)Resources.Load("Prefabs/Towers/Buff Tower",typeof(GameObject));
 		tower4 = (GameObject)Resources.Load("Prefabs/Towers/Canon Tower",typeof(GameObject));
 		tower5 = (GameObject)Resources.Load("Prefabs/Towers/Global Tower",typeof(GameObject));
-		tower6 = (GameObject)Resources.Load("Prefabs/Towers/Roundhouse Tower", typeof(GameObject));
+		tower6 = (GameObject)Resources.Load("Prefabs/Towers/Canon Tower", typeof(GameObject));;
 
 		Vector2 coords =  Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		coords = new Vector2(Mathf.Round(coords.x),Mathf.Round(coords.y));
@@ -86,6 +88,7 @@ public class FlowController : MonoBehaviour {
 
 	public void StartWaves_UpdateSpeed(){
 		if(GetComponent<WaveControler>().OutOfWaves && numberOFEnemies==0 && !GetComponent<WaveControler>().EndOfWaves){
+			//!GetComponent<WaveControler>().EndOfWaves: αλλιως θα καλούνταν η callWave χωρις βεβαια να κανει κατι αλλα θα εμποδιζε την ταχυτητα να αυξηθει(στο τελευταιο κυμα)
 			if(Time.timeScale == 2)
 				Time.timeScale = 1;
 			GetComponent<WaveControler>().callWave();
@@ -93,14 +96,6 @@ public class FlowController : MonoBehaviour {
 		}else{
 			AdjustGameSpeed();
 		}
-	}
-
-	public void  UpdateHealth(){
-		GameObject.Find("HealthText").GetComponent<Text>().text = lives.ToString();
-	}
-
-	public void UpdateGold(){
-		GameObject.Find("GoldText").GetComponent<Text>().text = money.ToString();
 	}
 
 	public void AdjustGameSpeed(){
@@ -113,31 +108,23 @@ public class FlowController : MonoBehaviour {
 		}
 	}
 	
-	public void ControLives()
-	{
-		if(lives<=0) EndGame();
-	}
-	
 	public void ControlNumOfEnemies()
 	{
-		if(numberOFEnemies==0 && GetComponent<WaveControler>().OutOfWaves && !GetComponent<WaveControler>().EndOfWaves)
-			GameObject.Find("Start_and_Speed_Button").GetComponent<Image>().sprite = (Sprite)Resources.Load("Sprites/GUI/startlevel",typeof(Sprite));
-		else if(!completeLevel && gameFlow.GetComponent<WaveControler> ().EndOfWaves && numberOFEnemies == 0 && !flagEnd){
-			LevelComplete ();
-			completeLevel = true;
-		}
+		
 	}
-
+		
 	//SCENES IN GAME
 	public void EndGame()
 	{
+		//ποσο αντεξε, κουμπι για στατιστικα
 		Time.timeScale = 0;
 		gameOverUI.SetActive (true);
 	}
 	
 	public void LevelComplete(){
-		levelCompleteUI.SetActive (true);
+		//ποσο αντεξε, κουμπι για στατιστικα
 		Time.timeScale = 0;
+		levelCompleteUI.SetActive (true);
 	}
 	
 	public void Pause()
@@ -171,26 +158,12 @@ public class FlowController : MonoBehaviour {
 	
 	public void ContinueLevelCompleteUI()
 	{
-		Application.LoadLevel ("LevelSelect");
+		//analoga survivval or story na bgazei kai scene
+		Application.LoadLevel ("GameModeSelection");
 		Time.timeScale = 1f;
 	}
 
 	//GETTERS
-	public int Kill{
-		get{ return kills;}
-		set{ kills = value;}
-	}
-
-	public int Money{
-		get{ return money;}
-		set{ money = value;}
-	}
-
-	public int Lives{
-		get{ return lives;}
-		set{ lives = value;}
-	}
-
 	public int NumbersOfEnemies{
 		get{ return numberOFEnemies;}
 		set{ numberOFEnemies = value;}
