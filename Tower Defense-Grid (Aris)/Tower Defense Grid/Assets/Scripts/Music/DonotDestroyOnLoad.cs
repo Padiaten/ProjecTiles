@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class DonotDestroyOnLoad : MonoBehaviour {
 	bool muted;
 	void Update(){
-		print(muted);
 		if(muted)
 			AudioListener.volume = 0;
 			else

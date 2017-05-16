@@ -55,12 +55,10 @@ public class MainEnemy: MonoBehaviour {
 			}
 		}
 		if (Mathf.Approximately (transform.position.x, vectorNext.x) && Mathf.Approximately (transform.position.y, vectorNext.y) && flag) {
-			Destroy (this.gameObject);
-
+			DestroyEnemy();
 			gameFlow.GetComponent<FlowController> ().Lives--;
-			gameFlow.GetComponent<FlowController> ().NumbersOfEnemies--;
+			gameFlow.GetComponent<FlowController>().ControLives();
 			gameFlow.GetComponent<FlowController> ().UpdateHealth();
-			if (gameFlow.GetComponent<FlowController> ().Lives <= 0) gameFlow.GetComponent<FlowController>().EndGame();
 		}
 	}
 
@@ -68,13 +66,19 @@ public class MainEnemy: MonoBehaviour {
 	{
 		health -= hitpoints;
 		if (health <= 0) {
-			Destroy (this.gameObject);
+			DestroyEnemy();
 			gameFlow.GetComponent<FlowController> ().Kill++;
 			gameFlow.GetComponent<FlowController> ().Money += worth;
 			gameFlow.GetComponent<FlowController> ().UpdateGold();
-			gameFlow.GetComponent<FlowController> ().NumbersOfEnemies--;
 		}
         
+	}
+	
+	public void DestroyEnemy()
+	{
+		Destroy (this.gameObject);
+		gameFlow.GetComponent<FlowController> ().NumbersOfEnemies--;
+		gameFlow.GetComponent<FlowController> ().ControlNumOfEnemies();
 	}
 
     public void EffectHit(string effect, int value)

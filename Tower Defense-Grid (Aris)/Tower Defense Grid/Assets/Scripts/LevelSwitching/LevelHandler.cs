@@ -1,19 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
+
 
 
 public static class LevelHandler{
 
 	private static List<List<string>> Selected_Level = new List<List<string>>();
-	private static List<List<string>> Selected_Wave = new List<List<string>> ();
+	private static List<List<List<string>>> Selected_Wave = new List<List<List<string>>> ();
+	private static List<List<string>> Waves1 = new List<List<string>> ();
+	private static List<List<string>> Waves2 = new List<List<string>> ();
 
 	private static int DimX=10,DimY=10;
 
 	public static void PickLevel(int i){
 		Selected_Level.Clear();
 		Selected_Wave.Clear ();
+		Waves1.Clear ();
+		Waves2.Clear ();
 		switch(i){
 		case 1:
 			{
@@ -27,8 +31,10 @@ public static class LevelHandler{
 				Selected_Level.Add (new List<string> (){ "X", "X", "R", "D", "X", "X", "X", "X", "X" });
 				Selected_Level.Add (new List<string> (){ "X", "X", "X", "E", "X", "X", "X", "X", "X" });
 
-				Selected_Wave.Add (new List<string> (){"1-2-4-1","1-2-0-1","1-2-1-1","1-2-1-1","1-2-1-1"});
-				Selected_Wave.Add (new List<string> (){"1-100-0-0.3","1-100-1-0.3","1-100-2-0.3","1-100-3-0.3","1-100-4-0.3"});
+				Waves1.Add (new List<string> (){"1-2-4-1","1-2-0-1","1-2-1-1","1-2-1-1","1-2-1-1"});
+				Waves1.Add (new List<string> (){"1-100-0-0.3","1-100-1-0.3","1-100-2-0.3","1-100-3-0.3","1-100-4-0.3"});
+
+				Selected_Wave.Add (Waves1);
 				break;
 			}
 		case 2:
@@ -49,7 +55,13 @@ public static class LevelHandler{
 				Selected_Level.Add (new List<string> (){ "X", "X", "X", "X", "D", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X" });
 				Selected_Level.Add (new List<string> (){ "X", "X", "X", "X", "E", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X" });
 
-				Selected_Wave.Add (new List<string> (){"1-200-2-1","1-2-2-1","1-2-2-1","1-2-3-1","1-2-3-1"});
+				Waves1.Add (new List<string> (){"1-2-0-1"});
+				Waves2.Add (new List<string> (){"1-2-4-1"});
+				Waves1.Add (new List<string> (){"1-2-0-1"});
+				Waves2.Add (new List<string> (){"1-2-4-1"});
+
+				Selected_Wave.Add (Waves2);
+				Selected_Wave.Add (Waves1);
 				break;
 			}
 		case 3:
@@ -69,10 +81,11 @@ public static class LevelHandler{
 				Selected_Level.Add(new List<string>(){"X","X","X","X","X","X","X","X","X","X","X","X","D","X"});
 				Selected_Level.Add(new List<string>(){"X","X","X","X","X","X","X","X","X","X","X","X","E","X"});
 
-				Selected_Wave.Add (new List<string> (){"1-1-0-1"});
-				Selected_Wave.Add (new List<string> (){"1-6-0-1","2-6-1-2"});
-				Selected_Wave.Add (new List<string> (){"1-6-0-1","2-10-1-2","2-7-2-2","1-12-3-2","4-5-4-2"});
+				Waves1.Add (new List<string> (){"1-1-0-1"});
+				Waves1.Add (new List<string> (){"1-6-0-1","2-6-1-2"});
+				Waves1.Add (new List<string> (){"1-6-0-1","2-10-1-2","2-7-2-2","1-12-3-2","4-5-4-2"});
 
+				Selected_Wave.Add (Waves1);
 				break;	
 			}
 		}
@@ -81,46 +94,12 @@ public static class LevelHandler{
 		DimY = Selected_Level.Count;
 	}
 
-	//Reads custom levels from CustomLevels folder,which is located in the same dir as the exe
-	public static string[] ReadCustomLevels(){
-		//get path
-		string path = System.IO.Directory.GetCurrentDirectory() + "\\CustomLevels";
-		//if directory !exists create it
-		if(!System.IO.Directory.Exists(path)){
-			System.IO.Directory.CreateDirectory(path);
-		}
-		//get all files with ptl extension
-		string[] contents = System.IO.Directory.GetFiles(path,"*.ptl");
-		//return list of paths
-		return contents;
-	}
-
-	//Reads a custom level
-	public static void ReadCustom(string path){
-		Selected_Level.Clear();
-		Selected_Wave.Clear ();
-
-		string[] lines = System.IO.File.ReadAllLines(path);
-		//Add to selected level
-		for(int i =0;i<lines.Length;i++){
-			Selected_Level.Add(new List<string>());
-			string[] parts = lines[i].Split(' ');
-			foreach(string p in parts){
-				Selected_Level[i].Add(p);
-			}
-
-
-			DimX = Selected_Level[0].Count;
-			DimY = Selected_Level.Count;
-
-		}
-	}
 
 	public static List<List<string>> GetSelectedLevel(){
 		return Selected_Level;
 	}
 
-	public static List<List<string>> GetSelectedWave(){
+	public static List<List<List<string>>> GetSelectedWave(){
 		return Selected_Wave;
 	}
 
