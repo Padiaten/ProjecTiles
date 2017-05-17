@@ -4,19 +4,32 @@ using UnityEngine;
 
 public class Wave : MonoBehaviour {
 	public List<GameObject> enemies = new List<GameObject> ();
-	private Transform spawnPoint;
-	private float timeBetweenEnemies,countdown,oldTiBeEn = 0;
-	private int countEnemy,enemyIndex,waveIndex = 0; 
+
+	private float countdown,oldTiBeEn = 0;
 	private List<List<string>> waves = new List<List<string>> ();
-	private GameObject gameFlow;
-	private bool outWave = true,endWave = false;
-	private int starTileIndex;
+	private bool endWave = false;
+
+	protected float timeBetweenEnemies;
+	protected int enemiesNumber;
+	protected int enemyIndex,waveIndex;
+	protected bool outWave = true;
+	protected GameObject gameFlow;
+	protected int starTileIndex;
+	protected Transform spawnPoint;
+
+	public void Init(int i)
+	{
+		enemyIndex = 0;
+		waveIndex = 0;
+		outWave = true;
+		gameFlow = GameObject.Find("GameFlow");
+		starTileIndex = i;
+		spawnPoint = gameFlow.GetComponent<GridController> ().GetStartTiles()[starTileIndex].GetComponent<PathTile>().transform;
+	}
 
 	public void Initialize(int i)
 	{
-		starTileIndex = i;
-		gameFlow = GameObject.Find("GameFlow");
-		spawnPoint = gameFlow.GetComponent<GridController> ().GetStartTiles()[starTileIndex].GetComponent<PathTile>().transform;
+		Init (i);
 		waves = LevelHandler.GetSelectedWave ()[starTileIndex];
 	}
 
@@ -29,32 +42,12 @@ public class Wave : MonoBehaviour {
 		outWave = false;
 		if (waveIndex < waves.Count) {
 			List<string> wave = waves [waveIndex];
-			string item = "", values = "";
-			int index, oldindex;
 			for (int i = 0; i < wave.Count; i++) {	
-				oldindex = 0;
-				item = wave [i];
-				item.Replace (" ", "");
-				index = item.IndexOf ('-');
-				values = item.Substring (oldindex, (index - oldindex));
-				countdown = float.Parse (values);
-				oldindex = index;
-
-				index = item.IndexOf ('-', (index + 1));
-				values = item.Substring ((oldindex + 1), (index - oldindex - 1));
-				countEnemy = int.Parse (values);
-				oldindex = index;
-
-				index = item.IndexOf ('-', (index + 1));
-				values = item.Substring ((oldindex + 1), (index - oldindex - 1));
-				enemyIndex = int.Parse (values);
-
-				values = item.Substring ((index + 1), (item.Length - index - 1));
-				timeBetweenEnemies = float.Parse (values);
+				ReadList (i,wave);
 
 				yield return new WaitForSeconds (countdown - oldTiBeEn);
-				for (int j = 0; j < countEnemy; j++) {
-					CreateEnemy (enemyIndex,spawnPoint,starTileIndex);
+				for (int j = 0; j < enemiesNumber; j++) {
+					CreateEnemy (enemyIndex);
 					yield return new WaitForSeconds (timeBetweenEnemies);
 				}
 				oldTiBeEn = timeBetweenEnemies;
@@ -67,10 +60,36 @@ public class Wave : MonoBehaviour {
 		outWave = true;
 	}
 
-	public void CreateEnemy(int index,Transform point,int starTileIndex)
+	public void ReadList(int i,List<string> wave)
 	{
-		GameObject enem = Instantiate (enemies [index], point.position, point.rotation);
+		int index, oldindex;
+		string item = "", values = "";
+
+		oldindex = 0;
+		item = wave [i].Replace(" ","");
+		index = item.IndexOf ('-');
+		values = item.Substring (oldindex, (index - oldindex));
+		countdown = float.Parse (values);
+		oldindex = index;
+
+		index = item.IndexOf ('-', (index + 1));
+		values = item.Substring ((oldindex + 1), (index - oldindex - 1));
+		enemiesNumber = int.Parse (values);
+		oldindex = index;
+
+		index = item.IndexOf ('-', (index + 1));
+		values = item.Substring ((oldindex + 1), (index - oldindex - 1));
+		enemyIndex = int.Parse (values);
+
+		values = item.Substring ((index + 1), (item.Length - index - 1));
+		timeBetweenEnemies = float.Parse (values);
+	}
+
+	public void CreateEnemy(int index)
+	{
+		GameObject enem = Instantiate (enemies [index], spawnPoint.position, spawnPoint.rotation);
 		enem.tag = "Enemy";
+		enem.name = "Enemy"+(index+1);
 		enem.GetComponent<Enemy> ().Initialize (starTileIndex);
 		gameFlow.GetComponent<FlowController> ().NumbersOfEnemies++;
 	}
@@ -79,6 +98,11 @@ public class Wave : MonoBehaviour {
 	{
 		get{ return outWave; }
 		set{ outWave = value; }
+	}
+
+	public List<GameObject> EnemiesList
+	{
+		get{ return enemies; }
 	}
 
 	public bool EndWave{

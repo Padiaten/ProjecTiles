@@ -10,10 +10,20 @@ public class Enemy: MonoBehaviour {
     [SerializeField]
     private float coefSpeed;
 
-   // private float cStemp;
-
     [SerializeField]
     private int worth;
+
+	[SerializeField]
+	private int scoreIncrease;
+
+	[SerializeField]
+	private int scoreReduction;
+
+	[SerializeField]
+	private bool notSlow;
+
+	[SerializeField]
+	private int id;
 
     private GameObject gameFlow;   
     private GameObject g;
@@ -55,15 +65,7 @@ public class Enemy: MonoBehaviour {
 			}
 		}
 		if (Mathf.Approximately (transform.position.x, vectorNext.x) && Mathf.Approximately (transform.position.y, vectorNext.y) && flag) {
-			gameFlow.GetComponent<Player> ().Lives--;
-			gameFlow.GetComponent<Player>().ControLives();
-			gameFlow.GetComponent<Player> ().UpdateHealth();
-			DestroyEnemy();
-			/* πρωτα ενημερωνω lives και μετα καλω την DestroyEnemy αλλιως σε περιπτωση που ο παικτης εχει π.χ. 1 ζωη και ενας εχθρος φτασει
-			 * στο τελος λογικα το παιχνιδι θα πρεπει να τερματιστει καθως ο παικτης θα εχει χασει. Αν ομως καλεσω πρωτα την DestroyEnemy 
-			 * το παιχνιδι θα καταλαβει οτι συμπληρωθηκε το level καθως θα καλεστει πρωτα η ControlNumOfEnemies(βλεπε πως λειτουργει στο FlowController)
-			 * και οχι μονο αυτο αλλα θα εμφανιστει στην συνεχεια και η οθονη gameOver
-			 */ 
+			EndOfRoute ();
 		}
 	}
 
@@ -71,32 +73,47 @@ public class Enemy: MonoBehaviour {
 	{
 		health -= damage;
 		if (health <= 0) {
-			gameFlow.GetComponent<Player> ().Kill++;
-			gameFlow.GetComponent<Player> ().Money += worth;
-			gameFlow.GetComponent<Player> ().UpdateGold();
-			DestroyEnemy();
+			KillEnemy ();
 		}
-        
+	}
+
+	public void EndOfRoute()
+	{
+		gameFlow.GetComponent<Player> ().Lives--;
+		gameFlow.GetComponent<Player> ().Score -= scoreReduction;
+		gameFlow.GetComponent<Player> ().UpdateHealth();
+		gameFlow.GetComponent<Player>().ControLives();
+		DestroyEnemy();
+	}
+
+	public void KillEnemy()
+	{
+		gameFlow.GetComponent<Player> ().Kill++;
+		gameFlow.GetComponent<Player> ().Money += worth;
+		gameFlow.GetComponent<Player> ().Score += scoreIncrease;
+		gameFlow.GetComponent<Player> ().UpdateGold();
+		DestroyEnemy();
 	}
 	
 	public void DestroyEnemy()
 	{
 		Destroy (this.gameObject);
 		gameFlow.GetComponent<FlowController> ().NumbersOfEnemies--;
-		gameFlow.GetComponent<FlowController> ().ControlNumOfEnemies();
+		gameFlow.GetComponent<Player> ().UpdateScore ();
 	}
 
     public void EffectHit(string effect, int value)
     {
-
-        if(effect == "Slow")
-        {
-            coefSpeed /= value;
-        }
-        else if(effect == "Restore Movement")
-        {
-            coefSpeed *= value;
-        }
+		if (!notSlow) {
+			if(effect == "Slow")
+			{
+				coefSpeed /= value;
+			}
+			else if(effect == "Restore Movement")
+			{
+				coefSpeed *= value;
+			}
+		}
     }
 }
 //Vector2 dir = new Vector2(vectorNext.x-transform.position.x,vectorNext.y-transform.position.y);

@@ -1,13 +1,11 @@
-﻿
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 
 //θελει καλο ελεγχο καποιες μικρο αναβαθμισεις και καλυτερο σχολιασμο
 //μην ασχοληθει ομως κανεις με αυτην αν δεν με ρωτησει πρωτα
-public class SurvivalWaves : MonoBehaviour {
-	public List<GameObject> enemies = new List<GameObject> ();
+public class SurvivalWaves : Wave {
 	private static int InitiaEnemiesNumber = 5;//με ποσα enemies/κυμα θα ξεκινησει το παιχνιδι 
 	private static int EnemyAdder = 5;//ποσα παραπανω enemies θα βγαινουν σε καθε κυμα
 	private static float StartPercentage = 0.5f;//αρχικο ποσοστο του dominantEnemy στο κυμα
@@ -15,7 +13,7 @@ public class SurvivalWaves : MonoBehaviour {
 	// x= EndPercentage-StartPercentage. Αν x > WavesPerEnemy τοτε για x κυματα το percentage θα είναι ισο με EndPercentage
 	private static float PercentageAdder = 0.1f;//κατα ποσο αυξανεται το ποσοστο μεσα σε ενα κυμα του dominantEnemy(η αυξηση γινεται ανα κυμα)
 	private static int WavesPerEnemy = 5;//σε ποσα κυματα θα ειναι ενα enemy dominantEnemy
-	private static List<string> TimeBetweenEnemies = new List<string>{"2-0.1-0.5","2-0.1-0.2","2-1-0.2","1-0.1-0.2","0.1-0.01-0.02","0.05-0.01-0.01"};
+	private static List<string> ListTimeBetweenEnemies = new List<string>{"2-0.1-0.5","2-0.1-0.3","2-0.1-0.5","1-0.1-0.2","0.1-0.01-0.02","0.05-0.01-0.01"};
 	/*η παραπανω λιστα περιεχει τους χρονους μεταξυ των enemies. Ο πρώτος αριθμος αντιστοιχει στον αρχικο χρονο μεταξυ των enemies ο δευτερος στο κατωτατο οριο που μπορει να φτασει
 	 * και ο τριτος στο κατα ποσο θα μειωνεται ο χρονος.Για τα κυματα που δεν εχει δηλωθει χρονος θα χρησιμοποιουν το τελευταιο στοιχειο της λιστας. Το προγραμμα θα μετακινειται στο
 	 * επομενο στοιχειο της λιστας μετα απο WavesPerTime κυματα
@@ -26,31 +24,24 @@ public class SurvivalWaves : MonoBehaviour {
 	private static int WavesPerRandomPerce = 10;//ανα ποσα κυματα θα αυξανεται το Random_Perce_OfNum
 
 	private int numberStartiles;
-	private int waveIndex = 0;
-	private int enemyIndex = 0;
 	private int dominantEnemy;//το enemy που θα βγαινει σε μεγαλυτερη αναλογια
 	private float percentage;//ποσοστο του dominantEnemy στο κυμα
-	private int enemiesNumber;//ποσα enemies θα βγαινουν σε καθε κυμα
 
 	private int dominantEnemiesNumber,otherEnemiesNumber;
 	private float subtracter, startTime, endTime;
 	private int listOfTimesIndex = 0;
 	private int listTimeCount;
-
-	private bool outWave = true;
-	private Transform spawnPoint;
-	private int starTileIndex = 0; 
-	private float timeBetEnemies;
-	private GameObject gameFlow;
+	 
 	private float random_Perce_OfNum;
 
 	void Start (){
-		gameFlow = GameObject.Find ("GameFlow");
+		Init (0);
+
 		numberStartiles = gameFlow.GetComponent<GridController> ().GetStartTiles().Count;//αριθμος εισοδων
 		dominantEnemy = enemyIndex;
 		percentage = StartPercentage;
 		enemiesNumber = InitiaEnemiesNumber;
-		listTimeCount = TimeBetweenEnemies.Count;
+		listTimeCount = ListTimeBetweenEnemies.Count;
 		random_Perce_OfNum = Start_Random_Perce_OfNum;
 		spawnPoint = gameFlow.GetComponent<GridController> ().GetStartTiles()[starTileIndex].GetComponent<PathTile>().transform;
 	}
@@ -78,8 +69,8 @@ public class SurvivalWaves : MonoBehaviour {
 				starTileIndex = Mathf.RoundToInt (Random.Range (0,numberStartiles));
 				spawnPoint = gameFlow.GetComponent<GridController> ().GetStartTiles()[starTileIndex].GetComponent<PathTile>().transform;
 			}
-			CreateEnemy (dominantEnemy,spawnPoint,starTileIndex);
-			yield return new WaitForSeconds (timeBetEnemies);
+			CreateEnemy (dominantEnemy);
+			yield return new WaitForSeconds (timeBetweenEnemies);
 		}
 		for(int i = 0; i<otherEnemiesNumber; i++)
 		{
@@ -88,15 +79,16 @@ public class SurvivalWaves : MonoBehaviour {
 				spawnPoint = gameFlow.GetComponent<GridController> ().GetStartTiles()[starTileIndex].GetComponent<PathTile>().transform;
 			}
 			int randomEnemy = Mathf.RoundToInt (Random.Range (0,enemyIndex));
-			CreateEnemy (randomEnemy,spawnPoint,starTileIndex);
-			yield return new WaitForSeconds (timeBetEnemies);
+			CreateEnemy (randomEnemy);
+			if(i != (otherEnemiesNumber-1))
+				yield return new WaitForSeconds (timeBetweenEnemies);
 		}
 
 		enemiesNumber += EnemyAdder;
-		if (timeBetEnemies != endTime) {
-			timeBetEnemies -= subtracter;
-			if (timeBetEnemies < endTime) {
-				timeBetEnemies = endTime;
+		if (timeBetweenEnemies != endTime) {
+			timeBetweenEnemies -= subtracter;
+			if (timeBetweenEnemies < endTime) {
+				timeBetweenEnemies = endTime;
 			}
 		}
 		waveIndex++;//πρωτα να αυξανεται ο waveIndex και μετα να γινονται οι παρακατω ελεγχοι αλλιως αν αυξανεται μετα θα αλλαζει το dominantEnemy ενα κυμα αργοτερα
@@ -125,7 +117,7 @@ public class SurvivalWaves : MonoBehaviour {
 	{
 		int index,oldindex = 0;
 		string values = "";
-		string item = TimeBetweenEnemies[listOfTimesIndex].Replace(" ","");
+		string item = ListTimeBetweenEnemies[listOfTimesIndex].Replace(" ","");
 
 		index = item.IndexOf ('-');
 		values = item.Substring (oldindex, (index - oldindex));
@@ -141,21 +133,7 @@ public class SurvivalWaves : MonoBehaviour {
 
 		print (startTime+"-"+endTime+"-"+subtracter);
 
-		timeBetEnemies = startTime;
+		timeBetweenEnemies = startTime;
 		listOfTimesIndex++;
-	}
-
-	public void CreateEnemy(int index,Transform point,int starTileIndex)
-	{
-		GameObject enem = Instantiate (enemies [index], point.position, point.rotation);
-		enem.tag = "Enemy";
-		enem.GetComponent<Enemy> ().Initialize (starTileIndex);
-		gameFlow.GetComponent<FlowController> ().NumbersOfEnemies++;
-	}
-
-	public bool OutWave
-	{
-		get{ return outWave; }
-		set{ outWave = value; }
 	}
 }

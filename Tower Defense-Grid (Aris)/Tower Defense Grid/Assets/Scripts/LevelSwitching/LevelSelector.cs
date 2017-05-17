@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.SceneManagement;
 
 public class LevelSelector : MonoBehaviour {
 
@@ -12,11 +13,11 @@ public class LevelSelector : MonoBehaviour {
 	public void Survival(bool s)
 	{
 		LevelHandler.IsSurvival = s;
-		Application.LoadLevel("MainGame");
+		SceneManager.LoadScene ("MainGame");
 	}
 
 	public void SelectCustom(string path){
 		LevelHandler.ReadCustom(path);
-		Application.LoadLevel("MainGame");
+		SceneManager.LoadScene ("MainGame");
 	}
 }

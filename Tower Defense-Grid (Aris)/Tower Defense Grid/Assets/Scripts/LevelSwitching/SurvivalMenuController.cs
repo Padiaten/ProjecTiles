@@ -37,6 +37,4 @@ public class SurvivalMenuController : MonoBehaviour {
 			newbutton.GetComponent<Button>().onClick.AddListener(() => GameObject.Find("GridManager").GetComponent<LevelSelector>().SelectCustom(path));
 		}
 	}
-		
-		
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 //Controls the whole game
 public class FlowController : MonoBehaviour {
@@ -10,16 +11,19 @@ public class FlowController : MonoBehaviour {
 	public GameObject gameOverUI;
 	public GameObject pauseUI;
 	public GameObject levelCompleteUI;
+	public GameObject StatisticsUI;
 	//
 	private float oldTimeScale;
 	private int numberOFEnemies = 0;
 	private GameObject gameFlow;
 	private bool completeLevel = false;//εχει συμπληρωθει το level;
 	private bool waveStart = false;
+	private int oldScene;
 
 	// Use this for initialization
 	void Start () {
 		GetComponent<GridController>().enabled = true;
+		GetComponent<Player>().enabled = true;
 		gameFlow = GameObject.Find("GameFlow");
 		//GetComponent<WaveControler>().enabled = true;
 	}
@@ -107,11 +111,6 @@ public class FlowController : MonoBehaviour {
 			GameObject.Find("Start_and_Speed_Button").GetComponent<Image>().sprite = (Sprite)Resources.Load("Sprites/GUI/speedup",typeof(Sprite));
 		}
 	}
-	
-	public void ControlNumOfEnemies()
-	{
-		
-	}
 		
 	//SCENES IN GAME
 	public void EndGame()
@@ -119,12 +118,16 @@ public class FlowController : MonoBehaviour {
 		//ποσο αντεξε, κουμπι για στατιστικα
 		Time.timeScale = 0;
 		gameOverUI.SetActive (true);
+		gameFlow.GetComponent<Player> ().UpdateScore ();
+		GameObject.Find ("TextScoreGameOver").GetComponent<Text> ().text = gameFlow.GetComponent<Player> ().Score.ToString ();
 	}
 	
 	public void LevelComplete(){
-		//ποσο αντεξε, κουμπι για στατιστικα
+		//κουμπι για στατιστικα
 		Time.timeScale = 0;
 		levelCompleteUI.SetActive (true);
+		gameFlow.GetComponent<Player> ().UpdateScore ();
+		GameObject.Find ("TextScoreLevelComplete").GetComponent<Text> ().text = gameFlow.GetComponent<Player> ().Score.ToString (); 
 	}
 	
 	public void Pause()
@@ -146,21 +149,44 @@ public class FlowController : MonoBehaviour {
 
 	public void Restart()
 	{
-		Application.LoadLevel("MainGame");
+		SceneManager.LoadScene ("MainGame");
 		Time.timeScale = 1f;
 	}
 
 	public void Menu()
 	{
-		Application.LoadLevel ("MainMenu");
+		SceneManager.LoadScene ("MainMenu");
 		Time.timeScale = 1f;
 	}
 	
 	public void ContinueLevelCompleteUI()
 	{
 		//analoga survivval or story na bgazei kai scene
-		Application.LoadLevel ("GameModeSelection");
+		SceneManager.LoadScene ("GameModeSelection");
 		Time.timeScale = 1f;
+	}
+
+	public void StatisticsButton()
+	{
+		if (levelCompleteUI.activeSelf) {
+			levelCompleteUI.SetActive (false);
+			oldScene = 0;
+		} else if (gameOverUI.activeSelf) {
+			gameOverUI.SetActive (false);
+			oldScene = 1;
+		}
+		StatisticsUI.SetActive (true);
+		GetComponent<StatisticsMenuController> ().enabled = true;
+	}
+
+	public void Return()
+	{
+		GetComponent<StatisticsMenuController> ().enabled = false;
+		StatisticsUI.SetActive (false);
+		if (oldScene == 0)
+			LevelComplete ();
+		else
+			EndGame ();
 	}
 
 	//GETTERS
