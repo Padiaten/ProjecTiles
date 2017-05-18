@@ -31,7 +31,7 @@ public class SurvivalWaves : Wave {
 	private float subtracter, startTime, endTime;
 	private int listOfTimesIndex = 0;
 	private int listTimeCount;
-	 
+	      
 	private float random_Perce_OfNum;
 
 	void Start (){

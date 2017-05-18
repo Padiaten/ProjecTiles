@@ -100,7 +100,7 @@ public class Wave : MonoBehaviour {
 		set{ outWave = value; }
 	}
 
-	public List<GameObject> EnemiesList
+	public List<GameObject> ListWithEnemies
 	{
 		get{ return enemies; }
 	}

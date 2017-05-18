@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-
+using UnityEngine; 
+ 
 public class Enemy: MonoBehaviour {
 
     [SerializeField]
@@ -24,6 +24,9 @@ public class Enemy: MonoBehaviour {
 
 	[SerializeField]
 	private int id;
+	public int Id{
+		set{ id = value; }
+	}
 
     private GameObject gameFlow;   
     private GameObject g;
@@ -80,18 +83,18 @@ public class Enemy: MonoBehaviour {
 	public void EndOfRoute()
 	{
 		gameFlow.GetComponent<Player> ().Lives--;
-		gameFlow.GetComponent<Player> ().Score -= scoreReduction;
+		gameFlow.GetComponent<Player> ().UpdateScore ((-scoreReduction));
 		gameFlow.GetComponent<Player> ().UpdateHealth();
+		gameFlow.GetComponent<Player> ().AddInEnemieList (id,false);
 		gameFlow.GetComponent<Player>().ControLives();
 		DestroyEnemy();
 	}
 
 	public void KillEnemy()
 	{
-		gameFlow.GetComponent<Player> ().Kill++;
-		gameFlow.GetComponent<Player> ().Money += worth;
-		gameFlow.GetComponent<Player> ().Score += scoreIncrease;
-		gameFlow.GetComponent<Player> ().UpdateGold();
+		gameFlow.GetComponent<Player> ().UpdateScore (scoreIncrease);
+		gameFlow.GetComponent<Player> ().UpdateGold(worth);
+		gameFlow.GetComponent<Player> ().AddInEnemieList (id,true);
 		DestroyEnemy();
 	}
 	
@@ -99,7 +102,6 @@ public class Enemy: MonoBehaviour {
 	{
 		Destroy (this.gameObject);
 		gameFlow.GetComponent<FlowController> ().NumbersOfEnemies--;
-		gameFlow.GetComponent<Player> ().UpdateScore ();
 	}
 
     public void EffectHit(string effect, int value)

@@ -13,7 +13,7 @@ public class Hover : MonoBehaviour {
 		GetComponentInChildren<CircleCollider2D>().enabled = false;
         GetComponentInChildren<BoxCollider2D>().enabled = false;
 		InfoMessage = GameObject.Find("InfoMessage");
-		print("InfoMessage:" + InfoMessage);
+		//print("InfoMessage:" + InfoMessage);
     }
 	
 	// Update is called once per frame
@@ -58,9 +58,9 @@ public class Hover : MonoBehaviour {
 					InfoMessage.GetComponent<ShowInfoText>().displayMessage(3);
 					//print("Not enough money");		
 				}else{
-					GameObject.Find("GameFlow").GetComponent<Player>().Money -= towerCost;
-					GameObject.Find("GameFlow").GetComponent<Player>().UpdateGold();
-					print("Tower placed @ "+ position.x +"," +position.y);
+					GameObject.Find ("GameFlow").GetComponent<Player> ().AddInTowerList (this.gameObject.GetComponentInChildren<Tower> ().Id,true);
+					GameObject.Find("GameFlow").GetComponent<Player>().UpdateGold((-towerCost));
+					//print("Tower placed @ "+ position.x +"," +position.y);
 					GameObject.Find(Gname_test).GetComponent<GrassTile>().setCanPlaceBuilding(false);
 					GetComponentInChildren<CircleCollider2D>().enabled = true;
                     GetComponentInChildren<BoxCollider2D>().enabled = true;

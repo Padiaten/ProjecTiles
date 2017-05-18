@@ -76,17 +76,6 @@ public class WaveControler : MonoBehaviour {
 		}
 	}
 
-	public List<GameObject> ListWithEnemies
-	{
-		get
-		{ 
-			if (!survival)
-				return WaveObjects [0].GetComponent<Wave> ().EnemiesList;
-			else
-				return WaveObjects [0].GetComponent<SurvivalWaves> ().EnemiesList;
-		}
-	}
-
 	public int WavesIndex{
 		get{ return wavesIndex; }
 	}

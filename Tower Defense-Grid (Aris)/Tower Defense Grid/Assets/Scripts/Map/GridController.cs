@@ -93,14 +93,11 @@ public class GridController : MonoBehaviour {
 			
 			}
 		}
-
 		GetComponent<FlowController>().startWaveControler();
-
 	}
 
 	public List<GameObject> GetStartTiles(){
-		print("returned something," + StartTiles.Count);
-
+		//print("returned something," + StartTiles.Count);
 		return StartTiles;
 	}
 

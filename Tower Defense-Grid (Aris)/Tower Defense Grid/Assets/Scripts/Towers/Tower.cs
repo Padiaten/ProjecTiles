@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Tower : MonoBehaviour {
 
-
-
     [SerializeField]
     private bool hits;
 
@@ -52,6 +50,13 @@ public class Tower : MonoBehaviour {
 
     [SerializeField]
     private Projectile projectileObject;
+
+	[SerializeField]
+	private int id;
+	public int Id{
+		get{ return id; }
+		set{ id = value; }
+	}
 
     private SpriteRenderer sr;
 
@@ -128,7 +133,7 @@ public class Tower : MonoBehaviour {
     {
 		if(projectileObject == null)
         {
-			projectileObject = (Projectile)Resources.Load("Prefabs/Towers/Projectiles/Projectile", typeof(Projectile));
+			projectileObject = (Projectile)Resources.Load("Prefabs/Projectiles/Projectile", typeof(Projectile));
 		}
 
         if (multipleRoundhouseHit)

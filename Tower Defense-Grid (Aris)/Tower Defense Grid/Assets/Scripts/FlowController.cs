@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-
+ 
 //Controls the whole game
 public class FlowController : MonoBehaviour {
 
@@ -24,6 +24,7 @@ public class FlowController : MonoBehaviour {
 	void Start () {
 		GetComponent<GridController>().enabled = true;
 		GetComponent<Player>().enabled = true;
+		GetComponent<Player> ().StartChronometer ();
 		gameFlow = GameObject.Find("GameFlow");
 		//GetComponent<WaveControler>().enabled = true;
 	}
@@ -115,18 +116,16 @@ public class FlowController : MonoBehaviour {
 	//SCENES IN GAME
 	public void EndGame()
 	{
-		//ποσο αντεξε, κουμπι για στατιστικα
+		GetComponent<Player> ().EndChronometer();
 		Time.timeScale = 0;
 		gameOverUI.SetActive (true);
-		gameFlow.GetComponent<Player> ().UpdateScore ();
 		GameObject.Find ("TextScoreGameOver").GetComponent<Text> ().text = gameFlow.GetComponent<Player> ().Score.ToString ();
 	}
 	
 	public void LevelComplete(){
-		//κουμπι για στατιστικα
+		GetComponent<Player> ().EndChronometer();
 		Time.timeScale = 0;
 		levelCompleteUI.SetActive (true);
-		gameFlow.GetComponent<Player> ().UpdateScore ();
 		GameObject.Find ("TextScoreLevelComplete").GetComponent<Text> ().text = gameFlow.GetComponent<Player> ().Score.ToString (); 
 	}
 	
@@ -134,9 +133,11 @@ public class FlowController : MonoBehaviour {
 	{
 		pauseUI.SetActive (!pauseUI.activeSelf);
 		if (pauseUI.activeSelf) {
+			GetComponent<Player> ().StopChronometer ();
 			oldTimeScale = Time.timeScale;
 			Time.timeScale = 0f;
 		} else {
+			GetComponent<Player> ().StartChronometer ();
 			Time.timeScale = oldTimeScale;
 		}
 	}
@@ -145,6 +146,7 @@ public class FlowController : MonoBehaviour {
 	public void Continue(){
 		pauseUI.SetActive (false);
 		Time.timeScale = oldTimeScale;
+		GetComponent<Player> ().StartChronometer ();
 	}
 
 	public void Restart()
@@ -184,9 +186,9 @@ public class FlowController : MonoBehaviour {
 		GetComponent<StatisticsMenuController> ().enabled = false;
 		StatisticsUI.SetActive (false);
 		if (oldScene == 0)
-			LevelComplete ();
+			levelCompleteUI.SetActive (true);
 		else
-			EndGame ();
+			gameOverUI.SetActive (true);
 	}
 
 	//GETTERS
