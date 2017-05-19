@@ -6,12 +6,17 @@ using UnityEngine.SceneManagement;
 public class MenuManager : MonoBehaviour {
 
 	/*void Start(){
+		
 	}*/
 
 	public void LoadGame(string sel_schene) {
 		SceneManager.LoadScene (sel_schene);
-}
+	}
+
 	public void QuitGame(){
+		//na to sbiso
+		StatisticsData.Save();
+		print ("Quit");
 		Application.Quit (); 
 	}
 }

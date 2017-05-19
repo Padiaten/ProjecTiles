@@ -13,51 +13,69 @@ public class StatisticsMenuController : MonoBehaviour {
 	private int lengthEnemiesList,lengthTowersList;
 	private UnityEngine.Object[] enemiesArray;
 	private UnityEngine.Object[] towersArray;
+	private bool mainStat;
 
 	// Use this for initialization
-	void Start () {
-		enemiesArray = Resources.LoadAll ("Prefabs/Enemies",typeof(GameObject));
-		lengthEnemiesList = enemiesArray.Length;
-		towersArray = Resources.LoadAll ("Prefabs/Towers",typeof(GameObject));
-		lengthTowersList = towersArray.Length;
+	public void ShowStatistics(bool mainStatistics) {
+		//mainStatistics: τα στατιστικά όλου του παιχνιδιου
+		mainStat = mainStatistics;
 		Grid = GameObject.Find("Grid");
 		text = (GameObject)Resources.Load("Prefabs/UI/StatisticsText",typeof(GameObject));
+		if(mainStat){
+			FillGridMainSat ();
+		}else{
+			enemiesArray = Resources.LoadAll ("Prefabs/Enemies",typeof(GameObject));
+			lengthEnemiesList = enemiesArray.Length;
+			towersArray = Resources.LoadAll ("Prefabs/Towers",typeof(GameObject));
+			lengthTowersList = towersArray.Length;
+		}
 		FillGrid();
+	}
+
+	public void FillGridMainSat()
+	{
+		CreateTextFrame ("Number of games",StatisticsData.NumbersOfGames.ToString(),1);
+		CreateTextFrameTime (StatisticsData.Hours,StatisticsData.Minutes,StatisticsData.Seconds,"Total time");
 	}
 	
 	public void FillGrid(){
-		CreateTextFrameTime ();
-		CreateTextFrame ("Score",GetComponent<Player> ().Score.ToString(),1);
-		CreateTextFrame ("-Positive Score",GetComponent<Player>().PositiveScore.ToString(),4);
-		CreateTextFrame ("-Negative Score",GetComponent<Player>().NegativeScore.ToString(),4);
-		CreateTextFrame ("Lives/StartLives",GetComponent<Player>().Lives.ToString()+"/"+LevelHandler.SelectedLives.ToString(),1);
-		CreateTextFrame ("Total moneys",GetComponent<Player>().TotalMoneys.ToString(),1);
-		CreateTextFrame ("-Used moneys",GetComponent<Player>().UsedMoneys.ToString(),4);
-		CreateTextFrame ("-Remaining moneys",GetComponent<Player>().Money.ToString(),4);
-		CreateTextFrameEnemies ();
-		CreateTextFrameTowers ();
+		if(mainStat){
+			
+		}else{
+			CreateTextFrameTime (GetComponent<Player> ().Hours,GetComponent<Player> ().Minutes,GetComponent<Player> ().Seconds,"Time");
+			CreateTextFrame ("End score",GetComponent<Player> ().EndScore.ToString(),1);
+			CreateTextFrame ("Score",GetComponent<Player> ().Score.ToString(),1);
+			CreateTextFrame ("-Positive Score",GetComponent<Player>().PositiveScore.ToString(),4);
+			CreateTextFrame ("-Negative Score",GetComponent<Player>().NegativeScore.ToString(),4);
+			CreateTextFrame ("Lives/StartLives",GetComponent<Player>().Lives.ToString()+"/"+LevelHandler.SelectedLives.ToString(),1);
+			CreateTextFrame ("Total moneys",GetComponent<Player>().TotalMoneys.ToString(),1);
+			CreateTextFrame ("-Used moneys",GetComponent<Player>().UsedMoneys.ToString(),4);
+			CreateTextFrame ("-Remaining moneys",GetComponent<Player>().Money.ToString(),4);
+			CreateTextFrameEnemies ();
+			CreateTextFrameTowers ();
+		}
 	}
 
-	public void CreateTextFrameTime()
+	public void CreateTextFrameTime(int hours,int minutes,int seconds,string title)
 	{
-		string hours,minutes,seconds;
-		if (GetComponent<Player> ().Hours < 10)
-			hours = "0" + GetComponent<Player> ().Hours.ToString ();
+		string hoursText,minutesText,secondsText;
+		if (hours < 10)
+			hoursText = "0" + hours.ToString ();
 		else
-			hours = GetComponent<Player> ().Hours.ToString ();
+			hoursText = hours.ToString ();
 		
-		if (GetComponent<Player> ().Minutes < 10)
-			minutes = "0" + GetComponent<Player> ().Minutes.ToString ();
+		if (minutes < 10)
+			minutesText = "0" + minutes.ToString ();
 		else
-			minutes = GetComponent<Player> ().Minutes.ToString ();
+			minutesText = minutes.ToString ();
 		
-		if (GetComponent<Player> ().Seconds < 10)
-			seconds = "0" + GetComponent<Player> ().Seconds.ToString ();
+		if (seconds < 10)
+			secondsText = "0" + seconds.ToString ();
 		else
-			seconds = GetComponent<Player> ().Seconds.ToString ();
+			secondsText = seconds.ToString ();
 		
-		string timeText = hours + ":" + minutes + ":" + seconds;
-		CreateTextFrame ("Time",timeText,1);
+		string timeText = hoursText + ":" + minutesText + ":" + secondsText;
+		CreateTextFrame (title,timeText,1);
 	}
 
 	public void CreateTextFrameTowers()
@@ -139,7 +157,7 @@ public class StatisticsMenuController : MonoBehaviour {
 		else
 			newTextFrame.transform.Find ("Panel").GetComponent<Image> ().color = new Color (0.0F, 0.0F, 0.0F, 0.5F);
 		colorPanelCount++;
-	}
+	} 
 
 	public float CountTotalOfList(int count,List<int> list)
 	{

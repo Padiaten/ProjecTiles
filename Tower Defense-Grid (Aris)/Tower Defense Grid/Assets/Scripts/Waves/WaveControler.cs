@@ -9,7 +9,7 @@ public class WaveControler : MonoBehaviour {
 	public GameObject SurvivalWave;
 	private bool endOfWaves = true;
 	private bool outOfWaves;
-	private int wavesIndex;
+	private int wavesIndex = 0;
 	private int numberStartiles;
 	private bool createWaves = false;
 	private List<GameObject> WaveObjects = new List<GameObject>();

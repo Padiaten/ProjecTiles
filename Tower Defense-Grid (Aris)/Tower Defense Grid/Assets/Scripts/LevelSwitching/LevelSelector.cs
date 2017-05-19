@@ -14,10 +14,12 @@ public class LevelSelector : MonoBehaviour {
 	{
 		LevelHandler.IsSurvival = s;
 		SceneManager.LoadScene ("MainGame");
+		StatisticsData.NumbersOfGames++;
 	}
 
 	public void SelectCustom(string path){
 		LevelHandler.ReadCustom(path);
 		SceneManager.LoadScene ("MainGame");
+		StatisticsData.NumbersOfGames++;
 	}
 }

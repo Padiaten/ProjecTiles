@@ -6,9 +6,12 @@ using System.Diagnostics;
 
 public class Player : MonoBehaviour {
 
+	//PLAYER DATA FOR IN GAME
 	private int money;
 	private int lives;
 	private int score = 0;
+	private int endScore; //score = [(life*100+20*remaining gold)*diff]/(time/10) + Score
+	//PLAYER DATA FOR STATISTICS
 	private List<int> killist = new List<int> ();
 	private List<int> finishList = new List<int> ();
 	private List<int> sellTowers = new List<int> ();//να το φτιαξω
@@ -38,6 +41,27 @@ public class Player : MonoBehaviour {
 			totalTowers.Add (0);
 			sellTowers.Add (0);
 		}
+	}
+
+	public void TransferDataInStatistics()
+	{
+		StatisticsData.Hours += hours;
+		StatisticsData.Minutes += minutes;
+		StatisticsData.Seconds += seconds;
+		StatisticsData.EndScore += endScore;
+	}
+
+	public void CaclculateEndScore(){
+		int timeInSeconds = Mathf.RoundToInt((chronometer.ElapsedMilliseconds)/1000);
+		if ((timeInSeconds / 10) != 0)
+			endScore = Mathf.RoundToInt(((lives * 100f + 20f * money) / (timeInSeconds / 10f)) + score);
+		else
+			endScore = score;
+		print (timeInSeconds+" seconds");
+		print (lives+" lives");
+		print (money+" money");
+		print (score+" score");
+		print (endScore+" endscore");
 	}
 
 	public void AddInEnemieList(int id,bool isKill) 
@@ -122,6 +146,11 @@ public class Player : MonoBehaviour {
 	public int Score{
 		get{ return score; }
 		set{ score = value; }
+	}
+
+	public int EndScore{
+		get{ return endScore; }
+		set{ endScore = value; }
 	}
 
 	public int NegativeScore{

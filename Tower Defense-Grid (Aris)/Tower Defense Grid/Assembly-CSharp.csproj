@@ -63,7 +63,9 @@
      <Compile Include="Assets\Scripts\Player.cs" />
      <Compile Include="Assets\Scripts\ShowInfoText.cs" />
      <Compile Include="Assets\Scripts\StartGame.cs" />
-     <Compile Include="Assets\Scripts\StatisticsMenuController.cs" />
+     <Compile Include="Assets\Scripts\Statistics\StartStatistics.cs" />
+     <Compile Include="Assets\Scripts\Statistics\StatisticsData.cs" />
+     <Compile Include="Assets\Scripts\Statistics\StatisticsMenuController.cs" />
      <Compile Include="Assets\Scripts\Towers\Hover.cs" />
      <Compile Include="Assets\Scripts\Towers\LookAtTarget.cs" />
      <Compile Include="Assets\Scripts\Towers\Projectile.cs" />

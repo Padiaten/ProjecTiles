@@ -116,21 +116,24 @@ public class FlowController : MonoBehaviour {
 	//SCENES IN GAME
 	public void EndGame()
 	{
-		GetComponent<Player> ().EndChronometer();
+		BeforeGameEnds ();
+		//εχασες μετεφερε τα δεδομενα αποθηκευσε
 		Time.timeScale = 0;
 		gameOverUI.SetActive (true);
-		GameObject.Find ("TextScoreGameOver").GetComponent<Text> ().text = gameFlow.GetComponent<Player> ().Score.ToString ();
+		GameObject.Find ("TextScoreGameOver").GetComponent<Text> ().text = gameFlow.GetComponent<Player> ().EndScore.ToString ();
 	}
 	
 	public void LevelComplete(){
-		GetComponent<Player> ().EndChronometer();
+		BeforeGameEnds ();
+		//νικησες μετεφερε τα δεδομενα αποθηκευσε
 		Time.timeScale = 0;
 		levelCompleteUI.SetActive (true);
-		GameObject.Find ("TextScoreLevelComplete").GetComponent<Text> ().text = gameFlow.GetComponent<Player> ().Score.ToString (); 
+		GameObject.Find ("TextScoreLevelComplete").GetComponent<Text> ().text = gameFlow.GetComponent<Player> ().EndScore.ToString (); 
 	}
 	
 	public void Pause()
 	{
+		//αποθηκευσε τα δεδομενα στο if οχι μεταφορα λογω διπλοεγγραφης
 		pauseUI.SetActive (!pauseUI.activeSelf);
 		if (pauseUI.activeSelf) {
 			GetComponent<Player> ().StopChronometer ();
@@ -151,12 +154,24 @@ public class FlowController : MonoBehaviour {
 
 	public void Restart()
 	{
+		if(pauseUI.activeSelf)
+		{
+			BeforeGameEnds ();
+		//σε καθε load MainGame numberOfGames++
+		//αν καλειται απο την παυση
+		//τελος εχασες μετεφερε τα δεδομενα αποθηκευσε
+		}
 		SceneManager.LoadScene ("MainGame");
 		Time.timeScale = 1f;
+		StatisticsData.NumbersOfGames++;
 	}
 
 	public void Menu()
 	{
+		if(pauseUI.activeSelf){
+			BeforeGameEnds ();
+		//τελος εχασε μετεφερε τα δεδομενα αποθηκευσε
+		}
 		SceneManager.LoadScene ("MainMenu");
 		Time.timeScale = 1f;
 	}
@@ -164,11 +179,11 @@ public class FlowController : MonoBehaviour {
 	public void ContinueLevelCompleteUI()
 	{
 		//analoga survivval or story na bgazei kai scene
-		SceneManager.LoadScene ("GameModeSelection");
+		SceneManager.LoadScene ("LevelSelect");
 		Time.timeScale = 1f;
 	}
 
-	public void StatisticsButton()
+	public void StatisticsButton(bool mainStatistics)
 	{
 		if (levelCompleteUI.activeSelf) {
 			levelCompleteUI.SetActive (false);
@@ -179,6 +194,7 @@ public class FlowController : MonoBehaviour {
 		}
 		StatisticsUI.SetActive (true);
 		GetComponent<StatisticsMenuController> ().enabled = true;
+		GetComponent<StatisticsMenuController> ().ShowStatistics (mainStatistics);
 	}
 
 	public void Return()
@@ -189,6 +205,14 @@ public class FlowController : MonoBehaviour {
 			levelCompleteUI.SetActive (true);
 		else
 			gameOverUI.SetActive (true);
+	}
+
+	public void BeforeGameEnds()
+	{
+		gameFlow.GetComponent<Player> ().CaclculateEndScore ();
+		GetComponent<Player> ().EndChronometer();
+		GetComponent<Player> ().TransferDataInStatistics();//warning: always after EndChronometer
+		StatisticsData.Save();
 	}
 
 	//GETTERS
