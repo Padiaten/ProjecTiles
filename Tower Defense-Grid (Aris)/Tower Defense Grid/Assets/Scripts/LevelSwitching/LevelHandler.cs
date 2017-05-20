@@ -99,7 +99,7 @@ public static class LevelHandler{
 				selected_Level.Add(new List<string>(){"X","X","X","X","X","X","X","X","X","X","X","X","E","X"});
 
 				waves1.Add (new List<string> (){"1-1-0-1"});
-				waves1.Add (new List<string> (){"1-6-0-1","2-6-1-2"});
+				//waves1.Add (new List<string> (){"1-6-0-1","2-6-1-2"});
 				//waves1.Add (new List<string> (){"1-6-0-1","2-10-1-2","2-7-2-2","1-12-3-2","4-5-4-2"});
 
 				selected_Wave.Add (waves1);

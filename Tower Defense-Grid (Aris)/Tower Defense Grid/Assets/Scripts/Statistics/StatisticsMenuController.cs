@@ -6,14 +6,19 @@ using System;
 
 public class StatisticsMenuController : MonoBehaviour {
 
+	private static int StartDestroyFrame = 9;
+	private static int EndDestroyFrame = 40;
 	private GameObject Grid;
 	private GameObject text;
 	private GameObject newTextFrame;
+	private GameObject button;
+	GameObject newButton;
 	private int colorPanelCount = 0;
 	private int lengthEnemiesList,lengthTowersList;
 	private UnityEngine.Object[] enemiesArray;
 	private UnityEngine.Object[] towersArray;
 	private bool mainStat;
+	private int frameNumber = 0;
 
 	// Use this for initialization
 	public void ShowStatistics(bool mainStatistics) {
@@ -21,15 +26,20 @@ public class StatisticsMenuController : MonoBehaviour {
 		mainStat = mainStatistics;
 		Grid = GameObject.Find("Grid");
 		text = (GameObject)Resources.Load("Prefabs/UI/StatisticsText",typeof(GameObject));
+		button = (GameObject)Resources.Load("Prefabs/UI/ButtonMoreOrLess",typeof(GameObject));
 		if(mainStat){
 			FillGridMainSat ();
 		}else{
-			enemiesArray = Resources.LoadAll ("Prefabs/Enemies",typeof(GameObject));
-			lengthEnemiesList = enemiesArray.Length;
-			towersArray = Resources.LoadAll ("Prefabs/Towers",typeof(GameObject));
-			lengthTowersList = towersArray.Length;
+			if (GameObject.Find ("TextFrame0")) {
+
+			} else {
+				enemiesArray = Resources.LoadAll ("Prefabs/Enemies", typeof(GameObject));
+				lengthEnemiesList = enemiesArray.Length;
+				towersArray = Resources.LoadAll ("Prefabs/Towers", typeof(GameObject));
+				lengthTowersList = towersArray.Length;
+				FillGrid ();
+			}
 		}
-		FillGrid();
 	}
 
 	public void FillGridMainSat()
@@ -39,21 +49,46 @@ public class StatisticsMenuController : MonoBehaviour {
 	}
 	
 	public void FillGrid(){
-		if(mainStat){
-			
-		}else{
-			CreateTextFrameTime (GetComponent<Player> ().Hours,GetComponent<Player> ().Minutes,GetComponent<Player> ().Seconds,"Time");
-			CreateTextFrame ("End score",GetComponent<Player> ().EndScore.ToString(),1);
-			CreateTextFrame ("Score",GetComponent<Player> ().Score.ToString(),1);
-			CreateTextFrame ("-Positive Score",GetComponent<Player>().PositiveScore.ToString(),4);
-			CreateTextFrame ("-Negative Score",GetComponent<Player>().NegativeScore.ToString(),4);
-			CreateTextFrame ("Lives/StartLives",GetComponent<Player>().Lives.ToString()+"/"+LevelHandler.SelectedLives.ToString(),1);
-			CreateTextFrame ("Total moneys",GetComponent<Player>().TotalMoneys.ToString(),1);
-			CreateTextFrame ("-Used moneys",GetComponent<Player>().UsedMoneys.ToString(),4);
-			CreateTextFrame ("-Remaining moneys",GetComponent<Player>().Money.ToString(),4);
-			CreateTextFrameEnemies ();
-			CreateTextFrameTowers ();
-		}
+		CreateTextFrameTime (GetComponent<Player> ().Hours,GetComponent<Player> ().Minutes,GetComponent<Player> ().Seconds,"Time");
+		CreateTextFrame ("End score",GetComponent<Player> ().EndScore.ToString(),1);
+		CreateTextFrame ("Score",GetComponent<Player> ().Score.ToString(),1);
+		CreateTextFrame ("-Positive Score",GetComponent<Player>().PositiveScore.ToString(),4);
+		CreateTextFrame ("-Negative Score",GetComponent<Player>().NegativeScore.ToString(),4);
+		CreateTextFrame ("Lives/StartLives",GetComponent<Player>().Lives.ToString()+"/"+LevelHandler.SelectedLives.ToString(),1);
+		CreateTextFrame ("Total moneys",GetComponent<Player>().TotalMoneys.ToString(),1);
+		CreateTextFrame ("-Used moneys",GetComponent<Player>().UsedMoneys.ToString(),4);
+		CreateTextFrame ("-Remaining moneys",GetComponent<Player>().Money.ToString(),4);
+		//CreateTextFrameEnemies ();
+		//CreateTextFrameTowers ();
+		CreateButton ("MORE > >",true);
+	}
+
+	public void CreateButton(string nameButton,bool more){
+		newButton = Instantiate (button,new Vector3(0,0,0),Quaternion.identity);
+		newButton.transform.Find("TextMoreOrLess").GetComponent<Text>().text = nameButton;
+		newButton.transform.SetParent (Grid.transform);
+		newButton.name = "ButtonFrame";
+		if(more)
+			newButton.GetComponent<Button>().onClick.AddListener(() => GameObject.Find("GameFlow").GetComponent<StatisticsMenuController>().More());
+		else
+			newButton.GetComponent<Button>().onClick.AddListener(() => GameObject.Find("GameFlow").GetComponent<StatisticsMenuController>().Less());
+	}
+
+	public void More(){
+		Destroy (newButton);
+		CreateTextFrameEnemies ();
+		CreateTextFrameTowers ();
+		CreateButton ("< < LESS",false);
+	}
+
+	public void Less(){
+		Destroy (newButton);
+		for (int i = StartDestroyFrame; i <= EndDestroyFrame; i++) {
+			Destroy (GameObject.Find("TextFrame"+i));
+			frameNumber--;
+		} 
+		CreateButton ("MORE > >",true);
+		GameObject.Find ("Scrollbar").GetComponent<Scrollbar> ().value = 1;
 	}
 
 	public void CreateTextFrameTime(int hours,int minutes,int seconds,string title)
@@ -151,12 +186,13 @@ public class StatisticsMenuController : MonoBehaviour {
 		newTextFrame.transform.Find("TextTitle").GetComponent<Text>().text = space+textTitle;
 		newTextFrame.transform.Find ("TextData").GetComponent<Text> ().text = textData;
 		newTextFrame.transform.SetParent (Grid.transform);
-		newTextFrame.name = "TextFrame";
+		newTextFrame.name = "TextFrame"+frameNumber;
 		if (colorPanelCount % 2 == 0)
 			newTextFrame.transform.Find ("Panel").GetComponent<Image> ().color = new Color (0.5F, 0.5F, 0.5F, 0.5F);
 		else
 			newTextFrame.transform.Find ("Panel").GetComponent<Image> ().color = new Color (0.0F, 0.0F, 0.0F, 0.5F);
 		colorPanelCount++;
+		frameNumber++;
 	} 
 
 	public float CountTotalOfList(int count,List<int> list)

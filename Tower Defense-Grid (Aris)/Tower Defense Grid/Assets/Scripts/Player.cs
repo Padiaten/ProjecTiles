@@ -53,8 +53,8 @@ public class Player : MonoBehaviour {
 
 	public void CaclculateEndScore(){
 		int timeInSeconds = Mathf.RoundToInt((chronometer.ElapsedMilliseconds)/1000);
-		if ((timeInSeconds / 10) != 0)
-			endScore = Mathf.RoundToInt(((lives * 100f + 20f * money) / (timeInSeconds / 10f)) + score);
+		if ((timeInSeconds / 10f) != 0)
+			endScore = Mathf.RoundToInt((((lives * 100f + 20f * money)*GameData.Difficulty) / (timeInSeconds / 10f)) + score);
 		else
 			endScore = score;
 		print (timeInSeconds+" seconds");

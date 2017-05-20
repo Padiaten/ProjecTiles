@@ -61,8 +61,8 @@
      <Compile Include="Assets\Scripts\Map\Tile.cs" />
      <Compile Include="Assets\Scripts\Music\ChangeMusicState.cs" />
      <Compile Include="Assets\Scripts\Music\DonotDestroyOnLoad.cs" />
-     <Compile Include="Assets\Scripts\Music\SliderMusic.cs" />
      <Compile Include="Assets\Scripts\Player.cs" />
+     <Compile Include="Assets\Scripts\SettingsController.cs" />
      <Compile Include="Assets\Scripts\ShowInfoText.cs" />
      <Compile Include="Assets\Scripts\StartGame.cs" />
      <Compile Include="Assets\Scripts\Statistics\StartStatistics.cs" />

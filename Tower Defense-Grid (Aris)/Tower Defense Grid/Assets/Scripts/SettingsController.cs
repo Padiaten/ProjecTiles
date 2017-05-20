@@ -3,13 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SliderMusic : MonoBehaviour {
+public class SettingsController : MonoBehaviour {
 
 	public Slider Volume;
-	 AudioSource music;
+	public Slider Diffic;
+	AudioSource music;
 	 
 	void Start(){
-		Volume.value = music.volume;
+		
+		Diffic.GetComponent<Slider> ().value = GameData.Difficulty;
+		print (GameData.Difficulty+" -Difficulty");
+		Volume.GetComponent<Slider>().value = music.volume;
 	}
 	// Update is called once per frame
 	void Update () {
