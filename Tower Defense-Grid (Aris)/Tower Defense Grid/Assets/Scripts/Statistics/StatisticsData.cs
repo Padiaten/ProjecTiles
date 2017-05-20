@@ -24,7 +24,7 @@ public static class StatisticsData {
 
 	public static void Initialize () {
 		//ΨΑΞΕ ΓΙΑ ΑΡΧΕΙΟ
-		string directoryPath = System.IO.Directory.GetCurrentDirectory() + "\\StatisticsData";
+		string directoryPath = System.IO.Directory.GetCurrentDirectory() + "\\Saves";
 		filePath = directoryPath + "\\statistics.stat";
 
 		//ψαξε τον φακελο

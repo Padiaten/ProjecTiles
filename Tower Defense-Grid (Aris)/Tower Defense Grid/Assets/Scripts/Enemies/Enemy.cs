@@ -8,7 +8,7 @@ public class Enemy: MonoBehaviour {
     private int health;
 
     [SerializeField]
-    private float coefSpeed;
+	private float speed;
 
     [SerializeField]
     private int worth;
@@ -37,13 +37,13 @@ public class Enemy: MonoBehaviour {
 
     // Use this for initialization
     public void Initialize (int i) {
-		int diff = DifficultySetter.getDifficulty();
+		int diff = GameData.Difficulty;
 		if(diff == 1){
 			health =(int)(health * 1.5);
-			coefSpeed = coefSpeed * 1.5f;
+			speed = speed * 1.5f;
 		}else if(diff == 2){
 			health = health * 2;
-			coefSpeed = coefSpeed * 2f;
+			speed = speed * 2f;
 			worth =(int)(worth * 0.7f);
 		}
 		gameFlow = GameObject.Find("GameFlow");
@@ -56,18 +56,18 @@ public class Enemy: MonoBehaviour {
 
     void Update()
     {
-        Movement(coefSpeed, ref vectorNext, ref flag, ref g);
+        Movement(speed, ref vectorNext, ref flag, ref g);
     }
 
 
-    public void Movement(float coefSpeed,ref Vector2 vectorNext,ref bool flag,ref GameObject g){
+    public void Movement(float speed,ref Vector2 vectorNext,ref bool flag,ref GameObject g){
 
 		Vector3 dir = g.transform.position - this.transform.position;
 		float angle = (Mathf.Atan2 (dir.y, dir.x) * Mathf.Rad2Deg)+90;
 		Quaternion q = Quaternion.AngleAxis (angle, Vector3.forward);
 		transform.rotation = Quaternion.Slerp (transform.rotation, q, Time.deltaTime * 20);
 
-		transform.position = Vector2.MoveTowards(transform.position, vectorNext,coefSpeed*Time.deltaTime);
+		transform.position = Vector2.MoveTowards(transform.position, vectorNext,speed*Time.deltaTime);
 		if (Vector2.Distance((Vector2)transform.position, vectorNext) < 0.1 && !flag) {
 			g = g.GetComponent<PathTile>().getNextTile_Random();
 			vectorNext = g.GetComponent<Tile>().getCoords();
@@ -118,11 +118,11 @@ public class Enemy: MonoBehaviour {
 		if (!notSlow) {
 			if(effect == "Slow")
 			{
-				coefSpeed /= value;
+				speed /= value;
 			}
 			else if(effect == "Restore Movement")
 			{
-				coefSpeed *= value;
+				speed *= value;
 			}
 		}
     }

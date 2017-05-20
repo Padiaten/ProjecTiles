@@ -10,6 +10,8 @@ public class StartGame : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		if (!initial) {
+			GameData.Initialize ();
+			print (GameData.Difficulty+" -Difficulty");
 			panel.SetActive (false);
 			UnityEngine.Object[] enemiesList = Resources.LoadAll ("Prefabs/Enemies", typeof(GameObject));
 			int length = enemiesList.Length;
@@ -25,7 +27,7 @@ public class StartGame : MonoBehaviour {
 				g = towersList [i] as GameObject;
 				g.GetComponentInChildren<Tower> ().Id = i;
 			}
-
+				
 			StatisticsData.Initialize ();
 
 			GameObject.Find ("Loading").SetActive (false);
