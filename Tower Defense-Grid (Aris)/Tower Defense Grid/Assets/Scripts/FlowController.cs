@@ -32,7 +32,10 @@ public class FlowController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if ((Input.GetKeyUp (KeyCode.Escape) || Input.GetKeyUp(KeyCode.P)) && !gameOverUI.activeSelf && !levelCompleteUI.activeSelf) {
-			Pause();
+			if (StatisticsUI.activeSelf)
+				Return ();
+			else
+				Pause();
 		}
 		if (waveStart) {
 			if (numberOFEnemies == 0 && GetComponent<WaveControler> ().OutOfWaves && !GetComponent<WaveControler> ().EndOfWaves)
