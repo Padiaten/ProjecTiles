@@ -26,16 +26,22 @@ public class Tower : MonoBehaviour {
     public int Damage
     {
         get { return damage; }
+		set {damage = value;}
     }
 
     [SerializeField]
-    private float attackCooldown;
+	private float attackCooldown;
+	public float AttackCooldown {
+		get {return attackCooldown;}
+		set {attackCooldown = value;}
+	}
 
     [SerializeField]
     private float projectileSpeed;
     public float ProjectileSpeed
     {
         get { return projectileSpeed; }
+		set {projectileSpeed = value;}
     }
 
     [SerializeField]
@@ -46,7 +52,12 @@ public class Tower : MonoBehaviour {
     }
 
     [SerializeField]
-    private int effectValue;
+	private int effectValue;
+
+	public int EffectValue {
+		get {return effectValue;}
+		set {effectValue = value;}
+	}
 
     [SerializeField]
     private Projectile projectileObject;
@@ -73,7 +84,12 @@ public class Tower : MonoBehaviour {
 
     private Vector2[] vlist = new Vector2[8];
     
+	private int TowerLevel = 1;
 
+	public int Towerlevel{
+		get{ return TowerLevel;}
+		set{ TowerLevel = value;}
+	}
 
     // Use this for initialization
     void Start ()
@@ -90,19 +106,18 @@ public class Tower : MonoBehaviour {
             vlist[6] = new Vector2(transform.position.x - 100, transform.position.y + 100);
             vlist[7] = new Vector2(transform.position.x - 100, transform.position.y - 100);
         }
+		UpdateRange();
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-		UpdateRange();
-
         if(hits == true) Attack();
     }
       
 	public void UpdateRange()
     {
-		GetComponent<CircleCollider2D>().radius = Mathf.Max(transform.localScale.x,transform.localScale.y);
+		GetComponent<CircleCollider2D>().radius = 1;//Mathf.Max(transform.localScale.x,transform.localScale.y);
 	}
 
     private void Attack()

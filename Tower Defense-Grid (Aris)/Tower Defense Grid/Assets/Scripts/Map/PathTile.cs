@@ -40,7 +40,7 @@ public class PathTile : Tile {
 			case 1:
 				Ttype = TileType.PathStraight;
 				this.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/MapSprites/path_straight");
-				if(this.x == 0 || this.x == mapsize_x){
+				if(this.x == 0 || this.x == mapsize_x-1){
 					//print(this.x);
 					this.transform.rotation = Quaternion.Euler(0,0,90);
 				}

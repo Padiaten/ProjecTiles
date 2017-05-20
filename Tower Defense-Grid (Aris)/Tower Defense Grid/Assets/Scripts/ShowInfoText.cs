@@ -27,6 +27,9 @@ public class ShowInfoText : MonoBehaviour {
 		case 3:
 			this.GetComponent<Text>().text = "Insufficient funds";
 			break;
+		case 4:
+			this.GetComponent<Text>().text = "Max Level";
+			break;
 		}
 
 		yield return new WaitForSeconds (3);

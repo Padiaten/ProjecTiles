@@ -12,6 +12,8 @@ public class Hover : MonoBehaviour {
     void Start () {        
 		GetComponentInChildren<CircleCollider2D>().enabled = false;
         GetComponentInChildren<BoxCollider2D>().enabled = false;
+		transform.Find("Range").GetComponent<SpriteRenderer>().enabled = false;
+
 		InfoMessage = GameObject.Find("InfoMessage");
 		//print("InfoMessage:" + InfoMessage);
     }
@@ -64,6 +66,7 @@ public class Hover : MonoBehaviour {
 					GameObject.Find(Gname_test).GetComponent<GrassTile>().setCanPlaceBuilding(false);
 					GetComponentInChildren<CircleCollider2D>().enabled = true;
                     GetComponentInChildren<BoxCollider2D>().enabled = true;
+					transform.Find("Range").GetComponent<SpriteRenderer>().enabled = true;
 					GetComponentInChildren<Tower>().enabled = true;
 					GetComponent<TowerInteractions>().enabled = true;
                     hovering = false;

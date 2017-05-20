@@ -37,6 +37,15 @@ public class Enemy: MonoBehaviour {
 
     // Use this for initialization
     public void Initialize (int i) {
+		int diff = DifficultySetter.getDifficulty();
+		if(diff == 1){
+			health =(int)(health * 1.5);
+			coefSpeed = coefSpeed * 1.5f;
+		}else if(diff == 2){
+			health = health * 2;
+			coefSpeed = coefSpeed * 2f;
+			worth =(int)(worth * 0.7f);
+		}
 		gameFlow = GameObject.Find("GameFlow");
         flag = false;
         List<GameObject> listStarTiles = gameFlow.GetComponent<GridController>().GetStartTiles();

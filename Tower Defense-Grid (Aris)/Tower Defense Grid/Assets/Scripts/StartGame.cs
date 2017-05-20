@@ -10,6 +10,7 @@ public class StartGame : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		if (!initial) {
+			panel.SetActive (false);
 			UnityEngine.Object[] enemiesList = Resources.LoadAll ("Prefabs/Enemies", typeof(GameObject));
 			int length = enemiesList.Length;
 			GameObject g;

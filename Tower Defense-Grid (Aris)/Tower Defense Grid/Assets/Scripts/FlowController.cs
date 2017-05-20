@@ -57,7 +57,7 @@ public class FlowController : MonoBehaviour {
 		tower1 = (GameObject)Resources.Load("Prefabs/Towers/Tower",typeof(GameObject));
 		tower2 = (GameObject)Resources.Load("Prefabs/Towers/Slow Tower",typeof(GameObject));
 		tower3 = (GameObject)Resources.Load("Prefabs/Towers/Buff Tower",typeof(GameObject));
-		tower4 = (GameObject)Resources.Load("Prefabs/Towers/Canon Tower",typeof(GameObject));
+		tower4 = (GameObject)Resources.Load("Prefabs/Towers/RoundHouse Tower",typeof(GameObject));
 		tower5 = (GameObject)Resources.Load("Prefabs/Towers/Global Tower",typeof(GameObject));
 		tower6 = (GameObject)Resources.Load("Prefabs/Towers/Canon Tower", typeof(GameObject));;
 
@@ -67,21 +67,27 @@ public class FlowController : MonoBehaviour {
 		switch(i){
 		case 1:
 			new_tower = Instantiate(tower1,coords,Quaternion.identity);
+			new_tower.name = "Tower";
 			break;
 		case 2:
 			new_tower = Instantiate(tower2,coords,Quaternion.identity);
+			new_tower.name = "Slow Tower";
 			break;
 		case 3:
 			new_tower = Instantiate(tower3,coords,Quaternion.identity);
+			new_tower.name = "Buff Tower";
 			break;
 		case 4:
 			new_tower = Instantiate(tower4,coords,Quaternion.identity);
+			new_tower.name = "RoundHouse Tower";
 			break;
 		case 5:
 			new_tower = Instantiate(tower5,coords,Quaternion.identity);
+			new_tower.name = "Global Tower";
 			break;
 		case 6:
 			new_tower = Instantiate(tower6,coords,Quaternion.identity);
+			new_tower.name = "Canon Tower";
 			break;
 		}
 		new_tower.GetComponent<Hover>().enabled = true;
@@ -175,7 +181,7 @@ public class FlowController : MonoBehaviour {
 		SceneManager.LoadScene ("MainMenu");
 		Time.timeScale = 1f;
 	}
-	
+		
 	public void ContinueLevelCompleteUI()
 	{
 		//analoga survivval or story na bgazei kai scene
