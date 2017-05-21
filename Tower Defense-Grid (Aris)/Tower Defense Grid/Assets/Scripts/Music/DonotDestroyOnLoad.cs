@@ -4,7 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class DonotDestroyOnLoad : MonoBehaviour {
-	private bool muted;
+	bool muted;
+	void Update(){
+		if(muted)
+			AudioListener.volume = 0;
+			else
+			AudioListener.volume = 1;
+	}
 	void Awake(){
 		GameObject[] objs = GameObject.FindGameObjectsWithTag ("backroundmusic");
 		if(objs.Length > 1)
@@ -18,20 +24,12 @@ public class DonotDestroyOnLoad : MonoBehaviour {
 		muted = !muted;
 		if(muted){
 			GameObject.Find("Music").GetComponent<Image>().sprite = (Sprite)Resources.Load("Sprites/GUI/b_Sound1_Inactive",typeof(Sprite));
-			this.GetComponent<AudioSource>().volume = 0;
-
 		}else{
 			GameObject.Find("Music").GetComponent<Image>().sprite = (Sprite)Resources.Load("Sprites/GUI/b_Sound1",typeof(Sprite));
-			this.GetComponent<AudioSource>().volume = 1;
-
 		}
-	}
-		
+}
+
 	public bool getMuted(){
 		return muted;
-	}
-
-	public void setMuted(bool m){
-		muted = m;
 	}
 }

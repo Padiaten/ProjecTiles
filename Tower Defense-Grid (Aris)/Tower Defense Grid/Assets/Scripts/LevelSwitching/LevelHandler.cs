@@ -134,18 +134,18 @@ public static class LevelHandler{
 		case 5:
 			{
 				selected_Level.Add(new List<string>(){"X","X","X","X","X","X","X","X","X","X","X","X","X","X"});
-				selected_Level.Add(new List<string>(){"SR","D","X","X","X","X","X","X","X","X","X","X","X","X"});
-				selected_Level.Add(new List<string>(){"E","L","X","X","X","X","X","X","X","X","X","X","X","X"});
-				selected_Level.Add(new List<string>(){"X","X","X","X","X","X","X","X","X","X","X","X","X","X"});
-				selected_Level.Add(new List<string>(){"X","X","X","X","X","X","X","X","X","X","X","X","X","X"});
-				selected_Level.Add(new List<string>(){"X","X","X","X","X","X","X","X","X","X","X","X","X","X"});
-				selected_Level.Add(new List<string>(){"X","X","X","X","X","X","X","X","X","X","X","X","X","X"});
-				selected_Level.Add(new List<string>(){"X","X","X","X","X","X","X","X","X","X","X","X","X","X"});
-				selected_Level.Add(new List<string>(){"X","X","X","X","X","X","X","X","X","X","X","X","X","X"});
-				selected_Level.Add(new List<string>(){"X","X","X","X","X","X","X","X","X","X","X","X","X","X"});
-				selected_Level.Add(new List<string>(){"X","X","X","X","X","X","X","X","X","X","X","X","X","X"});
-				selected_Level.Add(new List<string>(){"X","X","X","X","X","X","X","X","X","X","X","X","X","X"});
-				selected_Level.Add(new List<string>(){"X","X","X","X","X","X","X","X","X","X","X","X","X","X"});
+				selected_Level.Add(new List<string>(){"SR","R","RD","R","R","D","X","X","X","R","R","R","R","E"});
+				selected_Level.Add(new List<string>(){"X","X","D","X","X","D","X","X","X","U","X","X","X","X"});
+				selected_Level.Add(new List<string>(){"X","X","D","X","X","D","X","X","X","U","X","X","X","X"});
+				selected_Level.Add(new List<string>(){"X","X","D","X","X","D","X","X","X","U","X","X","X","X"});
+				selected_Level.Add(new List<string>(){"SR","R","D","X","X","D","X","X","X","U","X","X","X","X"});
+				selected_Level.Add(new List<string>(){"X","X","D","X","X","D","X","X","X","U","X","X","X","X"});
+				selected_Level.Add(new List<string>(){"X","D","L","L","L","L","X","X","X","U","X","X","X","X"});
+				selected_Level.Add(new List<string>(){"X","D","X","X","X","X","X","X","X","U","L","L","L","X"});
+				selected_Level.Add(new List<string>(){"X","D","X","X","X","X","X","X","X","X","X","X","U","X"});
+				selected_Level.Add(new List<string>(){"X","D","X","R","R","R","R","D","X","X","X","X","U","X"});
+				selected_Level.Add(new List<string>(){"X","D","X","U","X","X","X","D","X","X","X","X","U","X"});
+				selected_Level.Add(new List<string>(){"X","R","R","U","X","X","X","R","R","R","R","R","U","X"});
 				selected_Level.Add(new List<string>(){"X","X","X","X","X","X","X","X","X","X","X","X","X","X"});
 
 				selectedLives = 100;
@@ -155,6 +155,7 @@ public static class LevelHandler{
 			}
 		case 6:
 			{
+
 				break;
 			}
 		}

@@ -9,13 +9,13 @@ public class Player : MonoBehaviour {
 	//PLAYER DATA FOR IN GAME
 	private int money;
 	private int lives;
-	private int score = 0;
+	private int score = 0; 
 	private int endScore; //score = [(life*100+20*remaining gold)*diff]/(time/10) + Score
 	//PLAYER DATA FOR STATISTICS
 	private List<int> killist = new List<int> ();
 	private List<int> finishList = new List<int> ();
 	private List<int> sellTowers = new List<int> ();//να το φτιαξω
-	private List<int> totalTowers = new List<int> ();
+	private List<int> totalTowers = new List<int> (); 
 	private int negativeScore = 0, positiveScore = 0;
 	private int totalMoneys = 0,usedMoneys = 0;
 	private Stopwatch chronometer = new Stopwatch();

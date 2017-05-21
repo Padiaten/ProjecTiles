@@ -3,13 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Runtime.Serialization;
+
 
 public static class StatisticsData {
+
+	private static int maxValueOfDifficulty = 2;
+	private static int numOfHighscores = 3;
 
 	//FILE 
 	private static string filePath;
 
 	private static int numberOfGames = 0;//αυξανεται όπου υπάρχει εντολή "SceneManager.LoadScene ("MainGame");"
+	private static int[,] highscores = new int[maxValueOfDifficulty,numOfHighscores]; 
 	/*private int money = 0;
 	private int lives = 0;
 	private int score = 0;
@@ -22,7 +29,11 @@ public static class StatisticsData {
 	private static int totalMoneys = 0,usedMoneys = 0;
 	private static int hours = 0,minutes = 0,seconds = 0;
 
-	public static void Initialize () {
+
+
+	/*public static void Initialize () {
+
+
 		//ΨΑΞΕ ΓΙΑ ΑΡΧΕΙΟ
 		string directoryPath = System.IO.Directory.GetCurrentDirectory() + "\\Saves";
 		filePath = directoryPath + "\\statistics.stat";
@@ -58,12 +69,12 @@ public static class StatisticsData {
 			sw.WriteLine(minutes);
 			sw.WriteLine(seconds);
 			sw.WriteLine(endScore);
-			/*sw.WriteLine();
+			sw.WriteLine(highscores);
 			sw.WriteLine();
 			sw.WriteLine();
 			sw.WriteLine();
 			sw.WriteLine();
-			sw.WriteLine();*/
+			sw.WriteLine();
 
 
 			//Close the file
@@ -104,6 +115,11 @@ public static class StatisticsData {
 		{
 			Debug.Log("Executing finally block.");
 		}
+	}*/
+
+	public static int[,] HighScores{
+		get{ return highscores; }
+		set{ highscores = value;}
 	}
 
 	public static int NumbersOfGames{
@@ -112,24 +128,35 @@ public static class StatisticsData {
 	}
 
 	public static int EndScore{
-		get{ return endScore; }
-		set{ endScore = value; }
+		get{ return endScore;}
+		set{ 
+			endScore = value; 
+			int diff = GameData.Difficulty;
+			if (endScore > highscores [diff,0]) {
+				highscores [diff,0] = endScore;
+				Array.Sort (highscores);//με αύξουσα {0,1,2}
+			}
+		}
 	}
 
 	public static int NegativeScore{
 		get{ return negativeScore; }
+		set{ negativeScore = value; }
 	}
 
 	public static int PositiveScore{
 		get{ return positiveScore; }
+		set{ positiveScore = value; }
 	}
 
 	public static int TotalMoneys{
 		get{ return totalMoneys; }
+		set{ totalMoneys = value; }
 	}
 
 	public static int UsedMoneys{
 		get{ return usedMoneys; }
+		set{ usedMoneys = value; }
 	}
 
 	public static int Hours{
@@ -161,5 +188,65 @@ public static class StatisticsData {
 				}
 			}
 		}
+	}
+
+	public static int MaxValueOfDifficulty{
+		get{ return maxValueOfDifficulty; }
+	}
+
+	public static int NumberOfHighscores{
+		get{ return numOfHighscores; }
+	}
+}
+
+[Serializable]
+public class AssistantClass{
+
+	private int numberOfGames = 0;
+	private int[,] highscores = new int[StatisticsData.MaxValueOfDifficulty,StatisticsData.NumberOfHighscores]; 
+	/*private int money = 0;
+	private int lives = 0;
+	private int score = 0;
+	private List<int> killist = new List<int> ();
+	private List<int> finishList = new List<int> ();
+	private List<int> sellTowers = new List<int> ();//να το φτιαξω
+	private List<int> totalTowers = new List<int> ();*/
+	private int negativeScore = 0, positiveScore = 0;
+	private int endScore = 0;
+	private int totalMoneys = 0,usedMoneys = 0;
+	private int hours = 0,minutes = 0,seconds = 0;
+
+	public AssistantClass(){
+
+	}
+
+	public void TransferDataFromStatistics(){
+		numberOfGames = StatisticsData.NumbersOfGames;
+		highscores = StatisticsData.HighScores;
+		negativeScore = StatisticsData.NegativeScore;
+		positiveScore = StatisticsData.PositiveScore;
+		endScore = StatisticsData.EndScore;
+		totalMoneys = StatisticsData.TotalMoneys;
+		usedMoneys = StatisticsData.UsedMoneys;
+		hours = StatisticsData.Hours;
+		minutes = StatisticsData.Minutes;
+		seconds = StatisticsData.Seconds;
+	}
+
+	public void Save(string path){
+		
+	}
+
+	public void Load(){
+		StatisticsData.NumbersOfGames = numberOfGames;
+		StatisticsData.HighScores = highscores;
+		StatisticsData.NegativeScore = negativeScore;
+		StatisticsData.PositiveScore = positiveScore;
+		StatisticsData.EndScore = endScore;
+		StatisticsData.TotalMoneys = totalMoneys;
+		StatisticsData.UsedMoneys = usedMoneys;
+		StatisticsData.Hours = hours;
+		StatisticsData.Minutes = minutes;
+		StatisticsData.Seconds = seconds;
 	}
 }

@@ -221,7 +221,7 @@ public class FlowController : MonoBehaviour {
 		gameFlow.GetComponent<Player> ().CaclculateEndScore ();
 		GetComponent<Player> ().EndChronometer();
 		GetComponent<Player> ().TransferDataInStatistics();//warning: always after EndChronometer
-		StatisticsData.Save();
+		//StatisticsData.Save();
 	}
 
 	//GETTERS

@@ -12,11 +12,13 @@ public class TowerController : MonoBehaviour {
 
 	void Start(){
 		InfoMessage = GameObject.Find("InfoMessage");
+		print(InfoMessage);
 	}
 
 	void Update(){
 		if(Input.GetMouseButtonDown(0)){
 			RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition),Vector2.zero);
+			print(hit.collider);
 			if(hit.collider != null && hit.collider.tag == "Tower"){
 				SelectTower(hit.collider.gameObject);
 			}

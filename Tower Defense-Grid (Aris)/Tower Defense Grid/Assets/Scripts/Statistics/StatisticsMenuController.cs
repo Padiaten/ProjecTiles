@@ -54,10 +54,10 @@ public class StatisticsMenuController : MonoBehaviour {
 		CreateTextFrame ("Score",GetComponent<Player> ().Score.ToString(),1);
 		CreateTextFrame ("-Positive Score",GetComponent<Player>().PositiveScore.ToString(),4);
 		CreateTextFrame ("-Negative Score",GetComponent<Player>().NegativeScore.ToString(),4);
-		CreateTextFrame ("Lives/Starting Lives",GetComponent<Player>().Lives.ToString()+"/"+LevelHandler.SelectedLives.ToString(),1);
-		CreateTextFrame ("Total money",GetComponent<Player>().TotalMoneys.ToString(),1);
-		CreateTextFrame ("-Used money",GetComponent<Player>().UsedMoneys.ToString(),4);
-		CreateTextFrame ("-Remaining money",GetComponent<Player>().Money.ToString(),4);
+		CreateTextFrame ("Lives/StartLives",GetComponent<Player>().Lives.ToString()+"/"+LevelHandler.SelectedLives.ToString(),1);
+		CreateTextFrame ("Total moneys",GetComponent<Player>().TotalMoneys.ToString(),1);
+		CreateTextFrame ("-Used moneys",GetComponent<Player>().UsedMoneys.ToString(),4);
+		CreateTextFrame ("-Remaining moneys",GetComponent<Player>().Money.ToString(),4);
 		//CreateTextFrameEnemies ();
 		//CreateTextFrameTowers ();
 		CreateButton ("MORE > >",true);

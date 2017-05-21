@@ -9,6 +9,7 @@ public class StartGame : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+
 		if (!initial) {
 			GameData.Initialize ();
 			print (GameData.Difficulty+" -Difficulty");
@@ -28,7 +29,7 @@ public class StartGame : MonoBehaviour {
 				g.GetComponentInChildren<Tower> ().Id = i;
 			}
 				
-			StatisticsData.Initialize ();
+			//StatisticsData.Initialize ();
 
 			GameObject.Find ("Loading").SetActive (false);
 			panel.SetActive (true);
