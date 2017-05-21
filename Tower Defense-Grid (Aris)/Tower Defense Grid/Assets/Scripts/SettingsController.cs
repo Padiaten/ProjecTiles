@@ -5,20 +5,30 @@ using UnityEngine.UI;
 
 public class SettingsController : MonoBehaviour {
 
-	public Slider Volume;
+	private GameObject Volume;
 	public Slider Diffic;
 	AudioSource music;
 	 
 	void Start(){
-		
+		Volume = GameObject.Find("MusicSlider");
+		music = GameObject.FindGameObjectWithTag ("backroundmusic").GetComponent<AudioSource>();
 		Diffic.GetComponent<Slider> ().value = GameData.Difficulty;
 		print (GameData.Difficulty+" -Difficulty");
+	//	print("Music Volume:" + music.getComponent<D> + ",Slider thinks:" + Volume.GetComponent<Slider>().value);
+
 		Volume.GetComponent<Slider>().value = music.volume;
 	}
-	// Update is called once per frame
-	void Update () {
-		music = GameObject.FindGameObjectWithTag ("backroundmusic").GetComponent<AudioSource> ();
-		music.volume = Volume.value;
+
+	public void UpdateVolume () {
+		music.volume = Volume.GetComponent<Slider>().value;
+		if(Volume.GetComponent<Slider>().value == 0){
+			GameObject.FindGameObjectWithTag ("backroundmusic").GetComponent<DonotDestroyOnLoad>().setMuted(true);
+		}else{
+			GameObject.FindGameObjectWithTag ("backroundmusic").GetComponent<DonotDestroyOnLoad>().setMuted(false);
+
+		}
 	}
+
+
 
 }

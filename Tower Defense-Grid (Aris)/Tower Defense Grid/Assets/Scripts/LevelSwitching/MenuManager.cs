@@ -2,16 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using System;
 
 public class MenuManager : MonoBehaviour {
+
+	/*void Start(){
+		
+	}*/
 
 	public void LoadGame(string sel_schene) {
 		SceneManager.LoadScene (sel_schene);
 	}
 
 	public void QuitGame(){
-		//StatisticsData.Save();
+		//na to sbiso
+		StatisticsData.Save();
 		print ("Quit");
 		Application.Quit (); 
 	}

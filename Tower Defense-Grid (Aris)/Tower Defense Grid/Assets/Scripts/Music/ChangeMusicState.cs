@@ -8,7 +8,8 @@ public class ChangeMusicState : MonoBehaviour {
 	void Start(){
 		if(GameObject.Find("BackgroundMusic").GetComponent<DonotDestroyOnLoad>().getMuted()){
 			GameObject.Find("Music").GetComponent<Image>().sprite =  (Sprite)Resources.Load("Sprites/GUI/b_Sound1_Inactive",typeof(Sprite));
-		}	
+		}
+
 	}
 
 	public void MusicState(){
