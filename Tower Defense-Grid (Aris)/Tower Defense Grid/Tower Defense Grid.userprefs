@@ -2,12 +2,13 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Enemies\Enemy.cs">
     <Files>
-      <File FileName="Assets\Scripts\Statistics\StatisticsData.cs" Line="3" Column="19" />
+      <File FileName="Assets\Scripts\Statistics\StatisticsData.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Player.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\StartGame.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Waves\WaveControler.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Statistics\StatisticsMenuController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Enemies\Enemy.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Enemies\Enemy.cs" Line="45" Column="33" />
+      <File FileName="Assets\Scripts\Towers\Projectile.cs" Line="35" Column="6" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

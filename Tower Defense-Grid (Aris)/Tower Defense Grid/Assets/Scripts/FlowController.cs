@@ -37,6 +37,7 @@ public class FlowController : MonoBehaviour {
 			else
 				Pause();
 		}
+
 		if (waveStart) {
 			if (numberOFEnemies == 0 && GetComponent<WaveControler> ().OutOfWaves && !GetComponent<WaveControler> ().EndOfWaves)
 				GameObject.Find ("Start_and_Speed_Button").GetComponent<Image> ().sprite = (Sprite)Resources.Load ("Sprites/GUI/startlevel", typeof(Sprite));
@@ -134,6 +135,9 @@ public class FlowController : MonoBehaviour {
 	
 	public void LevelComplete(){
 		BeforeGameEnds (true);
+		if(LevelHandler.Selected_level >= GameData.Progress){
+			GameData.Progress = LevelHandler.Selected_level + 1;
+		}
 		//νικησες μετεφερε τα δεδομενα αποθηκευσε
 		Time.timeScale = 0;
 		levelCompleteUI.SetActive (true);

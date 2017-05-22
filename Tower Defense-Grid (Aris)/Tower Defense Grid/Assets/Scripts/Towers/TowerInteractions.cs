@@ -15,11 +15,16 @@ public class TowerInteractions : MonoBehaviour {
 	}
 
 	public void OnMouseEnter(){
-		 transform.Find("Range").GetComponentInChildren<SpriteRenderer>().sortingOrder = 1;
+		if(this.name != "Global Tower"){
+			Color c = transform.Find("Range").GetComponentInChildren<SpriteRenderer>().color;
+			transform.Find("Range").GetComponentInChildren<SpriteRenderer>().color =  new Color(c.r,c.g,c.b,100/255f);
+		}
+	
 	}
 
 	public void OnMouseExit(){
-		transform.Find("Range").GetComponentInChildren<SpriteRenderer>().sortingOrder = -1;
+		Color c = transform.Find("Range").GetComponentInChildren<SpriteRenderer>().color;
+		transform.Find("Range").GetComponentInChildren<SpriteRenderer>().color = new Color(c.r,c.g,c.b,0);;
 
 	}
 

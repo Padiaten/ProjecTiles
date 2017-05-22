@@ -5,6 +5,7 @@ using UnityEngine;
 public class GridController : MonoBehaviour {
 	
 	List<List<string>> map = new List<List<string>>();
+	private int totalgrasstiles = 0;
 	//Έχει τα πλακίδια-αφετηρία
 	protected List<GameObject> StartTiles = new List<GameObject>();
 	void Start () {
@@ -23,12 +24,14 @@ public class GridController : MonoBehaviour {
 				if(map[i][j] == "X"){
 					go.AddComponent<GrassTile>();
 					go.GetComponent<GrassTile>().initializeTile(j,map[j].Count-1-i);
+					go.tag = "GrassTile";
 					go.name = "G" + " " + j + "," + (map[j].Count-1-i).ToString();
+					totalgrasstiles += 1;
 				}else{
 					go.AddComponent<PathTile>();
 					go.GetComponent<PathTile>().initializeTile(j,map[j].Count-1-i);
 					go.name = "P" + " " + j + "," + (map[j].Count-1-i).ToString();
-
+					go.tag = "PathTile";
 					//Ελένχει αν ειναι αφετηρια και το βαζει στη λιστα
 					}if(map[i][j].Contains("S")){
 						StartTiles.Add(go);
@@ -93,6 +96,7 @@ public class GridController : MonoBehaviour {
 			
 			}
 		}
+		placeRocks();
 		GetComponent<FlowController>().startWaveControler();
 	}
 
@@ -101,5 +105,26 @@ public class GridController : MonoBehaviour {
 		return StartTiles;
 	}
 
+	public void placeRocks(){
+		int rocks = Random.Range(0,totalgrasstiles/2);
+		print(rocks);
+		int i = 0;
+		GameObject[] grasstiles = GameObject.FindGameObjectsWithTag("GrassTile");
+		while(i<rocks){
+			int index = Random.Range(0,grasstiles.Length -1);
+			GameObject g = grasstiles[index];
+			if(g.GetComponent<GrassTile>().getCanPlaceBuilding()){
+				string path = "Sprites/MapSprites/rand" + Random.Range(1,5).ToString();
+				GameObject folliage = new GameObject();
+				folliage.name = "Folliage";
+				folliage.transform.position = new Vector3(g.transform.position.x,g.transform.position.y,-1);
+				folliage.AddComponent<SpriteRenderer>();
+				folliage.GetComponent<SpriteRenderer>().sprite =(Sprite)Resources.Load(path,typeof(Sprite));
+				g.GetComponent<GrassTile>().setCanPlaceBuilding(false);
+				i++;
+			}
+			
+		}
+	}
 
 }

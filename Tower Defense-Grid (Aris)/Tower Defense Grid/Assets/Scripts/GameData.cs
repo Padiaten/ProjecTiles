@@ -10,6 +10,7 @@ public static class GameData{
 	//DATA
 	private static int difficulty = 0;
 	//pistes ξεκλειδωμενες κ.τ.λ.
+	private static int progress = 1;
 
 	public static void Initialize(){
 		string directoryPath = System.IO.Directory.GetCurrentDirectory() + "\\Saves";
@@ -33,6 +34,7 @@ public static class GameData{
 			System.IO.File.Create (filePath);
 		}
 	}
+
 
 	public static void TransferDataFromFile(){
 		string line;
@@ -89,6 +91,15 @@ public static class GameData{
 		set{ 
 			difficulty = value; 
 			Save ();
+		}
+	}
+
+	public static int Progress {
+		get {
+			return progress;
+		}
+		set {
+			progress = value;
 		}
 	}
 }

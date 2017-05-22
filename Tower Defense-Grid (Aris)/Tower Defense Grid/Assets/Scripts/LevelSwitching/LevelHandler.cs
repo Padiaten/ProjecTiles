@@ -12,12 +12,14 @@ public static class LevelHandler{
 	private static List<List<string>> waves2 = new List<List<string>> ();
 	private static int selectedLives;
 	private static int selectedMoneys;
-	private static bool isSurvival;
+	private static bool isSurvival= false;
+	private static int selected_level;
 	private static int numberOfTracks = 5;//οποτε προσθετεις καποια πιστα ενημερωσε και την μεταβλητη
 
 	private static int DimX=10,DimY=10;
 
 	public static void PickLevel(int i){
+		selected_level = i;
 		selected_Level.Clear();
 		selected_Wave.Clear ();
 		waves1.Clear ();
@@ -36,7 +38,7 @@ public static class LevelHandler{
 				selected_Level.Add (new List<string> (){ "X", "X", "X", "E", "X", "X", "X", "X", "X" });
 
 				waves1.Add (new List<string> (){"1-2-4-1","1-2-0-1","1-2-1-1","1-2-1-1","1-2-1-1"});
-				waves1.Add (new List<string> (){"1-100-0-0.3","1-100-1-0.3","1-100-2-0.3","1-100-3-0.3","1-100-4-0.3"});
+				waves1.Add (new List<string> (){"1-1-0-0.3","1-1-1-0.3","1-1-2-0.3","1-1-3-0.3","1-1-4-0.3"});
 
 				selected_Wave.Add (waves1);
 
@@ -64,14 +66,14 @@ public static class LevelHandler{
 				selected_Level.Add (new List<string> (){ "X", "X", "X", "X", "E", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X" });
 
 				waves2.Add (new List<string> (){"1-2-0-5"});
-				waves2.Add (new List<string> (){"1-2-4-4"});
-				waves2.Add (new List<string> (){"1-2-0-3"});
-				waves2.Add (new List<string> (){"1-2-4-2"});
-				waves2.Add (new List<string> (){"1-10-4-1"});
-				waves2.Add (new List<string> (){"1-10-4-0.5"});
-				waves2.Add (new List<string> (){"1-10-4-0.1"});
-				waves2.Add (new List<string> (){"1-10-4-0.05"});
-				waves2.Add (new List<string> (){"1-10-4-0.01"});
+				//waves2.Add (new List<string> (){"1-2-4-4"});
+				//waves2.Add (new List<string> (){"1-2-0-3"});
+				//waves2.Add (new List<string> (){"1-2-4-2"});
+				//waves2.Add (new List<string> (){"1-10-4-1"});
+				//waves2.Add (new List<string> (){"1-10-4-0.5"});
+				//waves2.Add (new List<string> (){"1-10-4-0.1"});
+				waves1.Add (new List<string> (){"1-10-4-0.05"});
+				waves1.Add (new List<string> (){"1-10-4-0.01"});
 
 				selected_Wave.Add (waves2);
 				selected_Wave.Add (waves1);
@@ -232,6 +234,11 @@ public static class LevelHandler{
 
 	public static int getDimY(){
 		return DimY;
+	}
+
+	public static int Selected_level {
+		get {return selected_level;}
+		set {selected_level = value;}
 	}
 }
 

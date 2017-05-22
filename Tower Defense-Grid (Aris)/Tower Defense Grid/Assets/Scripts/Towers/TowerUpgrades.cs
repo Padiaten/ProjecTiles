@@ -15,6 +15,7 @@ public static class TowerUpgrades {
 		atk_cool=0;
 		proj_sp=0;
 		eff_val=0;
+		range = 0;
 
 		switch(i){
 		//Normal

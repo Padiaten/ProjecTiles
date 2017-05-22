@@ -39,11 +39,11 @@ public class Enemy: MonoBehaviour {
     public void Initialize (int i) {
 		int diff = GameData.Difficulty;
 		if(diff == 1){
-			health =(int)(health * 1.5);
-			speed = speed * 1.5f;
+			health =(int)(health * 1.2f);
+			speed = speed * 1.2f;
 		}else if(diff == 2){
-			health = health * 2;
-			speed = speed * 2f;
+			health =(int) (health * 1.5f);
+			speed = speed * 1.5f;
 			worth =(int)(worth * 0.7f);
 		}
 		gameFlow = GameObject.Find("GameFlow");
