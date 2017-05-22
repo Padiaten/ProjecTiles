@@ -11,7 +11,6 @@ public class ShowInfoText : MonoBehaviour {
 	}
 
 	public void displayMessage(int x){
-		print("DISPLAY MESSAGE");
 		i = x;
 		StartCoroutine(disp());
 	}
