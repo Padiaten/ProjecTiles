@@ -48,7 +48,28 @@ public class Player : MonoBehaviour {
 		StatisticsData.Hours += hours;
 		StatisticsData.Minutes += minutes;
 		StatisticsData.Seconds += seconds;
-		StatisticsData.EndScore += endScore;
+		StatisticsData.EndScore = endScore;//να μην προστιθεται ποτε των ποτων!!!!
+		StatisticsData.Waves += GetComponent<WaveControler> ().WavesIndex;
+		StatisticsData.TotalMoneys += totalMoneys;
+		StatisticsData.UsedMoneys += usedMoneys;
+		StatisticsData.NegativeScore += negativeScore;
+		StatisticsData.PositiveScore += positiveScore;
+		StatisticsData.Score += score;
+		StatisticsData.Lives += (LevelHandler.SelectedLives - lives); 
+		//StatisticsData.Wins +=
+		//StatisticsData.Loses +=
+		for(int i=0; i < killist.Count; i++){
+			StatisticsData.Killist [i] += killist [i];
+		}
+		for (int i = 0; i < finishList.Count; i++) {
+			StatisticsData.FinishList [i] += finishList [i];
+		}
+		for (int i = 0; i < totalTowers.Count; i++) {
+			StatisticsData.TotalTowers[i] += totalTowers [i];
+		}
+		for (int i = 0; i < sellTowers.Count; i++) {
+			StatisticsData.SellTowers[i] += sellTowers [i];
+		}
 	}
 
 	public void CaclculateEndScore(){

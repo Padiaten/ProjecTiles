@@ -128,6 +128,7 @@ public class TowerController : MonoBehaviour {
 		int y = (int) SelectedTower.transform.position.y;
 		string tilename = "G " + x + "," + y;
 		GameObject.Find(tilename).GetComponent<GrassTile>().setCanPlaceBuilding(true);
+		GetComponent<Player> ().AddInTowerList (SelectedTower.GetComponentInChildren<Tower>().Id,false);
 		Destroy(SelectedTower);
 		CancelTowerMenu();
 	}

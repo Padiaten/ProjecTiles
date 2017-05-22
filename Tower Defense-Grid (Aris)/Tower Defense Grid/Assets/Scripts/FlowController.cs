@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
+using UnityEngine.SceneManagement; 
  
 //Controls the whole game
 public class FlowController : MonoBehaviour {
@@ -125,7 +125,7 @@ public class FlowController : MonoBehaviour {
 	//SCENES IN GAME
 	public void EndGame()
 	{
-		BeforeGameEnds ();
+		BeforeGameEnds (false);
 		//εχασες μετεφερε τα δεδομενα αποθηκευσε
 		Time.timeScale = 0;
 		gameOverUI.SetActive (true);
@@ -133,7 +133,7 @@ public class FlowController : MonoBehaviour {
 	}
 	
 	public void LevelComplete(){
-		BeforeGameEnds ();
+		BeforeGameEnds (true);
 		//νικησες μετεφερε τα δεδομενα αποθηκευσε
 		Time.timeScale = 0;
 		levelCompleteUI.SetActive (true);
@@ -165,7 +165,7 @@ public class FlowController : MonoBehaviour {
 	{
 		if(pauseUI.activeSelf)
 		{
-			BeforeGameEnds ();
+			BeforeGameEnds (false);
 		//σε καθε load MainGame numberOfGames++
 		//αν καλειται απο την παυση
 		//τελος εχασες μετεφερε τα δεδομενα αποθηκευσε
@@ -178,7 +178,7 @@ public class FlowController : MonoBehaviour {
 	public void Menu()
 	{
 		if(pauseUI.activeSelf){
-			BeforeGameEnds ();
+			BeforeGameEnds (false);
 		//τελος εχασε μετεφερε τα δεδομενα αποθηκευσε
 		}
 		SceneManager.LoadScene ("MainMenu");
@@ -216,8 +216,12 @@ public class FlowController : MonoBehaviour {
 			gameOverUI.SetActive (true);
 	}
 
-	public void BeforeGameEnds()
+	public void BeforeGameEnds(bool win)
 	{
+		if(win)
+			StatisticsData.Wins++;
+		else 
+			StatisticsData.Loses++;
 		gameFlow.GetComponent<Player> ().CaclculateEndScore ();
 		GetComponent<Player> ().EndChronometer();
 		GetComponent<Player> ().TransferDataInStatistics();//warning: always after EndChronometer

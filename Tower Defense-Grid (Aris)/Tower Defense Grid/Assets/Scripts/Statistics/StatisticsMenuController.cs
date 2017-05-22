@@ -27,16 +27,16 @@ public class StatisticsMenuController : MonoBehaviour {
 		Grid = GameObject.Find("Grid");
 		text = (GameObject)Resources.Load("Prefabs/UI/StatisticsText",typeof(GameObject));
 		button = (GameObject)Resources.Load("Prefabs/UI/ButtonMoreOrLess",typeof(GameObject));
+		enemiesArray = Resources.LoadAll ("Prefabs/Enemies", typeof(GameObject));
+		lengthEnemiesList = enemiesArray.Length;
+		towersArray = Resources.LoadAll ("Prefabs/Towers", typeof(GameObject));
+		lengthTowersList = towersArray.Length;
 		if(mainStat){
 			FillGridMainSat ();
 		}else{
 			if (GameObject.Find ("TextFrame0")) {
-
+				//αν υπαρχουν ηδη μην κανεις τιποτα
 			} else {
-				enemiesArray = Resources.LoadAll ("Prefabs/Enemies", typeof(GameObject));
-				lengthEnemiesList = enemiesArray.Length;
-				towersArray = Resources.LoadAll ("Prefabs/Towers", typeof(GameObject));
-				lengthTowersList = towersArray.Length;
 				FillGrid ();
 			}
 		}
@@ -46,6 +46,9 @@ public class StatisticsMenuController : MonoBehaviour {
 	{
 		CreateTextFrame ("Number of games",StatisticsData.NumbersOfGames.ToString(),1);
 		CreateTextFrameTime (StatisticsData.Hours,StatisticsData.Minutes,StatisticsData.Seconds,"Total time");
+		CreateTextFrame ("Wins / Loses",StatisticsData.Wins+" / "+StatisticsData.Loses,1);
+		CreateTextFrameEnemies (StatisticsData.Killist,StatisticsData.FinishList);
+		CreateTextFrameTowers (StatisticsData.TotalTowers,StatisticsData.SellTowers);
 	}
 	
 	public void FillGrid(){
@@ -76,8 +79,8 @@ public class StatisticsMenuController : MonoBehaviour {
 
 	public void More(){
 		Destroy (newButton);
-		CreateTextFrameEnemies ();
-		CreateTextFrameTowers ();
+		CreateTextFrameEnemies (GetComponent<Player> ().Killist,GetComponent<Player> ().FinishList);
+		CreateTextFrameTowers (GetComponent<Player> ().TotalTowers,GetComponent<Player> ().SellTowers);
 		CreateButton ("< < LESS",false);
 	}
 
@@ -113,47 +116,50 @@ public class StatisticsMenuController : MonoBehaviour {
 		CreateTextFrame (title,timeText,1);
 	}
 
-	public void CreateTextFrameTowers()
+	public void CreateTextFrameTowers(List<int> totalList,List<int> sellList)
 	{
-		List<int> totalTowersList = GetComponent<Player> ().TotalTowers;
-		List<int> sellTowersList = GetComponent<Player> ().SellTowers;
-		float sum = CountTotalOfList (lengthTowersList,totalTowersList);
+		/*List<int> totalTowersList = GetComponent<Player> ().TotalTowers;
+		List<int> sellTowersList = GetComponent<Player> ().SellTowers;*/
+		float sum = CountTotalOfList (lengthTowersList,totalList);
 		float percentage;
 
 		CreateTextFrame ("Total towers",sum.ToString(),1);
 		for (int i = 0; i < lengthTowersList; i++) {
 			if (sum != 0)
-				percentage = Mathf.RoundToInt (((totalTowersList [i] / sum) * 100));
+				percentage = Mathf.RoundToInt (((totalList [i] / sum) * 100));
 			else
 				percentage = 0;
-			CreateTextFrame ("-"+towersArray[i].name,totalTowersList[i]+" - "+percentage.ToString()+"%",4);
+			CreateTextFrame ("-"+towersArray[i].name,totalList[i]+" - "+percentage.ToString()+"%",4);
 		}
 
-		sum = CountTotalOfList (lengthTowersList, sellTowersList);
+		sum = CountTotalOfList (lengthTowersList, sellList);
 		CreateTextFrame ("Sell towers",sum.ToString(),1);
 		for (int i = 0; i < lengthTowersList; i++) {
 			if (sum != 0)
-				percentage = Mathf.RoundToInt (((sellTowersList [i] / sum) * 100));
+				percentage = Mathf.RoundToInt (((sellList [i] / sum) * 100));
 			else
 				percentage = 0;
-			CreateTextFrame ("-"+towersArray[i].name,sellTowersList[i]+" - "+percentage.ToString()+"%",4);
+			CreateTextFrame ("-"+towersArray[i].name,sellList[i]+" - "+percentage.ToString()+"%",4);
 		}
 	}
 
-	public void CreateTextFrameEnemies()
+	public void CreateTextFrameEnemies(List<int> killist,List<int> finishlist)
 	{
-		List<int> killist = GetComponent<Player> ().Killist;
-		List<int> finishlist = GetComponent<Player> ().FinishList;
-		float percentage;
+		/*List<int> killist = GetComponent<Player> ().Killist;
+		List<int> finishlist = GetComponent<Player> ().FinishList;*/
+		int percentage;
 		float sum;
 		float sumOfKills = CountTotalOfList (lengthEnemiesList, killist);
 		float sumOfFinish = CountTotalOfList (lengthEnemiesList, finishlist);
 		float totalEnemies = sumOfKills + sumOfFinish;
 
-		CreateTextFrame ("Total enemies",totalEnemies.ToString()+" - 100%",1);
+		CreateTextFrame ("Total enemies",totalEnemies.ToString(),1);
 		for (int i = 0; i < lengthEnemiesList; i++) {
 			sum = killist [i] + finishlist [i];
-			percentage = Mathf.RoundToInt (((sum / totalEnemies)*100));
+			if (totalEnemies != 0)
+				percentage = Mathf.RoundToInt (((sum / totalEnemies) * 100));
+			else
+				percentage = 0;
 			CreateTextFrame ("-"+enemiesArray[i].name,sum.ToString()+" - "+percentage.ToString()+"%",4);
 		}
 
@@ -164,7 +170,11 @@ public class StatisticsMenuController : MonoBehaviour {
 	public void CreateTextFrameEnemy(float sumOfList,float total,List<int> list,string title,int startSpaces,int size)
 	{
 		//startSpaces: απο τι εσοχη θα ξεκιναει
-		float percentage = Mathf.RoundToInt (((sumOfList/total)*100));
+		int percentage;
+		if (total != 0)
+			percentage = Mathf.RoundToInt (((sumOfList / total) * 100));
+		else
+			percentage = 0;
 		CreateTextFrame (title,sumOfList.ToString()+" - "+percentage.ToString()+"%",startSpaces);
 		for (int i = 0; i < size; i++) {
 			if (sumOfList != 0)
