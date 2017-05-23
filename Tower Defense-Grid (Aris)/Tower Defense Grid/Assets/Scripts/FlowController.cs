@@ -155,13 +155,22 @@ public class FlowController : MonoBehaviour {
 	
 	public void Pause()
 	{
+
 		//αποθηκευσε τα δεδομενα στο if οχι μεταφορα λογω διπλοεγγραφης
 		pauseUI.SetActive (!pauseUI.activeSelf);
+	
 		if (pauseUI.activeSelf) {
+			GameObject cover = new GameObject("Cover");
+			cover.transform.position = new Vector3(0,0,-5);
+			cover.transform.localScale = new Vector3(10000,10000,1);
+			cover.AddComponent<BoxCollider2D>();
+
 			GetComponent<Player> ().StopChronometer ();
 			oldTimeScale = Time.timeScale;
 			Time.timeScale = 0f;
 		} else {
+			GameObject cov = GameObject.Find("Cover");
+			Destroy(cov.gameObject);
 			GetComponent<Player> ().StartChronometer ();
 			Time.timeScale = oldTimeScale;
 		}
@@ -170,6 +179,8 @@ public class FlowController : MonoBehaviour {
 	//MENU BUTTON IN GAME
 	public void Continue(){
 		pauseUI.SetActive (false);
+		GameObject cov = GameObject.Find("Cover");
+		Destroy(cov.gameObject);
 		Time.timeScale = oldTimeScale;
 		GetComponent<Player> ().StartChronometer ();
 	}

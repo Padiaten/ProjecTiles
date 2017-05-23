@@ -55,7 +55,7 @@ public static class TowerUpgrades {
 			}else{
 				damage = 5;
 				atk_cool = 0.5f;
-				proj_sp = 7;
+				range = 2;
 			}
 			break;
 		//Global

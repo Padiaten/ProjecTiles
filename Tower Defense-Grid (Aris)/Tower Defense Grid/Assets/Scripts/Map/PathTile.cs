@@ -40,9 +40,23 @@ public class PathTile : Tile {
 			case 1:
 				Ttype = TileType.PathStraight;
 				this.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/MapSprites/path_straight");
+				
+				//Create start/end graphics
+				GameObject transitiongraphic =new GameObject();
+				transitiongraphic.AddComponent<SpriteRenderer>();
+				transitiongraphic.transform.position = new Vector3(this.transform.position.x,this.transform.position.y,-1);
+				transitiongraphic.transform.localScale = new Vector3(1f,1.25f,1f);
+				if(GameObject.Find("GameFlow").GetComponent<GridController>().GetStartTiles().Contains(this.gameObject)){
+					transitiongraphic.GetComponent<SpriteRenderer>().sprite = (Sprite)Resources.Load("Sprites/MapSprites/entrypoint",typeof(Sprite));
+					transitiongraphic.name = "Entry Point";
+				}else{
+					transitiongraphic.GetComponent<SpriteRenderer>().sprite = (Sprite)Resources.Load("Sprites/MapSprites/exitpoint",typeof(Sprite));
+					transitiongraphic.name = "Entry Point";
+				}
 				if(this.x == 0 || this.x == mapsize_x-1){
 					//print(this.x);
 					this.transform.rotation = Quaternion.Euler(0,0,90);
+					transitiongraphic.transform.rotation = Quaternion.Euler(0,0,90);
 				}
 			  	break;
 

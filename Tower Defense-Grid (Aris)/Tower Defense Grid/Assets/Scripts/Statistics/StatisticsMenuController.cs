@@ -80,7 +80,7 @@ public class StatisticsMenuController : MonoBehaviour {
 		}
 		int text;
 		CreateTextFrame ("Number of games",StatisticsData.NumbersOfGames.ToString(),1);
-		CreateTextFrameTime (StatisticsData.Hours,StatisticsData.Minutes,StatisticsData.Seconds,"Total time");
+		CreateTextFrameTime (StatisticsData.Hours,StatisticsData.Minutes,StatisticsData.Seconds,"Total game time");
 		CreateTextFrame ("Wins / Loses",StatisticsData.Wins+" / "+StatisticsData.Loses,1);
 		text = Mathf.RoundToInt ((StatisticsData.Lives / divisor));
 		if (perGame) {
@@ -95,11 +95,11 @@ public class StatisticsMenuController : MonoBehaviour {
 			CreateTextFrame ("-Negative score",text.ToString(),4);
 		}
 		text = Mathf.RoundToInt ((StatisticsData.Waves / divisor));
-		CreateTextFrame ("Waves",text.ToString(),1);
+		CreateTextFrame ("Waves played",text.ToString(),1);
 		text = Mathf.RoundToInt ((StatisticsData.TotalMoneys / divisor));
-		CreateTextFrame ("Total moneys",text.ToString(),1);
+		CreateTextFrame ("Total money",text.ToString(),1);
 		text = Mathf.RoundToInt ((StatisticsData.UsedMoneys / divisor));
-		CreateTextFrame ("Used moneys",text.ToString(),1);
+		CreateTextFrame ("Used money",text.ToString(),1);
 		CreateTextFrameEnemies (StatisticsData.Killist,StatisticsData.FinishList,divisor);
 		CreateTextFrameTowers (StatisticsData.TotalTowers,StatisticsData.SellTowers,divisor);
 	}
@@ -174,7 +174,7 @@ public class StatisticsMenuController : MonoBehaviour {
 		int text;
 
 		sum = Mathf.RoundToInt((sum / divisor));
-		CreateTextFrame ("Total towers",sum.ToString(),1);
+		CreateTextFrame ("Towers built",sum.ToString(),1);
 		for (int i = 0; i < lengthTowersList; i++) {
 			if (sum != 0)
 				percentage = Mathf.RoundToInt ((((totalList [i]/divisor) / sum)* 100));
@@ -189,7 +189,7 @@ public class StatisticsMenuController : MonoBehaviour {
 
 		sum = CountTotalOfList (sellList);
 		sum = Mathf.RoundToInt((sum / divisor));
-		CreateTextFrame ("Sell towers",sum.ToString(),1);
+		CreateTextFrame ("Towers sold",sum.ToString(),1);
 		for (int i = 0; i < lengthTowersList; i++) {
 			if (sum != 0)
 				percentage = Mathf.RoundToInt ((((sellList [i]/divisor) / sum) * 100));
@@ -212,7 +212,7 @@ public class StatisticsMenuController : MonoBehaviour {
 		float totalEnemies = sumOfKills + sumOfFinish;
 
 		totalEnemies = Mathf.RoundToInt((totalEnemies/divisor));
-		CreateTextFrame ("Total enemies",totalEnemies.ToString(),1);
+		CreateTextFrame ("Total enemies spawned",totalEnemies.ToString(),1);
 		for (int i = 0; i < lengthEnemiesList; i++) {
 			sum = killist [i] + finishlist [i];
 			if (totalEnemies != 0)
@@ -226,8 +226,8 @@ public class StatisticsMenuController : MonoBehaviour {
 				CreateTextFrame ("-"+enemiesArray[i].name,text.ToString()+" - "+percentage.ToString()+"%",4);
 		}
 
-		CreateTextFrameEnemy (sumOfKills,totalEnemies,killist,"Kill enemies",4,lengthEnemiesList,divisor);
-		CreateTextFrameEnemy (sumOfFinish,totalEnemies,finishlist,"Finish enemies",4,lengthEnemiesList,divisor);
+		CreateTextFrameEnemy (sumOfKills,totalEnemies,killist,"Enemies killed",4,lengthEnemiesList,divisor);
+		CreateTextFrameEnemy (sumOfFinish,totalEnemies,finishlist,"Enemies not killed",4,lengthEnemiesList,divisor);
 	}
 
 	public void CreateTextFrameEnemy(float sumOfList,float total,List<int> list,string title,int startSpaces,int size,float divisor)

@@ -11,7 +11,6 @@ public class GridController : MonoBehaviour {
 	void Start () {
 		drawMap(LevelHandler.GetSelectedLevel());
 	}
-	
 
 
 	void drawMap(List<List<string>> map){
@@ -106,7 +105,7 @@ public class GridController : MonoBehaviour {
 	}
 
 	public void placeRocks(){
-		int rocks = Random.Range(0,totalgrasstiles/2);
+		int rocks = Random.Range(0,(int)(totalgrasstiles/3.5f));
 		print(rocks);
 		int i = 0;
 		GameObject[] grasstiles = GameObject.FindGameObjectsWithTag("GrassTile");
