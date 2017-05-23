@@ -48,16 +48,15 @@ public class Player : MonoBehaviour {
 		StatisticsData.Hours += hours;
 		StatisticsData.Minutes += minutes;
 		StatisticsData.Seconds += seconds;
-		StatisticsData.EndScore = endScore;//να μην προστιθεται ποτε των ποτων!!!!
-		StatisticsData.Waves += GetComponent<WaveControler> ().WavesIndex;
 		StatisticsData.TotalMoneys += totalMoneys;
 		StatisticsData.UsedMoneys += usedMoneys;
+		StatisticsData.SetEndScoreAndHighscores = endScore;//να μην προστιθεται ποτε των ποτων!!!και να μην χρησιμοποιειται ποτε το EndScore
 		StatisticsData.NegativeScore += negativeScore;
 		StatisticsData.PositiveScore += positiveScore;
+		StatisticsData.Waves += GetComponent<WaveControler> ().WavesIndex;
 		StatisticsData.Score += score;
 		StatisticsData.Lives += (LevelHandler.SelectedLives - lives); 
-		//StatisticsData.Wins +=
-		//StatisticsData.Loses +=
+
 		for(int i=0; i < killist.Count; i++){
 			StatisticsData.Killist [i] += killist [i];
 		}
@@ -75,7 +74,7 @@ public class Player : MonoBehaviour {
 	public void CaclculateEndScore(){
 		int timeInSeconds = Mathf.RoundToInt((chronometer.ElapsedMilliseconds)/1000);
 		if ((timeInSeconds / 10f) != 0)
-			endScore = Mathf.RoundToInt((((lives * 100f + 20f * money)*GameData.Difficulty) / (timeInSeconds / 10f)) + score);
+			endScore = score;//Mathf.RoundToInt((((lives * 100f + 20f * money)*GameData.Difficulty) / (timeInSeconds / 10f)) + score);
 		else
 			endScore = score;
 		print (timeInSeconds+" seconds");

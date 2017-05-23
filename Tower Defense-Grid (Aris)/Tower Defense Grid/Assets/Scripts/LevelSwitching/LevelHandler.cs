@@ -42,7 +42,7 @@ public static class LevelHandler{
 
 				selected_Wave.Add (waves1);
 
-				selectedLives = 100;
+				selectedLives = 10;
 				selectedMoneys = 200;
 			
 				break;
@@ -73,7 +73,7 @@ public static class LevelHandler{
 				//waves2.Add (new List<string> (){"1-10-4-0.5"});
 				//waves2.Add (new List<string> (){"1-10-4-0.1"});
 				waves1.Add (new List<string> (){"1-10-4-0.05"});
-				waves1.Add (new List<string> (){"1-10-4-0.01"});
+				//waves1.Add (new List<string> (){"1-10-4-0.01"});
 
 				selected_Wave.Add (waves2);
 				selected_Wave.Add (waves1);
@@ -212,10 +212,12 @@ public static class LevelHandler{
 
 	public static int SelectedLives{
 		get{ return selectedLives; }
+		set{ selectedLives = value; }
 	}
 
 	public static int SelectedMoneys{
 		get{ return selectedMoneys; }
+		set{ selectedMoneys = value; }
 	}
 
 	public static bool IsSurvival{

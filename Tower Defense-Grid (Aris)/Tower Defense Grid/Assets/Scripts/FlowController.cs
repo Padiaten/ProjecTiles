@@ -131,17 +131,26 @@ public class FlowController : MonoBehaviour {
 		Time.timeScale = 0;
 		gameOverUI.SetActive (true);
 		GameObject.Find ("TextScoreGameOver").GetComponent<Text> ().text = gameFlow.GetComponent<Player> ().EndScore.ToString ();
+		if(StatisticsData.IsHighscore)
+			GameObject.Find("ScoreOrHighscoreGO").GetComponent<Text>().text = "HIGH SCORE";
+		else
+			GameObject.Find("ScoreOrHighscoreGO").GetComponent<Text>().text = "SCORE";
 	}
 	
 	public void LevelComplete(){
 		BeforeGameEnds (true);
 		if(LevelHandler.Selected_level >= GameData.Progress){
 			GameData.Progress = LevelHandler.Selected_level + 1;
+			GameData.Save ();
 		}
 		//νικησες μετεφερε τα δεδομενα αποθηκευσε
 		Time.timeScale = 0;
 		levelCompleteUI.SetActive (true);
 		GameObject.Find ("TextScoreLevelComplete").GetComponent<Text> ().text = gameFlow.GetComponent<Player> ().EndScore.ToString (); 
+		if(StatisticsData.IsHighscore)
+			GameObject.Find("ScoreOrHighscoreLC").GetComponent<Text>().text = "HIGH SCORE";
+		else
+			GameObject.Find("ScoreOrHighscoreLC").GetComponent<Text>().text = "SCORE";
 	}
 	
 	public void Pause()

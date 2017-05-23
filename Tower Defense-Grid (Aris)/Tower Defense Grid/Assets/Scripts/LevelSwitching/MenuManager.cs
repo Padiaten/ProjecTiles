@@ -10,6 +10,8 @@ public class MenuManager : MonoBehaviour {
 	}*/
 
 	public void LoadGame(string sel_schene) {
+		if (sel_schene.CompareTo ("LevelSelect") == 0)
+			LevelHandler.IsSurvival = false;
 		SceneManager.LoadScene (sel_schene);
 	}
 

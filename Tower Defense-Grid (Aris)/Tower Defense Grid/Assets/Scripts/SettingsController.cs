@@ -13,6 +13,7 @@ public class SettingsController : MonoBehaviour {
 		Volume = GameObject.Find("MusicSlider");
 		music = GameObject.FindGameObjectWithTag ("backroundmusic").GetComponent<AudioSource>();
 		Diffic.GetComponent<Slider> ().value = GameData.Difficulty;
+		Volume.GetComponent<Slider> ().value = GameData.MusicVolume;
 		print (GameData.Difficulty+" -Difficulty");
 	//	print("Music Volume:" + music.getComponent<D> + ",Slider thinks:" + Volume.GetComponent<Slider>().value);
 
@@ -25,10 +26,15 @@ public class SettingsController : MonoBehaviour {
 			GameObject.FindGameObjectWithTag ("backroundmusic").GetComponent<DonotDestroyOnLoad>().setMuted(true);
 		}else{
 			GameObject.FindGameObjectWithTag ("backroundmusic").GetComponent<DonotDestroyOnLoad>().setMuted(false);
-
 		}
+		GameData.MusicVolume = Volume.GetComponent<Slider> ().value;
 	}
 
+	public void SaveData(){
+		GameData.Save ();
+	}
 
-
+	public void ChangeDiff(){
+		GameData.Difficulty = (int)Diffic.GetComponent<Slider> ().value;
+	}
 }
