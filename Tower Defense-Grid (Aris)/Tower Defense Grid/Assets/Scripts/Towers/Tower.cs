@@ -41,7 +41,8 @@ public class Tower : MonoBehaviour {
 	private float attackCooldown;
 	public float AttackCooldown {
 		get {return attackCooldown;}
-		set {attackCooldown = value;}
+		set {attackCooldown = value;
+			 atkcool = attackCooldown;}
 	}
 
     [SerializeField]
@@ -99,9 +100,12 @@ public class Tower : MonoBehaviour {
 		set{ TowerLevel = value;}
 	}
 
+	private float atkcool;
     // Use this for initialization
     void Start ()
     {
+		atkcool = attackCooldown;
+
         sr = GetComponent<SpriteRenderer>();
         if (multipleRoundhouseHit)
         {
@@ -134,11 +138,14 @@ public class Tower : MonoBehaviour {
         if (!canAttack)
         {
             attackTimer += Time.deltaTime;
-
-            if (attackTimer >= attackCooldown)
+			if (attackTimer >= atkcool)
             {
                 canAttack = true;
                 attackTimer = 0;
+				if(transform.parent.name == "Global Tower"){
+					print("RAND");
+					atkcool = attackCooldown + Random.Range(0f,1f);
+				}
             }
         }
 

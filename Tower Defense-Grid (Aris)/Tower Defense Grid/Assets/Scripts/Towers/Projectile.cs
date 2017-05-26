@@ -86,10 +86,9 @@ public class Projectile : MonoBehaviour {
 						en.gameObject.GetComponent<Enemy>().Hit(sourceTower.Damage);
 					}
 				}
-				//Destroy(o.gameObject);
-				//print("heyo");
-            }
-            enem.Hit(sourceTower.Damage);
+			}else{
+				enem.Hit(sourceTower.Damage);
+			}
             Destroy(this.gameObject);                         
         }
     }
