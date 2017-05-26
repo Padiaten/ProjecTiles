@@ -84,7 +84,7 @@ public class StatisticsMenuController : MonoBehaviour {
 		CreateTextFrame ("Wins / Loses",StatisticsData.Wins+" / "+StatisticsData.Loses,1);
 		text = Mathf.RoundToInt ((StatisticsData.Lives / divisor));
 		if (perGame) {
-			CreateTextFrame ("Lives",text.ToString(),1);
+			CreateTextFrame ("Lives lost",text.ToString(),1);
 			text = Mathf.RoundToInt ((StatisticsData.EndScore / divisor));
 			CreateTextFrame ("End score",text.ToString(),1);
 			text = Mathf.RoundToInt ((StatisticsData.Score / divisor));

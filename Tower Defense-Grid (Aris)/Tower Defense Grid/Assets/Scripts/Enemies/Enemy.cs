@@ -42,9 +42,8 @@ public class Enemy: MonoBehaviour {
 			health =(int)(health * 1.2f);
 			speed = speed * 1.2f;
 		}else if(diff == 2){
-			health =(int) (health * 1.5f);
-			speed = speed * 1.5f;
-			worth =(int)(worth * 0.7f);
+			health =(int) (health * 1.25f);
+			speed = speed * 1.3f;
 		}
 		gameFlow = GameObject.Find("GameFlow");
         flag = false;
@@ -83,6 +82,7 @@ public class Enemy: MonoBehaviour {
 
 	public void Hit(int damage)
 	{
+		print("hit");
 		health -= damage;
 		if (health <= 0) {
 			KillEnemy ();
@@ -110,6 +110,7 @@ public class Enemy: MonoBehaviour {
 	public void DestroyEnemy()
 	{
 		Destroy (this.gameObject);
+		print("num");
 		gameFlow.GetComponent<FlowController> ().NumbersOfEnemies--;
 	}
 

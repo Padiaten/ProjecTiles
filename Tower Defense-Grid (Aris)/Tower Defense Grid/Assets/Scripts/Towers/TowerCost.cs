@@ -13,16 +13,16 @@ public  static class TowerCost{
 			cost=60;
 			break;
 		case 3:
-			cost=70;
+			cost=125;
 			break;
 		case 4:
-			cost=80;
+			cost=100;
 			break;
 		case 5:
-			cost=90;
+			cost=200;
 			break;
 		case 6:
-			cost=100;
+			cost=10;
 			break;
 		}
 

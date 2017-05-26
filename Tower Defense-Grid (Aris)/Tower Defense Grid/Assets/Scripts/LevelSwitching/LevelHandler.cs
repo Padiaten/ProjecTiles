@@ -27,63 +27,36 @@ public static class LevelHandler{
 		switch(i){
 		case 1:
 			{
-				selected_Level.Add (new List<string> (){ "X", "X", "X", "SD", "X", "X", "X", "X", "X" });
-				selected_Level.Add (new List<string> (){ "X", "X", "X", "R", "D", "X", "X", "X", "X" });
-				selected_Level.Add (new List<string> (){ "X", "X", "X", "X", "D", "X", "X", "X", "X" });
-				selected_Level.Add (new List<string> (){ "X", "X", "X", "X", "D", "X", "X", "X", "X" });
-				selected_Level.Add (new List<string> (){ "X", "X", "D", "L", "LD", "L", "L", "X", "X" });
-				selected_Level.Add (new List<string> (){ "X", "X", "D", "X", "D", "X", "U", "X", "X" });
-				selected_Level.Add (new List<string> (){ "X", "X", "D", "X", "R", "R", "U", "X", "X" });
-				selected_Level.Add (new List<string> (){ "X", "X", "R", "D", "X", "X", "X", "X", "X" });
-				selected_Level.Add (new List<string> (){ "X", "X", "X", "E", "X", "X", "X", "X", "X" });
-
-				waves1.Add (new List<string> (){"1-2-4-1","1-2-0-1","1-2-1-1","1-2-1-1","1-2-1-1"});
-				waves1.Add (new List<string> (){"1-1-0-0.3","1-1-1-0.3","1-1-2-0.3","1-1-3-0.3","1-1-4-0.3"});
+				selected_Level.Add(new List<string>(){"X","X","X","X","X","X","X","X","X","X","X"});
+				selected_Level.Add(new List<string>(){"SR","D","X","X","X","X","X","X","X","X","X"});
+				selected_Level.Add(new List<string>(){"X","D","X","X","X","R","R","RD","R","D","X"});
+				selected_Level.Add(new List<string>(){"X","D","X","X","X","U","X","D","X","D","X"});
+				selected_Level.Add(new List<string>(){"X","D","X","X","X","U","L","L","X","D","X"});
+				selected_Level.Add(new List<string>(){"X","D","X","X","X","U","X","X","X","D","X"});
+				selected_Level.Add(new List<string>(){"X","DR","R","R","R","U","X","X","X","D","X"});
+				selected_Level.Add(new List<string>(){"X","D","X","X","X","U","X","X","X","D","X"});
+				selected_Level.Add(new List<string>(){"X","D","X","X","X","U","X","X","X","R","E"});
+				selected_Level.Add(new List<string>(){"X","R","R","R","R","U","X","X","X","X","X"});
+				selected_Level.Add(new List<string>(){"X","X","X","X","X","X","X","X","X","X","X"});
+				
+				
+				waves1.Add (new List<string> (){"0.1-3-0-1.5"});
+				waves1.Add (new List<string> (){"0.1-6-0-0.7","1.5-3-1-1","1-2-0-0.3","1-2-1-1","1-3-0-0.7","0.2-3-1-0.7"});
+				waves1.Add (new List<string> (){"0.5-5-1-0.7","0.5-2-1-0.3","0.5-8-0-0.4","1-3-2-1.2"});
+				waves1.Add (new List<string> (){"0.1-1-0-1","0.3-1-1-1","0.3-1-2-1","1-5-2-0.6","0.5-3-1-0.5","0.3-2-2-0.4","1-1-0-1","0.3-12-2-0.7","1.5-1-0-1"});
+				waves1.Add (new List<string> (){"1-5-3-1","0.5-4-2-0.6","0.7-4-1-0.2","1-3-0-0.3","0.4-3-3-0.3","0.5-3-0-0.4"});
+				waves1.Add (new List<string> (){"1-1-4-1","1.5-2-0-0.4","0.5-2-1-0.4","0.5-2-0-0.4","0.5-1-3-0.4","0.5-2-3-0.4","0.5-7-1-0.4","0.5-2-4-0.4","0.5-2-2-0.4","0.5-3-2-0.4","0.5-2-3-0.4"});
+				waves1.Add (new List<string> (){"1-7-4-0.6","2-4-1-0.3","0.5-6-2-0.5","0.7-3-1-0.5","0.3-2-0-1","0.5-6-3-0.5","0.4-4-4-1","0.3-2-0-0.2","0.3-4-4-0.3"});
+				waves1.Add (new List<string> (){"1-4-4-0.5","1-4-3-0.5","1-4-2-0.5","1-10-2-0.5","1-7-4-0.5","0.5-5-1-0.2","0.2-3-0-0.2","2-7-2-0.2"});
 
 				selected_Wave.Add (waves1);
 
-				selectedLives = 10;
-				selectedMoneys = 200;
+				selectedLives = 10 + GameData.Difficulty * 2;
+				selectedMoneys = 125;
 			
 				break;
 			}
 		case 2:
-			{
-				selected_Level.Add (new List<string> (){ "X", "X", "X", "X", "SD", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X" });
-				selected_Level.Add (new List<string> (){ "X", "X", "X", "X", "D", "X", "D", "L", "L", "X", "X", "X", "X", "X", "X" });
-				selected_Level.Add (new List<string> (){ "X", "X", "X", "X", "D", "X", "D", "X", "U", "X", "X", "X", "X", "X", "X" });
-				selected_Level.Add (new List<string> (){ "X", "X", "D", "L", "LR", "R", "DR", "R", "U", "X", "X", "X", "X", "X", "X" });
-				selected_Level.Add (new List<string> (){ "X", "X", "D", "X", "X", "X", "D", "X", "X", "X", "X", "X", "X", "X", "X" });
-				selected_Level.Add (new List<string> (){ "SR", "R", "D", "X", "X", "X", "D", "X", "X", "X", "X", "X", "X", "X", "X" });
-				selected_Level.Add (new List<string> (){ "X", "X", "D", "X", "X", "X", "D", "X", "X", "X", "X", "X", "X", "X", "X" });
-				selected_Level.Add (new List<string> (){ "X", "X", "R", "R", "D", "L", "L", "X", "X", "X", "X", "X", "X", "X", "X" });
-				selected_Level.Add (new List<string> (){ "X", "X", "X", "X", "D", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X" });
-				selected_Level.Add (new List<string> (){ "X", "X", "X", "X", "D", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X" });
-				selected_Level.Add (new List<string> (){ "X", "X", "X", "X", "D", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X" });
-				selected_Level.Add (new List<string> (){ "X", "X", "X", "X", "D", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X" });
-				selected_Level.Add (new List<string> (){ "X", "X", "X", "X", "D", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X" });
-				selected_Level.Add (new List<string> (){ "X", "X", "X", "X", "D", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X" });
-				selected_Level.Add (new List<string> (){ "X", "X", "X", "X", "E", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X" });
-
-				waves2.Add (new List<string> (){"1-2-0-5"});
-				//waves2.Add (new List<string> (){"1-2-4-4"});
-				//waves2.Add (new List<string> (){"1-2-0-3"});
-				//waves2.Add (new List<string> (){"1-2-4-2"});
-				//waves2.Add (new List<string> (){"1-10-4-1"});
-				//waves2.Add (new List<string> (){"1-10-4-0.5"});
-				//waves2.Add (new List<string> (){"1-10-4-0.1"});
-				waves1.Add (new List<string> (){"1-10-4-0.05"});
-				//waves1.Add (new List<string> (){"1-10-4-0.01"});
-
-				selected_Wave.Add (waves2);
-				selected_Wave.Add (waves1);
-
-				selectedLives = 200;
-				selectedMoneys = 150;
-
-				break;
-			}
-		case 3:
 			{
 				selected_Level.Add(new List<string>(){"X","SD","X","X","X","X","X","X","X","X","X","X","X","X"});
 				selected_Level.Add(new List<string>(){"X","D","X","X","X","X","X","X","X","X","X","X","X","X"});
@@ -99,15 +72,58 @@ public static class LevelHandler{
 				selected_Level.Add(new List<string>(){"X","X","X","X","X","X","X","X","R","R","R","R","D","X"});
 				selected_Level.Add(new List<string>(){"X","X","X","X","X","X","X","X","X","X","X","X","D","X"});
 				selected_Level.Add(new List<string>(){"X","X","X","X","X","X","X","X","X","X","X","X","E","X"});
+				
 
-				waves1.Add (new List<string> (){"1-1-0-1"});
-				//waves1.Add (new List<string> (){"1-6-0-1","2-6-1-2"});
+				waves2.Add (new List<string> (){"1-2-0-5"});
+				//waves2.Add (new List<string> (){"1-2-4-4"});
+				//waves2.Add (new List<string> (){"1-2-0-3"});
+				//waves2.Add (new List<string> (){"1-2-4-2"});
+				//waves2.Add (new List<string> (){"1-10-4-1"});
+				//waves2.Add (new List<string> (){"1-10-4-0.5"});
+				//waves2.Add (new List<string> (){"1-10-4-0.1"});
+				waves1.Add (new List<string> (){"1-10-4-0.05"});
+				//waves1.Add (new List<string> (){"1-10-4-0.01"});
+
+				selected_Wave.Add (waves2);
+				selected_Wave.Add (waves1);
+
+				selectedLives = 200;
+				selectedMoneys = 100;
+
+				break;
+			}
+		case 3:
+			{
+				selected_Level.Add(new List<string>(){"X","X","X","X","X","X","X","X","X","X","X","X","X","X","X"});
+				selected_Level.Add(new List<string>(){"SR","R","R","D","X","X","X","X","X","X","X","D","L","L","SL"});
+				selected_Level.Add(new List<string>(){"X","X","X","D","X","X","X","X","X","X","X","D","X","X","X"});
+				selected_Level.Add(new List<string>(){"X","X","X","D","X","X","X","X","X","X","X","D","X","X","X"});
+				selected_Level.Add(new List<string>(){"X","X","X","R","R","R","R","D","L","L","L","L","X","X","X"});
+				selected_Level.Add(new List<string>(){"X","X","X","X","X","X","X","D","X","X","X","X","X","X","X"});
+				selected_Level.Add(new List<string>(){"X","X","X","X","X","X","X","D","X","X","X","X","X","X","X"});
+				selected_Level.Add(new List<string>(){"X","D","L","L","L","L","L","RL","R","R","R","R","R","D","X"});
+				selected_Level.Add(new List<string>(){"X","D","X","X","X","X","X","X","X","X","X","X","X","D","X"});
+				selected_Level.Add(new List<string>(){"X","D","X","X","X","X","X","X","X","X","X","X","X","D","X"});
+				selected_Level.Add(new List<string>(){"X","R","R","R","R","D","X","X","X","D","L","L","L","L","X"});
+				selected_Level.Add(new List<string>(){"X","X","X","X","X","D","X","X","X","D","X","X","X","X","X"});
+				selected_Level.Add(new List<string>(){"X","X","X","X","X","D","X","X","X","D","X","X","X","X","X"});
+				selected_Level.Add(new List<string>(){"E","L","L","L","L","L","X","X","X","R","R","R","R","R","E"});
+				selected_Level.Add(new List<string>(){"X","X","X","X","X","X","X","X","X","X","X","X","X","X","X"});
+
+				waves1.Add (new List<string> (){"1-100-0-0.1"});
+				waves1.Add (new List<string> (){"1-7-0-1","1-7-0-1","1-7-0-1","1-7-0-1","1-7-0-1"});
+				waves2.Add (new List<string> (){"1-7-1-1","1-7-1-1","1-7-1-1","1-7-1-1","1-7-1-1"});
+				waves1.Add (new List<string> (){"1-7-2-1","1-7-2-1","1-7-2-1","1-7-2-1","1-7-2-1"});
+				waves2.Add (new List<string> (){"1-7-3-1","1-7-3-1","1-7-3-1","1-7-3-1","1-7-3-1"});
+				waves1.Add (new List<string> (){"1-7-4-1","1-7-4-1","1-7-4-1","1-7-4-1","1-7-4-1"});
+				waves2.Add (new List<string> (){"1-6-0-1","2-6-1-2"});
 				//waves1.Add (new List<string> (){"1-6-0-1","2-10-1-2","2-7-2-2","1-12-3-2","4-5-4-2"});
 
 				selected_Wave.Add (waves1);
+				selected_Wave.Add (waves2);
 
-				selectedLives = 1;
-				selectedMoneys = 100;
+				selectedLives = 100;
+				selectedMoneys = 10000;
 
 				break;	
 			}
@@ -129,7 +145,7 @@ public static class LevelHandler{
 				selected_Level.Add(new List<string>(){"X","X","X","X","X","X","X","X","X","X","X","X","X","X"});
 
 				selectedLives = 100;
-				selectedMoneys = 200;
+				selectedMoneys = 100;
 
 				break;
 			}
@@ -151,7 +167,7 @@ public static class LevelHandler{
 				selected_Level.Add(new List<string>(){"X","X","X","X","X","X","X","X","X","X","X","X","X","X"});
 
 				selectedLives = 100;
-				selectedMoneys = 200;
+				selectedMoneys = 100;
 
 				break;
 			}

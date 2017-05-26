@@ -10,7 +10,7 @@ public class Player : MonoBehaviour {
 	private int money;
 	private int lives;
 	private int score = 0;
-	private int endScore; //score = [(life*100+20*remaining gold)*diff]/(time/10) + Score
+	private int endScore; //Endscore = score*(1+diff/10) + ((1+diff/10)*gold)/2
 	//PLAYER DATA FOR STATISTICS
 	private List<int> killist = new List<int> ();
 	private List<int> finishList = new List<int> ();
@@ -74,10 +74,12 @@ public class Player : MonoBehaviour {
 	public void CaclculateEndScore(){
 		int timeInSeconds = Mathf.RoundToInt((chronometer.ElapsedMilliseconds)/1000);
 		if ((timeInSeconds / 10f) != 0)
-			endScore = score;//Mathf.RoundToInt((((lives * 100f + 20f * money)*GameData.Difficulty) / (timeInSeconds / 10f)) + score);
+			//Endscore = score*(1+diff/10) + ((1+diff/10)*gold)/2
+			endScore = Mathf.RoundToInt(score*(1+(GameData.Difficulty/10f)) + (1+(GameData.Difficulty/10f))*(money/2f));
+			//(((lives * 100f + 20f * money)*GameData.Difficulty) / (timeInSeconds / 10f)) + score
 		else
 			endScore = score;
-		print (timeInSeconds+" seconds");
+		print (totalMoneys-usedMoneys+" gold");
 		print (lives+" lives");
 		print (money+" money");
 		print (score+" score");

@@ -21,6 +21,14 @@ public class Tower : MonoBehaviour {
         get { return hitAOE; }
     }
 
+	
+    [SerializeField]
+    private float rangeAOE;
+	public float RangeAOE{
+		get{return rangeAOE;}
+		set{rangeAOE = value;}
+	}
+	
     [SerializeField]
     private int damage;
     public int Damage
@@ -106,6 +114,7 @@ public class Tower : MonoBehaviour {
             vlist[6] = new Vector2(transform.position.x - 100, transform.position.y + 100);
             vlist[7] = new Vector2(transform.position.x - 100, transform.position.y - 100);
         }
+		
 		UpdateRange();
     }
 	

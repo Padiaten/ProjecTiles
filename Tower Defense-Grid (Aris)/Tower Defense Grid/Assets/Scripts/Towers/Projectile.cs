@@ -21,6 +21,7 @@ public class Projectile : MonoBehaviour {
         bCol = GetComponent<BoxCollider2D>();
         cCol = GetComponent<CircleCollider2D>();
 
+		
         if(sourceTower != null)
              roundhouseF = sourceTower.MultipleRoundhouseHit;
     }
@@ -72,16 +73,22 @@ public class Projectile : MonoBehaviour {
             if(o.tag == "Enemy")
             {
                 o.GetComponent<Enemy>().Hit(sourceTower.Damage);
-                Destroy(this.gameObject);
+                //Destroy(this.gameObject);
             }
         }
         else if (o.gameObject == enem.gameObject)
         {         
-           /* if (sourceTower.HitAOE)
-            {
-                if (o.tag == "Enemy") o.GetComponent<Enemy>().Hit(sourceTower.Damage);               
-                Destroy(this.gameObject);
-            }*/
+            if (sourceTower.HitAOE)
+            {	
+				Collider2D[] enemies = Physics2D.OverlapCircleAll(this.transform.position,sourceTower.RangeAOE);
+				foreach(Collider2D en in enemies){
+					if(en.gameObject.tag == "Enemy"){
+						en.gameObject.GetComponent<Enemy>().Hit(sourceTower.Damage);
+					}
+				}
+				//Destroy(o.gameObject);
+				//print("heyo");
+            }
             enem.Hit(sourceTower.Damage);
             Destroy(this.gameObject);                         
         }

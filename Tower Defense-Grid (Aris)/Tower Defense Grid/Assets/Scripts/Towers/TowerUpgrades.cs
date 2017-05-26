@@ -21,19 +21,19 @@ public static class TowerUpgrades {
 		//Normal
 		case 1:
 			if(lvl == 1){
-				damage = 5;
+				damage = 10;
 				atk_cool = 0.8f;
 				proj_sp = 10;
 			}else{
-				damage = 7;
+				damage = 15;
 				atk_cool = 0.5f;
-				range = 2;
+				range = 1.3f;
 			}
 			break;
 		//Slow
 		case 2:
 			if(lvl == 1){
-				range = 2;
+				range = 1.5f;
 			}else{
 				eff_val = 3;
 			}
@@ -53,7 +53,7 @@ public static class TowerUpgrades {
 				atk_cool = 0.8f;
 				proj_sp = 7;
 			}else{
-				damage = 5;
+				damage = 7;
 				atk_cool = 0.5f;
 				range = 2;
 			}
@@ -61,10 +61,10 @@ public static class TowerUpgrades {
 		//Global
 		case 5:
 			if(lvl == 1){
-				damage = 7;
+				damage = 15;
 				atk_cool = 1.5f;
 			}else{
-				damage = 10;
+				damage = 20;
 				atk_cool = 1f;
 			}
 			break;
