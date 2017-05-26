@@ -19,10 +19,10 @@ public  static class TowerCost{
 			cost=100;
 			break;
 		case 5:
-			cost=200;
+			cost=180;
 			break;
 		case 6:
-			cost=10;
+			cost=200;
 			break;
 		}
 

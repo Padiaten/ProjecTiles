@@ -14,7 +14,7 @@ public static class LevelHandler{
 	private static int selectedMoneys;
 	private static bool isSurvival= false;
 	private static int selected_level;
-	private static int numberOfTracks = 5;//οποτε προσθετεις καποια πιστα ενημερωσε και την μεταβλητη
+	private static int numberOfTracks = 6;//οποτε προσθετεις καποια πιστα ενημερωσε και την μεταβλητη
 
 	private static int DimX=10,DimY=10;
 
@@ -173,6 +173,24 @@ public static class LevelHandler{
 			}
 		case 6:
 			{
+				selected_Level.Add(new List<string>(){"X","X","X","X","X","X","X","X","X","X","X","X","X","X","X"});
+				selected_Level.Add(new List<string>(){"SR","R","RD","R","R","D","X","X","X","D","L","L","LD","L","SL"});
+				selected_Level.Add(new List<string>(){"X","X","D","X","X","D","X","X","X","D","X","X","D","X","X"});
+				selected_Level.Add(new List<string>(){"X","X","R","R","R","D","X","X","X","D","L","L","L","X","X"});
+				selected_Level.Add(new List<string>(){"X","X","X","X","X","D","X","X","X","D","X","X","X","X","X"});
+				selected_Level.Add(new List<string>(){"X","X","X","X","X","D","X","X","X","D","X","X","X","X","X"});
+				selected_Level.Add(new List<string>(){"X","X","X","X","X","D","X","X","X","D","X","X","X","X","X"});
+				selected_Level.Add(new List<string>(){"X","X","X","X","X","R","R","D","L","L","X","X","X","X","X"});
+				selected_Level.Add(new List<string>(){"X","X","X","X","X","X","X","D","X","X","X","X","X","X","X"});
+				selected_Level.Add(new List<string>(){"E","L","L","X","X","X","X","D","X","X","X","X","R","R","E"});
+				selected_Level.Add(new List<string>(){"X","X","U","X","X","X","X","D","X","X","X","X","U","X","X"});
+				selected_Level.Add(new List<string>(){"X","X","U","L","LD","L","L","LR","R","R","RD","R","U","X","X"});
+				selected_Level.Add(new List<string>(){"X","X","X","X","D","X","X","X","X","X","D","X","X","X","X"});
+				selected_Level.Add(new List<string>(){"X","X","X","X","D","X","X","X","X","X","D","X","X","X","X"});
+				selected_Level.Add(new List<string>(){"X","X","X","X","E","X","X","X","X","X","E","X","X","X","X"});
+				
+				selectedLives = 100;
+				selectedMoneys = 100;
 				break;
 			}
 		}

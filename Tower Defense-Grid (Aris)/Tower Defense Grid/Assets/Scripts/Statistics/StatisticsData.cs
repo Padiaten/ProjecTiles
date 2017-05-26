@@ -6,11 +6,11 @@ using System;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Serialization;
 
-
+//αποθηκεύονται όλα τα στατιστικά του παιχνιδιού
 public static class StatisticsData {
 
-	private static int maxValueOfDifficulty = 3;//π;όσες διαφορετικες διακριτες τιμε μπορει να παρει
-	private static int numOfHighscores = 3;
+	private static int maxValueOfDifficulty = 3;//π;όσες διαφορετικες διακριτες τιμε μπορει να παρει η δυσκολία
+	private static int numOfHighscores = 3;//πόσα highscore να υπολογίζει
 	private static int lengthTowers;
 	private static int lengthEnemies;
 	private static bool isHighscore = false;
@@ -22,24 +22,22 @@ public static class StatisticsData {
 	private static int[,] highscores = new int[maxValueOfDifficulty,numOfHighscores]; 
 
 	private static int wins = 0,loses = 0;
-	private static int lives = 0;//xamenes zoes
+	private static int lives = 0;//χαμένες ζωές
 	private static int score = 0;
 	private static int waves = 0;
 
-	private static List<int> killist = new List<int> ();
-	private static List<int> finishList = new List<int> ();
-	private static List<int> sellTowers = new List<int> ();//να το φτιαξω
-	private static List<int> totalTowers = new List<int> ();
+	private static List<int> killist = new List<int> ();//λίστα με τους εχθρούς που έχεις σκοτώσει
+	private static List<int> finishList = new List<int> ();//λίστα με τους εχθρούς που έχουν τερματίσει
+	private static List<int> sellTowers = new List<int> ();//λίστα με τα towers που έχεις πουλήσει
+	private static List<int> totalTowers = new List<int> ();//λίστα με τα towers που έχεις τοπποθετήσει 
 
-	private static int negativeScore = 0, positiveScore = 0;
+	private static int negativeScore = 0, positiveScore = 0;//negativeScore: πόσους βαθμούς έχεις χάσει από εχθρούς που τερμάτισαν, positiveScore: πόσους βαθμούς έχεις κερδίσει 
 	private static int endScore = 0;
 	private static int totalMoneys = 0,usedMoneys = 0;
 	private static int hours = 0,minutes = 0,seconds = 0;
 
 
 	public static void Initialize () {
-
-		Debug.Log ("INITIALIZE");
 
 		string directoryPath = System.IO.Directory.GetCurrentDirectory() + "\\Saves";
 		filePath = directoryPath + "\\statistics.stat";
@@ -71,21 +69,21 @@ public static class StatisticsData {
 				System.IO.File.Create (filePath);
 			}
 		} else {//δεν τον βρήκες
-			//δημιουργησε φακελο κι αρχειο και βάλε στις τιμες 0
+			//δημιουργησε φακελο κι αρχειο
 			System.IO.Directory.CreateDirectory(directoryPath);
 			System.IO.File.Create (filePath);
 		}
 	}
 
-	public static void Save()//να αποθηκεύονται κατα την εξοδο
+	// αποθηκεύει τα δεδομένα σε αρχείο
+	public static void Save()
 	{
-		Debug.Log ("SAVE");
 		try {
-			AssistantClassStatistics acla = new AssistantClassStatistics();
-			acla.TransferDataFromStatistics();
+			AssistantClassStatistics acla = new AssistantClassStatistics();//δημιουργία αντικειμένου της βοηθητικής κλάσης
+			acla.TransferDataFromStatistics();//πέρασμα των τιμών στην βοηθητική κλαση
 			IFormatter formatter = new BinaryFormatter();
 			Stream stream = new FileStream (filePath,FileMode.Truncate);
-			formatter.Serialize (stream,acla);
+			formatter.Serialize (stream,acla);//σειριοποίηση του αντικειμένου
 			stream.Close ();
 		}
 		catch(Exception e)
@@ -98,18 +96,17 @@ public static class StatisticsData {
 		}
 	}
 
+	//μεταφορά των δεδομένων από το αρχείο
 	public static void TransferDataFromFile()
 	{
-		Debug.Log ("TRANSFER");
-
 		try 
 		{
-			AssistantClassStatistics acla = new AssistantClassStatistics();
+			AssistantClassStatistics acla = new AssistantClassStatistics();//δημιουργία αντικειμένου της βοηθητικής κλάσης
 			IFormatter formatter = new BinaryFormatter();
 			Stream stream = new FileStream (filePath,FileMode.Open);
-			acla = (AssistantClassStatistics)formatter.Deserialize(stream);
+			acla = (AssistantClassStatistics)formatter.Deserialize(stream);// "αποσειριοποίηση"
 			stream.Close ();
-			acla.Load();
+			acla.Load();//μεταφορά των τιμών από το βοηθητικο αντικειμενο
 		}
 		catch(Exception e)
 		{
@@ -121,12 +118,11 @@ public static class StatisticsData {
 		}
 	}
 
+	//μηδενίζει τις τιμές των στατιστικών
 	public static void ResetStatistics(){
-		Debug.Log ("RESET STAT");
-
 		try {
 			AssistantClassStatistics acla = new AssistantClassStatistics();
-			acla.ResetStatistics();
+			acla.ResetStatistics();//μηδενισμός των τιμών
 			IFormatter formatter = new BinaryFormatter();
 			Stream stream = new FileStream (filePath,FileMode.Truncate);
 			formatter.Serialize (stream,acla);
@@ -141,13 +137,12 @@ public static class StatisticsData {
 			Debug.Log("Executing finally block.");
 		}
 	}
-
+	
+	//μηδενίζει τις τιμές των highscores
 	public static void ResetHighscores(){
-		Debug.Log ("RESET HIGH");
-
 		try {
 			AssistantClassStatistics acla = new AssistantClassStatistics();
-			acla.ResetHighscores();
+			acla.ResetHighscores();//μηδενισμός highscores
 			IFormatter formatter = new BinaryFormatter();
 			Stream stream = new FileStream (filePath,FileMode.Truncate);
 			formatter.Serialize (stream,acla);
@@ -163,6 +158,7 @@ public static class StatisticsData {
 		}
 	}
 
+	//GETTERS and SETTERS
 	public static int Wins{
 		get{ return wins; }
 		set{ wins = value; }
@@ -220,23 +216,21 @@ public static class StatisticsData {
 
 	public static int SetEndScoreAndHighscores{
 		set{ 
+			//αυξάνει την τιμή του endScore κατά την τιμή που της δίνεται υπολογίζει αν η τιμή που πήρε ανήκει στα highscore και αν ναι την τοποθετεί στη κατάλληλη θέση
 			endScore += value;
 			int thisScore = value;
 			int diff = GameData.Difficulty;
 			isHighscore = false;
-			if (thisScore > highscores [diff,0]) {
+			if (thisScore > highscores [diff,0]) {//αν είναι μεγαλύτερη της μικρότερης τιμής
 				isHighscore = true;
 				highscores [diff,0] = thisScore;
-				int[] a = new int[NumberOfHighscores];
+				int[] a = new int[NumberOfHighscores];//α: βοηθητικός πίνακας χρησιμοποιειται για την ταξινόμηση μιας γραμμής του δισδιάστατου πίνακα 
 				for (int i = 0; i < NumberOfHighscores; i++) {
 					a [i] = highscores [diff, i];
 				} 
-				Array.Sort (a);//με αύξουσα {0,1,2}
+				Array.Sort (a);//ταξινόμηση με αύξουσα π.χ. {0,1,2}
 				for (int i = 0; i < NumberOfHighscores; i++) {
 					highscores [diff, i] = a[i];
-				}
-				for (int i = 0; i < 3; i++) {
-					Debug.Log(highscores[diff,i]+" high");
 				}
 			} 
 		}
@@ -319,6 +313,12 @@ public static class StatisticsData {
 	}
 }
 
+/*βοηθητική κλάση. Χρησιμοποιείται διότι η StatisticsData λόγω του ότι είναι στατική δεν γίνεται να σειριοποιηθεί
+*υπηρχε και άλλος τρόπος για την αποθηκευση της αλλά έπρεπε όλα τα πεδία της να γίνουν public οπότε προτίμησα αυτόν
+*τραβάει ουσιαστικά όλες τις τιμές από τη StatisticsData σειριοποιείται και αποθηκεύεται
+*όταν "αποσειριοποιηθεί" περνάει τις τιμές τις στην StatisticsData
+*/
+
 [Serializable]
 public class AssistantClassStatistics{
 
@@ -343,6 +343,7 @@ public class AssistantClassStatistics{
 	public AssistantClassStatistics(){
 	}
 
+	//μεταφορα των δεδομένων από την StatisticsData στα πεδία της
 	public void TransferDataFromStatistics(){
 		numberOfGames = StatisticsData.NumbersOfGames;
 		highscores = StatisticsData.HighScores;
@@ -365,6 +366,7 @@ public class AssistantClassStatistics{
 		seconds = StatisticsData.Seconds;
 	}
 
+	//μεταφορά των τιμών των πεδίων της στα πεδία της StatisticsData. Είναι το αντίστροφο της TransferDataFromStatistics
 	public void Load(){
 		StatisticsData.NumbersOfGames = numberOfGames;
 		StatisticsData.HighScores = highscores;
@@ -387,6 +389,7 @@ public class AssistantClassStatistics{
 		StatisticsData.Seconds = seconds;
 	}
 
+	//χρησιμοποιείται για να μηδενίσει τις τιμές των στατιστικων 
 	public void ResetStatistics(){
 		highscores = StatisticsData.HighScores;//απαραιτητο για να μην μηδενιστει και το highscore
 		StatisticsData.NumbersOfGames = 0;
@@ -404,6 +407,7 @@ public class AssistantClassStatistics{
 		StatisticsData.Minutes = 0;
 		StatisticsData.Seconds = 0;
 
+		//μηδενισμός των λιστών
 		int count = StatisticsData.LengthEnemies;
 		for (int i = 0; i < count; i++) {
 			killist.Add(0);
@@ -417,6 +421,7 @@ public class AssistantClassStatistics{
 		Load ();
 	}
 		
+	//χρησιμοποιείται για τον μηδενισμό των highscores	
 	public void ResetHighscores(){
 		
 		int iCount = StatisticsData.MaxValueOfDifficulty;

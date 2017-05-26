@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StartStatistics : MonoBehaviour {
 
-	// Use this for initialization
+	//χρησιμοποιείται για να "ξεκινάει" το script StatisticsMenuController όταν μπαίνει στην οθόνη Statistics
 	void Start () {
 		GetComponent<StatisticsMenuController> ().ShowStatistics (true);
 	}

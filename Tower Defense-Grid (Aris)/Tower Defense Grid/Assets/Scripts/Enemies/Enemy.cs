@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine; 
- 
+ //διαχειρίζεται τα enemies
 public class Enemy: MonoBehaviour {
 
     [SerializeField]
@@ -58,7 +58,7 @@ public class Enemy: MonoBehaviour {
         Movement(speed, ref vectorNext, ref flag, ref g);
     }
 
-
+	//διαχειρίζεται την  κίνηση του enemie
     public void Movement(float speed,ref Vector2 vectorNext,ref bool flag,ref GameObject g){
 
 		Vector3 dir = g.transform.position - this.transform.position;
@@ -80,16 +80,15 @@ public class Enemy: MonoBehaviour {
 		}
 	}
 
-	public void Hit(int damage)
+	public void Hit(int damage)//καλείται όταν χτυπηθεί από ένα tower
 	{
-		print("hit");
 		health -= damage;
 		if (health <= 0) {
 			KillEnemy ();
 		}
 	}
 
-	public void EndOfRoute()
+	public void EndOfRoute()//καλέιται όταν φτάσει στο τέλος της διαδρομής
 	{
 		gameFlow.GetComponent<Player> ().Lives--;
 		gameFlow.GetComponent<Player> ().UpdateScore ((-scoreReduction));
@@ -101,6 +100,7 @@ public class Enemy: MonoBehaviour {
 
 	public void KillEnemy()
 	{
+		//κάνει τις απαραίτητες ενέργειες πριν σκοτωθεί ένα enemy
 		gameFlow.GetComponent<Player> ().UpdateScore (scoreIncrease);
 		gameFlow.GetComponent<Player> ().UpdateGold(worth);
 		gameFlow.GetComponent<Player> ().AddInEnemieList (id,true);
@@ -109,13 +109,14 @@ public class Enemy: MonoBehaviour {
 	
 	public void DestroyEnemy()
 	{
+		//καταστρέφει το gameObject πάνω στο οποίο βρίσκεται το script και ενημερώνει το NumbersOfEnemies
 		Destroy (this.gameObject);
-		print("num");
 		gameFlow.GetComponent<FlowController> ().NumbersOfEnemies--;
 	}
 
     public void EffectHit(string effect, int value)
     {
+		//καλείται από το tower που κάνει slow
 		if (!notSlow) {
 			if(effect == "Slow")
 			{
@@ -128,5 +129,3 @@ public class Enemy: MonoBehaviour {
 		}
     }
 }
-//Vector2 dir = new Vector2(vectorNext.x-transform.position.x,vectorNext.y-transform.position.y);
-//transform.Translate(speed*Time.deltaTime*dir.normalized,Space.World);

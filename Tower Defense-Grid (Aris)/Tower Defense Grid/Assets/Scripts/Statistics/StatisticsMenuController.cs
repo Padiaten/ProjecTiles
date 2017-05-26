@@ -4,28 +4,31 @@ using UnityEngine;
 using UnityEngine.UI;
 using System; 
 
+//διαχειρίζεται την εμφάνιση των στατιστικών είτε των κύριων είτε του κάθε παιχνιδιού 
 public class StatisticsMenuController : MonoBehaviour {
 
-	private static int StartDestroyFrame = 9;
-	private static int EndDestroyFrame = 40;
+	//βοηθητικές μεταβλητές για τα κουμπια more και less
+	private static int StartDestroyFrame = 9;//από ποιο frame θα αρχίσει να σβήνει όταν πατηθεί το κουμπί less
+	private static int EndDestroyFrame = 40;//και που θα σταματήσει
+	
 	private GameObject Grid;
 	private GameObject text;
 	private GameObject newTextFrame;
 	private GameObject button;
 	private GameObject buttonPerGame;
 	private GameObject newButton;
-	private int colorPanelCount = 0;
+	private int colorPanelCount = 0;//χρησιμοποιείται για 
 	private int lengthEnemiesList,lengthTowersList;
 	private UnityEngine.Object[] enemiesArray;
 	private UnityEngine.Object[] towersArray;
 	private bool mainStat;
-	private int frameNumber = 0;
-	private List<GameObject> allFrames = new List<GameObject> ();
+	private int frameNumber = 0;//αριθμός frame
+	private List<GameObject> allFrames = new List<GameObject> ();//πεεριλαμβάνει όλα τα frames που έχουν δημιουργηθεί
 	private bool perGame = false;
 
 	// Use this for initialization
 	public void ShowStatistics(bool mainStatistics) {
-		//mainStatistics: τα στατιστικά όλου του παιχνιδιου
+		//mainStatistics: τα στατιστικά όλου του παιχνιδιου. αναλογα με την τιμή που παίρνει εμφανίζονται και τα κατάλληλα στατιστικά
 		mainStat = mainStatistics;
 		Grid = GameObject.Find("Grid");
 		buttonPerGame = GameObject.Find ("PerGame");
@@ -36,8 +39,10 @@ public class StatisticsMenuController : MonoBehaviour {
 		towersArray = Resources.LoadAll ("Prefabs/Towers", typeof(GameObject));
 		lengthTowersList = towersArray.Length;
 		if(mainStat){
+			//"κύρια στατιστικά"
 			FillGridMainStat (false);
 		}else{
+			//στατιστικά κάθε παιχνιδιού
 			if (GameObject.Find ("TextFrame0")) {
 				//αν υπαρχουν ηδη μην κανεις τιποτα
 			} else {
@@ -46,30 +51,39 @@ public class StatisticsMenuController : MonoBehaviour {
 		}
 	}
 
+	//καλείται όταν πατηθεί το κουμπί για τον μηδενισμό των στατιστικών
 	public void Reset(){
+		//μηδενίζει τα στατιστικά
 		StatisticsData.ResetStatistics ();
 		int count = allFrames.Count;
+		//καταστρέφει όλα τα frames που υπάρχουν
 		for (int i = 0; i < count; i++) {
 			Destroy (allFrames[i]);
 		}
 		frameNumber = 0;
+		//ξαναδημιουργεί τα frame τα οποία όμως τώρα έχουν τιμές 0
 		FillGridMainStat (perGame);
 	}
 
+	//καλειται όταν πατηθεί το κουμπί perGame και εμφανίζει τα στατιστικά ανα παιχνίδι
 	public void PerGame(){
 		perGame = !perGame;
 		int count = allFrames.Count;
+		//καταστρέφει τα προυπάρχοντα frames
 		for (int i = 0; i < count; i++) {
 			Destroy (allFrames[i]);
 		}
 		frameNumber = 0;
+		//αλλάζει το text του κουμπιού
 		if (perGame)
 			buttonPerGame.GetComponentInChildren<Text>().text = "TOTAL";
 		else
 			buttonPerGame.GetComponentInChildren<Text>().text = "PER GAME";
+		//δημιουργεί τα στατιστικά ανά παιχνίδι
 		FillGridMainStat (perGame);
 	}
 
+	//η κύρια κλάση για τη δημιουργία των frames για τα κύρια σταιστικά
 	public void FillGridMainStat(bool perGame)
 	{
 		float divisor = 1f;
@@ -104,6 +118,7 @@ public class StatisticsMenuController : MonoBehaviour {
 		CreateTextFrameTowers (StatisticsData.TotalTowers,StatisticsData.SellTowers,divisor);
 	}
 	
+	//η κύρια κλάση για τη δημιουργία των frames για τα στατιστικά κάθε παιχνιδιού
 	public void FillGrid(){
 		CreateTextFrameTime (GetComponent<Player> ().Hours,GetComponent<Player> ().Minutes,GetComponent<Player> ().Seconds,"Time");
 		CreateTextFrame ("End score",GetComponent<Player> ().EndScore.ToString(),1);
@@ -117,6 +132,7 @@ public class StatisticsMenuController : MonoBehaviour {
 		CreateButton ("MORE > >",true);
 	}
 
+	//δημιουργία κουμπιου
 	public void CreateButton(string nameButton,bool more){
 		newButton = Instantiate (button,new Vector3(0,0,0),Quaternion.identity);
 		newButton.transform.Find("TextMoreOrLess").GetComponent<Text>().text = nameButton;
@@ -128,6 +144,7 @@ public class StatisticsMenuController : MonoBehaviour {
 			newButton.GetComponent<Button>().onClick.AddListener(() => GameObject.Find("GameFlow").GetComponent<StatisticsMenuController>().Less());
 	}
 
+	//καλέιται όταν πατηθεί το κουμπί more
 	public void More(){
 		Destroy (newButton);
 		CreateTextFrameEnemies (GetComponent<Player> ().Killist,GetComponent<Player> ().FinishList,1);
@@ -135,6 +152,7 @@ public class StatisticsMenuController : MonoBehaviour {
 		CreateButton ("< < LESS",false);
 	}
 
+	//καλέιται όταν πατηθεί το κουμπί less
 	public void Less(){
 		Destroy (newButton);
 		for (int i = StartDestroyFrame; i <= EndDestroyFrame; i++) {
@@ -145,6 +163,7 @@ public class StatisticsMenuController : MonoBehaviour {
 		GameObject.Find ("Scrollbar").GetComponent<Scrollbar> ().value = 1;
 	}
 
+	//δημιουργεί το frame που περιέχει την ώρα
 	public void CreateTextFrameTime(int hours,int minutes,int seconds,string title)
 	{
 		string hoursText,minutesText,secondsText;

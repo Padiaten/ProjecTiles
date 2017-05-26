@@ -2,18 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
-//θελει καλο ελεγχο καποιες μικρο αναβαθμισεις και καλυτερο σχολιασμο
-//μην ασχοληθει ομως κανεις με αυτην αν δεν με ρωτησει πρωτα
+//διαχειρίζεται τα wave του survival mode
 public class SurvivalWaves : Wave {
-	private static int InitiaEnemiesNumber = 5;//με ποσα enemies/κυμα θα ξεκινησει το παιχνιδι 
-	private static int EnemyAdder = 5;//ποσα παραπανω enemies θα βγαινουν σε καθε κυμα
+	private static int InitiaEnemiesNumber = 10;//με ποσα enemies/κυμα θα ξεκινησει το παιχνιδι 
+	private static int EnemyAdder = 10;//ποσα παραπανω enemies θα βγαινουν σε καθε κυμα
 	private static float StartPercentage = 0.5f;//αρχικο ποσοστο του dominantEnemy στο κυμα
 	private static float EndPercentage = 1.0f;//τελικο ποσοστο του dominantEnemy στο κυμα, προτεινεται να μην παιρνει τιμη μεγαλυτερη απο 1.0f
 	// x= EndPercentage-StartPercentage. Αν x > WavesPerEnemy τοτε για x κυματα το percentage θα είναι ισο με EndPercentage
 	private static float PercentageAdder = 0.1f;//κατα ποσο αυξανεται το ποσοστο μεσα σε ενα κυμα του dominantEnemy(η αυξηση γινεται ανα κυμα)
 	private static int WavesPerEnemy = 5;//σε ποσα κυματα θα ειναι ενα enemy dominantEnemy
-	private static List<string> ListTimeBetweenEnemies = new List<string>{"2-0.1-0.5","2-0.1-0.3","2-0.1-0.5","1-0.1-0.2","0.1-0.01-0.02","0.05-0.01-0.01"};
+	private static List<string> ListTimeBetweenEnemies = new List<string>{"2-0.1-0.5","2-0.1-0.3","2-0.1-0.5","1-0.1-0.2","0.1-0.01-0.02","0.05-0.01-0.001"};
 	/*η παραπανω λιστα περιεχει τους χρονους μεταξυ των enemies. Ο πρώτος αριθμος αντιστοιχει στον αρχικο χρονο μεταξυ των enemies ο δευτερος στο κατωτατο οριο που μπορει να φτασει
 	 * και ο τριτος στο κατα ποσο θα μειωνεται ο χρονος.Για τα κυματα που δεν εχει δηλωθει χρονος θα χρησιμοποιουν το τελευταιο στοιχειο της λιστας. Το προγραμμα θα μετακινειται στο
 	 * επομενο στοιχειο της λιστας μετα απο WavesPerTime κυματα
@@ -62,7 +60,7 @@ public class SurvivalWaves : Wave {
 				ReadData ();
 			}
 		}
-
+		print("enemies -"+dominantEnemiesNumber);
 		for(int i=0; i<dominantEnemiesNumber; i++)
 		{
 			if (numberStartiles > 1) {
@@ -72,6 +70,7 @@ public class SurvivalWaves : Wave {
 			CreateEnemy (dominantEnemy);
 			yield return new WaitForSeconds (timeBetweenEnemies);
 		}
+		print("other -"+otherEnemiesNumber);
 		for(int i = 0; i<otherEnemiesNumber; i++)
 		{
 			if (numberStartiles > 1) {
@@ -115,6 +114,7 @@ public class SurvivalWaves : Wave {
 
 	public void ReadData()
 	{
+		//διαβάζει τα δεδομένα για τους χρόνους μεταξύ των enemies που υπάρχουν αποθηκευμένα στην ListTimeBetweenEnemies
 		int index,oldindex = 0;
 		string values = "";
 		string item = ListTimeBetweenEnemies[listOfTimesIndex].Replace(" ","");
