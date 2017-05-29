@@ -13,6 +13,7 @@ public class DonotDestroyOnLoad : MonoBehaviour {
 
 	}
 
+	//Toggle music muting
 	 public void Muted()
 	{
 		muted = !muted;
@@ -26,7 +27,7 @@ public class DonotDestroyOnLoad : MonoBehaviour {
 
 		}
 	}
-		
+	//GETTERS/SETTERS
 	public bool getMuted(){
 		return muted;
 	}

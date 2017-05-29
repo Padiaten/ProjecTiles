@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class DisplayLockedLevelMessage : MonoBehaviour {
 
+	//Calls show,cannot be called directly
 	public void disp(){
 		StartCoroutine(show());
 	}

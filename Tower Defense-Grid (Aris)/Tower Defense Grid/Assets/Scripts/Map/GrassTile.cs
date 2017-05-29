@@ -4,17 +4,14 @@ using UnityEngine;
    
 public class GrassTile : Tile {
 	private bool canPlaceBuilding = true;
-	// Use this for initialization
+	//Set sprite
 	void Start () {
 		
 		GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/MapSprites/Grass");
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
+	//GETTERS/SETTERS
 	public bool getCanPlaceBuilding(){
 		return canPlaceBuilding;
 	}

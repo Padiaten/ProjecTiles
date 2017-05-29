@@ -1,8 +1,8 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj" RefactoringSettings.EnableRefactorings="True">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Towers\Projectile.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Towers\TowerInteractions.cs">
     <Files>
-      <File FileName="Assets\Scripts\Towers\Projectile.cs" Line="90" Column="34" />
+      <File FileName="Assets\Scripts\Towers\TowerInteractions.cs" Line="16" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

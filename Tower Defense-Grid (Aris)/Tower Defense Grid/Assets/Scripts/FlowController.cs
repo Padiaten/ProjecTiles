@@ -49,11 +49,13 @@ public class FlowController : MonoBehaviour {
 		}
 	}
 
+	//Starts a wave
 	public void startWaveControler(){
 		GetComponent<WaveControler>().enabled = true;
 		waveStart = true;
 	}
 
+	//Gets tower id when a player clicks the tower ui,creates the object,and starts hovering it
 	public void TowerHover(int i){
 		GameObject tower1,tower2,tower3,tower4,tower5,tower6;
 		GameObject new_tower = null;
@@ -101,6 +103,7 @@ public class FlowController : MonoBehaviour {
 
 	}
 
+	//Handles speed up/down
 	public void StartWaves_UpdateSpeed(){
 		if(GetComponent<WaveControler>().OutOfWaves && numberOFEnemies==0 && !GetComponent<WaveControler>().EndOfWaves){
 			//!GetComponent<WaveControler>().EndOfWaves: αλλιως θα καλούνταν η callWave χωρις βεβαια να κανει κατι αλλα θα εμποδιζε την ταχυτητα να αυξηθει(στο τελευταιο κυμα)
@@ -124,6 +127,7 @@ public class FlowController : MonoBehaviour {
 	}
 		
 	//SCENES IN GAME
+	//Handles game over conditions
 	public void EndGame()
 	{
 		BeforeGameEnds (false);
@@ -136,7 +140,7 @@ public class FlowController : MonoBehaviour {
 		else
 			GameObject.Find("ScoreOrHighscoreGO").GetComponent<Text>().text = "SCORE";
 	}
-	
+	//Handles level complete conditions
 	public void LevelComplete(){
 		BeforeGameEnds (true);
 		if(LevelHandler.Selected_level >= GameData.Progress){
@@ -152,7 +156,7 @@ public class FlowController : MonoBehaviour {
 		else
 			GameObject.Find("ScoreOrHighscoreLC").GetComponent<Text>().text = "SCORE";
 	}
-	
+	//Handles pause menu
 	public void Pause()
 	{
 
@@ -177,6 +181,7 @@ public class FlowController : MonoBehaviour {
 	}
 
 	//MENU BUTTON IN GAME
+	//Gets triggered by "CONTINUE" button on pause menu
 	public void Continue(){
 		pauseUI.SetActive (false);
 		GameObject cov = GameObject.Find("Cover");
@@ -185,6 +190,7 @@ public class FlowController : MonoBehaviour {
 		GetComponent<Player> ().StartChronometer ();
 	}
 
+	//Handles restarting
 	public void Restart()
 	{
 		if(pauseUI.activeSelf)
@@ -199,6 +205,7 @@ public class FlowController : MonoBehaviour {
 		StatisticsData.NumbersOfGames++;
 	}
 
+	//Goto main menu
 	public void Menu()
 	{
 		if(pauseUI.activeSelf){
@@ -208,7 +215,8 @@ public class FlowController : MonoBehaviour {
 		SceneManager.LoadScene ("MainMenu");
 		Time.timeScale = 1f;
 	}
-		
+
+	//Goto level select menu
 	public void ContinueLevelCompleteUI()
 	{
 		//analoga survivval or story na bgazei kai scene
@@ -216,6 +224,7 @@ public class FlowController : MonoBehaviour {
 		Time.timeScale = 1f;
 	}
 
+	//Gets triggered by "STATISTICS" button,shows statistics 
 	public void StatisticsButton(bool mainStatistics)
 	{
 		if (levelCompleteUI.activeSelf) {
@@ -230,6 +239,7 @@ public class FlowController : MonoBehaviour {
 		GetComponent<StatisticsMenuController> ().ShowStatistics (mainStatistics);
 	}
 
+	//Gets triggered by "RETURN" button,hides statistics 
 	public void Return()
 	{
 		GetComponent<StatisticsMenuController> ().enabled = false;
@@ -240,6 +250,7 @@ public class FlowController : MonoBehaviour {
 			gameOverUI.SetActive (true);
 	}
 
+	//Some statistics handling
 	public void BeforeGameEnds(bool win)
 	{
 		if(win)

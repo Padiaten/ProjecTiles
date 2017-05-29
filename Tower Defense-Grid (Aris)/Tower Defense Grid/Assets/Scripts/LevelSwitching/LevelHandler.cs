@@ -18,6 +18,7 @@ public static class LevelHandler{
 
 	private static int DimX=10,DimY=10;
 
+	//Holds premade levels,picks one of them
 	public static void PickLevel(int i){
 		selected_level = i;
 		selected_Level.Clear();
@@ -75,14 +76,13 @@ public static class LevelHandler{
 				
 
 				waves2.Add (new List<string> (){"1-2-0-5"});
-				//waves2.Add (new List<string> (){"1-2-4-4"});
-				//waves2.Add (new List<string> (){"1-2-0-3"});
-				//waves2.Add (new List<string> (){"1-2-4-2"});
-				//waves2.Add (new List<string> (){"1-10-4-1"});
-				//waves2.Add (new List<string> (){"1-10-4-0.5"});
-				//waves2.Add (new List<string> (){"1-10-4-0.1"});
+				waves2.Add (new List<string> (){"1-2-4-4"});
+				waves2.Add (new List<string> (){"1-2-0-3"});
+				waves2.Add (new List<string> (){"1-2-4-2"});
+				waves1.Add (new List<string> (){"1-10-4-1"});
+				waves1.Add (new List<string> (){"1-10-4-0.5"});
+				waves1.Add (new List<string> (){"1-10-4-0.1"});
 				waves1.Add (new List<string> (){"1-10-4-0.05"});
-				//waves1.Add (new List<string> (){"1-10-4-0.01"});
 
 				selected_Wave.Add (waves2);
 				selected_Wave.Add (waves1);
@@ -235,6 +235,8 @@ public static class LevelHandler{
 		}
 	}
 
+
+	//GETTERS/SETTERS
 
 	public static List<List<string>> GetSelectedLevel(){
 		return selected_Level;

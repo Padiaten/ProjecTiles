@@ -8,8 +8,9 @@ public class Hover : MonoBehaviour {
 	private GameObject InfoMessage;
 
 	private int towerCost;
-    // Use this for initialization
-    void Start () {        
+
+	//Starts hovering
+	void Start () {        
 		GetComponentInChildren<CircleCollider2D>().enabled = false;
         GetComponentInChildren<BoxCollider2D>().enabled = false;
 		transform.Find("Range").GetComponent<SpriteRenderer>().enabled = false;
@@ -17,10 +18,10 @@ public class Hover : MonoBehaviour {
 		InfoMessage = GameObject.Find("InfoMessage");
 		//print("InfoMessage:" + InfoMessage);
     }
-	
-	// Update is called once per frame
+
+	//Handles the rest of the hovering,and also cost
 	void Update () {
-        //Τοποθέτηση Πύργων
+        //Position tower on mouse
         Vector2 position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		position = new Vector2(Mathf.Round(position.x),Mathf.Round(position.y));
 

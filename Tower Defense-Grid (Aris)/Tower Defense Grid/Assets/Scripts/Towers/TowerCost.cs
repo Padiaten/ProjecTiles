@@ -4,6 +4,7 @@ using UnityEngine;
 
 public  static class TowerCost{
 	private static int cost,sellvalue;
+	//Returns tower cost based on id
 	public static int getCost(int i){
 		switch(i){
 		case 1:
@@ -29,6 +30,7 @@ public  static class TowerCost{
 		return cost;
 	}
 
+	//Returns tower sell value based on id
 	public static int getTowerSellValue(int i,int level){
 		int c = getCost(i);
 		int lcost =0;
@@ -46,6 +48,7 @@ public  static class TowerCost{
 		return (lcost/2);
 	}
 
+	//Returns tower upgrade value based on id
 	public static int getUpgradeCost(int i,int level){
 		int c = getCost(i);
 		int lcost =0;

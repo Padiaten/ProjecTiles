@@ -6,15 +6,14 @@ using UnityEngine.UI;
 public class ShowInfoText : MonoBehaviour {
 
 	private int i;
-	void Start () {
-		
-	}
 
+	//Calls disp(Cannot be called directly)
 	public void displayMessage(int x){
 		i = x;
 		StartCoroutine(disp());
 	}
 
+	//Displays a message on a UIText object for 3 seconds
 	IEnumerator disp(){
 		switch(i){
 		case 1:

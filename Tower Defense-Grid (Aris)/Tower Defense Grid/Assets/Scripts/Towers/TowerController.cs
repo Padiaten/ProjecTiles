@@ -14,6 +14,7 @@ public class TowerController : MonoBehaviour {
 		InfoMessage = GameObject.Find("InfoMessage");
 	}
 
+	//Checks if a tower is clicked,opens upgrade menu
 	void Update(){
 		if(Input.GetMouseButtonDown(0)){
 			RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition),Vector2.zero);
@@ -23,6 +24,7 @@ public class TowerController : MonoBehaviour {
 		}
 	}
 
+	//Finds tower type,calls UpdateMenu
 	public void SelectTower(GameObject t)
     {
 		if(SelectedTower != null){
@@ -55,17 +57,20 @@ public class TowerController : MonoBehaviour {
     }
 
 
+	//Toggles tower menu
 	public void ToggleTowerMenu(){
 		TowerMenu.SetActive(true);
 	}
     
 
+	//Gets tower upgrade value,sell value and sets the correct labels on buttons
 	public void UpdateMenu(){
 		TowerMenu.transform.Find("UpgradeButton").GetComponentInChildren<Text>().text = "UPGRADE(" + TowerCost.getUpgradeCost(ttype,tlevel) + ")";
 		TowerMenu.transform.Find("SellButton").GetComponentInChildren<Text>().text = "SELL(" + TowerCost.getTowerSellValue(ttype,tlevel) + ")";
 
 	}
 
+	//Handles tower upgrading
 	public void UpgradeTower(){
 		int cost = TowerCost.getUpgradeCost(ttype,tlevel);
 		if(this.GetComponent<Player>().Money >= cost){
@@ -113,6 +118,7 @@ public class TowerController : MonoBehaviour {
 
 	}
 
+	//Hides tower upgrade menu
 	public void CancelTowerMenu(){
 
 		TowerMenu.SetActive(false);
@@ -121,6 +127,7 @@ public class TowerController : MonoBehaviour {
 
 	}
 
+	//Handles tower selling
 	public void SellTower(){
 		int value = TowerCost.getTowerSellValue(ttype,tlevel);
 		this.GetComponent<Player>().UpdateGold(value);

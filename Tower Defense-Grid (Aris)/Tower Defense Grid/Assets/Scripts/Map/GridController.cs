@@ -6,13 +6,16 @@ public class GridController : MonoBehaviour {
 	
 	List<List<string>> map = new List<List<string>>();
 	private int totalgrasstiles = 0;
-	//Έχει τα πλακίδια-αφετηρία
+	//Holds starting tiles
 	protected List<GameObject> StartTiles = new List<GameObject>();
+
+	//Calls drawMap
 	void Start () {
 		drawMap(LevelHandler.GetSelectedLevel());
 	}
 
 
+	//Draws map
 	void drawMap(List<List<string>> map){
 		//Scan 1 of 2,identify general tile type and place on grid
 		for(int i=0;i<map.Count;i++){
@@ -99,11 +102,13 @@ public class GridController : MonoBehaviour {
 		GetComponent<FlowController>().startWaveControler();
 	}
 
+	//GETTER
 	public List<GameObject> GetStartTiles(){
 		//print("returned something," + StartTiles.Count);
 		return StartTiles;
 	}
 
+	//Places rocks randomly,called by drawMap near the end
 	public void placeRocks(){
 		int rocks = Random.Range(0,(int)(totalgrasstiles/3.5f));
 		print(rocks);

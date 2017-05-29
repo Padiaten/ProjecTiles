@@ -10,6 +10,7 @@ public class LevelSelector : MonoBehaviour {
 	public GameObject infomessage;
 	int progress,sel_level;
 
+	//Sets which level the player can play on story mode
 	void Start(){
 
 
@@ -33,13 +34,14 @@ public class LevelSelector : MonoBehaviour {
 		}
 	}
 
+	//Calls PickLevel on LevelHandler which loads correct map
 	public void SelectLevel(int i){
 		
 			LevelHandler.PickLevel(i);
 			sel_level = i;
 	}
 
-
+	//Starts survival mode
 	public void Survival(bool s)
 	{
 		
@@ -54,7 +56,7 @@ public class LevelSelector : MonoBehaviour {
 }
 
 
-
+	//Calls ReadCustom which loads custom levels
 	public void SelectCustom(string path){
 		LevelHandler.ReadCustom(path);
 		SceneManager.LoadScene ("MainGame");

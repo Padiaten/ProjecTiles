@@ -10,22 +10,15 @@ public abstract class Tile : MonoBehaviour {
 	protected int x,y;
 	protected TileType Ttype;
 
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
+	//Initializes tile
 	public void initializeTile(int x,int y){
 		transform.position = new Vector2(x,y);
 		this.x = x;
 		this.y = y;
 	}
 
+
+	//GETTERS-SETTERS
 	public int getX(){
 		return x;
 	}

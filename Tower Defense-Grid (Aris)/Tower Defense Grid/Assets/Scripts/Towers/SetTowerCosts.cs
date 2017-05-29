@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class SetTowerCosts : MonoBehaviour {
 
-	// Use this for initialization
+	//Sets the tower cost displays on the menu
 	void Start () {
 
 		for(int i=1;i<7;i++){

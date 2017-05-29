@@ -6,10 +6,12 @@ using System;
 
 public class SurvivalMenuController : MonoBehaviour {
 
+	//Calls FillGrid
 	void Start(){
 		FillGrid();
 	}
 
+	//Creates a list that displays levels that can be played on survival 
 	public void FillGrid(){
 		GameObject button = (GameObject)Resources.Load("Prefabs/UI/SurvivalButtonPrefab",typeof(GameObject));
 		GameObject Grid = GameObject.Find("Grid");

@@ -10,6 +10,7 @@ public static class TowerUpgrades {
 	private static int eff_val;
 	private static float range;
 
+	//Holds tower upgrades
 	public static void setTowerUpgrades(int i,int lvl){
 		damage = 0;
 		atk_cool=0;
@@ -85,6 +86,7 @@ public static class TowerUpgrades {
 
 	}
 
+	//GETTERS/SETTERS
 	public static float Range {
 		get {
 			return range;
