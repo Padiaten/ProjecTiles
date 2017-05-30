@@ -126,7 +126,7 @@ public class Tower : MonoBehaviour {
     {
         if (hits == true)
         {
-            if (!multipleRoundhouseHit) LookAtTarget();
+            if (!multipleRoundhouseHit && enem2 != null) LookAtTarget();
             Attack();           
         }
     }
@@ -214,6 +214,7 @@ public class Tower : MonoBehaviour {
     /*Κάνει το πύργο να κοιτάει στον εχθρο που στοχεύει*/
     public void LookAtTarget()
     {
+
         if (enem2 != null)
         {
             Vector3 diff = enem2.transform.position - transform.position;
@@ -264,6 +265,10 @@ public class Tower : MonoBehaviour {
         {
             if (hits == true)
             {
+                if (enemies.Contains(o.GetComponent<Enemy>()))
+                {
+                    enemies.Dequeue();
+                }
                 enem2 = null;
             }
 
