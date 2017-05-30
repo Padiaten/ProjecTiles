@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class TowerInteractions : MonoBehaviour {
 
 	// Use this for initialization
@@ -14,13 +15,22 @@ public class TowerInteractions : MonoBehaviour {
 		
 	}
 
+    //Εμφανίζει το βεληνεκές του πύργου εαν στοχεύσουμε με το ποντίκι το πύργο
 	public void OnMouseEnter(){
-		 transform.Find("Range").GetComponentInChildren<SpriteRenderer>().sortingOrder = 1;
+		if(this.name != "Global Tower"){
+			Color c = transform.Find("Range").GetComponentInChildren<SpriteRenderer>().color;
+			transform.Find("Range").GetComponentInChildren<SpriteRenderer>().color =  new Color(c.r,c.g,c.b,100/255f);
+		}
+	
 	}
 
-	public void OnMouseExit(){
-		transform.Find("Range").GetComponentInChildren<SpriteRenderer>().sortingOrder = -1;
+    //Εξαφανίζεται το βεληνεκές αφού το ποντίκι φύγει από το πύργο
+    public void OnMouseExit(){
+		Color c = transform.Find("Range").GetComponentInChildren<SpriteRenderer>().color;
+		transform.Find("Range").GetComponentInChildren<SpriteRenderer>().color = new Color(c.r,c.g,c.b,0);;
 
 	}
+
+
 
 }

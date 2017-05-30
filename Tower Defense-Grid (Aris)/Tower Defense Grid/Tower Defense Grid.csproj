@@ -18,7 +18,7 @@
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.5.2f1</UnityVersion>
     <RootNamespace></RootNamespace>
-    <LangVersion Condition=" '$(VisualStudioVersion)' != '10.0' ">4</LangVersion>
+    <LangVersion>4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -76,21 +76,28 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\CameraResize.cs" />
-    <Compile Include="Assets\Scripts\Enemies\MainEnemy.cs" />
-    <Compile Include="Assets\Scripts\Enemies\WaveControler.cs" />
-    <Compile Include="Assets\Scripts\Enemies\WaveTextController.cs" />
+    <Compile Include="Assets\Scripts\Enemies\Enemy.cs" />
     <Compile Include="Assets\Scripts\FlowController.cs" />
+    <Compile Include="Assets\Scripts\GameData.cs" />
+    <Compile Include="Assets\Scripts\LevelSwitching\DisplayLockedLevelMessage.cs" />
     <Compile Include="Assets\Scripts\LevelSwitching\LevelHandler.cs" />
     <Compile Include="Assets\Scripts\LevelSwitching\LevelSelector.cs" />
     <Compile Include="Assets\Scripts\LevelSwitching\MenuManager.cs" />
+    <Compile Include="Assets\Scripts\LevelSwitching\SurvivalMenuController.cs" />
     <Compile Include="Assets\Scripts\Map\GrassTile.cs" />
     <Compile Include="Assets\Scripts\Map\GridController.cs" />
     <Compile Include="Assets\Scripts\Map\PathTile.cs" />
     <Compile Include="Assets\Scripts\Map\Tile.cs" />
     <Compile Include="Assets\Scripts\Music\ChangeMusicState.cs" />
     <Compile Include="Assets\Scripts\Music\DonotDestroyOnLoad.cs" />
-    <Compile Include="Assets\Scripts\Music\SliderMusic.cs" />
+    <Compile Include="Assets\Scripts\Player.cs" />
+    <Compile Include="Assets\Scripts\ScoreSceneController.cs" />
+    <Compile Include="Assets\Scripts\SettingsController.cs" />
     <Compile Include="Assets\Scripts\ShowInfoText.cs" />
+    <Compile Include="Assets\Scripts\StartGame.cs" />
+    <Compile Include="Assets\Scripts\Statistics\StartStatistics.cs" />
+    <Compile Include="Assets\Scripts\Statistics\StatisticsData.cs" />
+    <Compile Include="Assets\Scripts\Statistics\StatisticsMenuController.cs" />
     <Compile Include="Assets\Scripts\Towers\Hover.cs" />
     <Compile Include="Assets\Scripts\Towers\LookAtTarget.cs" />
     <Compile Include="Assets\Scripts\Towers\Projectile.cs" />
@@ -99,6 +106,11 @@
     <Compile Include="Assets\Scripts\Towers\TowerController.cs" />
     <Compile Include="Assets\Scripts\Towers\TowerCost.cs" />
     <Compile Include="Assets\Scripts\Towers\TowerInteractions.cs" />
+    <Compile Include="Assets\Scripts\Towers\TowerUpgrades.cs" />
+    <Compile Include="Assets\Scripts\Waves\SurvivalWaves.cs" />
+    <Compile Include="Assets\Scripts\Waves\Wave.cs" />
+    <Compile Include="Assets\Scripts\Waves\WaveControler.cs" />
+    <Compile Include="Assets\Scripts\Waves\WaveTextController.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

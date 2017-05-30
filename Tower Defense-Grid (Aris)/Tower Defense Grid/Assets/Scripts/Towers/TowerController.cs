@@ -5,37 +5,42 @@ using UnityEngine.UI;
 
 public class TowerController : MonoBehaviour {
 
-	public GameObject TowerMenu;
+	public GameObject TowerMenu, InfoMessage;
 	private GameObject SelectedTower = null;
 	private int ttype,tlevel;
-	private GameObject InfoMessage;
 
 	void Start(){
 		InfoMessage = GameObject.Find("InfoMessage");
 	}
 
-	//Checks if a tower is clicked,opens upgrade menu
 	void Update(){
-		if(Input.GetMouseButtonDown(0)){
+
+        //Επιλέγεται ο πύργος με το αριστερό κλικ κ εκτελείται η SelectTower
+		if(Input.GetMouseButtonDown(0))
+        {
 			RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition),Vector2.zero);
-			if(hit.collider != null && hit.collider.tag == "Tower"){
+			if(hit.collider != null && hit.collider.tag == "Tower")
 				SelectTower(hit.collider.gameObject);
-			}
 		}
 	}
 
-	//Finds tower type,calls UpdateMenu
+
 	public void SelectTower(GameObject t)
     {
-		if(SelectedTower != null){
+		if(SelectedTower != null)
+        {
+            //Εμφανίζει το μενου των tower (Upgrade Tower, Sell Tower)
 			SelectedTower.GetComponent<SpriteRenderer>().color = new Color(1f,1f,1f,1f);
 			TowerMenu.transform.Find("UpgradeButton").GetComponentInChildren<Text>().text = "";
 			TowerMenu.transform.Find("SellButton").GetComponentInChildren<Text>().text = "";
 		}
+
+        //Κάνει εμφανες στο χρήστη οτι επίλέχτηκε ο πύργος
 		SelectedTower = t;
 		SelectedTower.GetComponent<SpriteRenderer>().color = new Color(1f,0,0,1f);
 		tlevel = SelectedTower.GetComponentInChildren<Tower>().Towerlevel;
 
+        //Ορίζει μια int ανάλογα με το τύπο του πύργου
 		switch(t.name){
 		case "Tower":ttype = 1;
 		break;
@@ -51,33 +56,40 @@ public class TowerController : MonoBehaviour {
 		break;
 		}
 
+        //Προσδιορίζει τις αναβαθμίσεις των πύργων
 		TowerUpgrades.setTowerUpgrades(ttype,tlevel);
 		ToggleTowerMenu();
 		UpdateMenu();
     }
 
-
-	//Toggles tower menu
-	public void ToggleTowerMenu(){
+    //Ενεργοποιείται το μενού των πύργων
+	public void ToggleTowerMenu()
+    {
 		TowerMenu.SetActive(true);
 	}
     
-
-	//Gets tower upgrade value,sell value and sets the correct labels on buttons
-	public void UpdateMenu(){
+    //Οριίζει το κείμενο στα κουμπια του μένού των πύργων
+	public void UpdateMenu()
+    {
 		TowerMenu.transform.Find("UpgradeButton").GetComponentInChildren<Text>().text = "UPGRADE(" + TowerCost.getUpgradeCost(ttype,tlevel) + ")";
 		TowerMenu.transform.Find("SellButton").GetComponentInChildren<Text>().text = "SELL(" + TowerCost.getTowerSellValue(ttype,tlevel) + ")";
-
 	}
 
-	//Handles tower upgrading
-	public void UpgradeTower(){
+    //Αναβάθμιση πύργου
+	public void UpgradeTower()
+    {
 		int cost = TowerCost.getUpgradeCost(ttype,tlevel);
-		if(this.GetComponent<Player>().Money >= cost){
-			if(tlevel < 3){
+		if(this.GetComponent<Player>().Money >= cost)
+        {
+			if(tlevel < 3)
+            {
 				SelectedTower.GetComponentInChildren<Tower>().Towerlevel = tlevel + 1;
+
+                //Γίνεται η αφαίρεση των χρημάτων για την αναβάθμιση και 
 				this.GetComponent<Player>().UpdateGold(-cost);
-				int damage;
+
+                //Eνημερώνονται οι μεταβλητές για τις ιδιότητες του πύργου
+                int damage;
 				float atk_cool;
 				float proj_sp;
 				int eff_val;
@@ -89,53 +101,52 @@ public class TowerController : MonoBehaviour {
 				eff_val = TowerUpgrades.Eff_val;
 				range = TowerUpgrades.Range;
 
-				if(damage != 0){
-					SelectedTower.GetComponentInChildren<Tower>().Damage = damage;
-				}
+				if(damage != 0)     SelectedTower.GetComponentInChildren<Tower>().Damage = damage;
+				
+				if(atk_cool != 0)   SelectedTower.GetComponentInChildren<Tower>().AttackCooldown = atk_cool;
 
-				if(atk_cool != 0){
-					SelectedTower.GetComponentInChildren<Tower>().AttackCooldown = atk_cool;
-				}
+				if(proj_sp != 0)	SelectedTower.GetComponentInChildren<Tower>().ProjectileSpeed = proj_sp;
 
-				if(proj_sp != 0){
-					SelectedTower.GetComponentInChildren<Tower>().ProjectileSpeed = proj_sp;
-				}
-
-				if(eff_val != 0){
-					SelectedTower.GetComponentInChildren<Tower>().EffectValue = eff_val;
-				}
+				if(eff_val != 0)    SelectedTower.GetComponentInChildren<Tower>().EffectValue = eff_val;
 			
-				if(range != 0){
+
+				if(range != 0)
+                {
 					SelectedTower.transform.Find("Range").transform.localScale = new Vector3(range,range,1);
 					SelectedTower.GetComponentInChildren<Tower>().UpdateRange();
 				}
 
 				CancelTowerMenu();
-			}else{
-				InfoMessage.GetComponent<ShowInfoText>().displayMessage(4);
 			}
+
+            else	InfoMessage.GetComponent<ShowInfoText>().displayMessage(4);
+
 		}
 
 	}
 
-	//Hides tower upgrade menu
-	public void CancelTowerMenu(){
-
+    //Εξαφανίζει το μενού των πύργων
+	public void CancelTowerMenu()
+    {
 		TowerMenu.SetActive(false);
 		SelectedTower.GetComponent<SpriteRenderer>().color = new Color(1f,1f,1f,1f);
 		SelectedTower = null;
-
 	}
 
-	//Handles tower selling
-	public void SellTower(){
+    //Γίνεται η πώληση του πύργου
+	public void SellTower()
+    {
 		int value = TowerCost.getTowerSellValue(ttype,tlevel);
 		this.GetComponent<Player>().UpdateGold(value);
+
+        //Απελευθερώνει το tile που ήταν ο πύργος
 		int x = (int)SelectedTower.transform.position.x;
 		int y = (int) SelectedTower.transform.position.y;
 		string tilename = "G " + x + "," + y;
-		GameObject.Find(tilename).GetComponent<GrassTile>().setCanPlaceBuilding(true);
-		GetComponent<Player> ().AddInTowerList (SelectedTower.GetComponentInChildren<Tower>().Id,false);
+        GameObject.Find(tilename).GetComponent<GrassTile>().setCanPlaceBuilding(true);
+
+        //Αφαιρείται ο πύργος από το παιχνίδι
+        GetComponent<Player>().AddInTowerList(SelectedTower.GetComponentInChildren<Tower>().Id,false);
 		Destroy(SelectedTower);
 		CancelTowerMenu();
 	}
