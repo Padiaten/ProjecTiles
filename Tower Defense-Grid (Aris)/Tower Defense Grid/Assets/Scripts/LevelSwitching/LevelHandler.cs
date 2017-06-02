@@ -122,7 +122,19 @@ public static class LevelHandler{
 				waves2.Add (new List<string> (){"1-7-3-1","1-7-3-1","1-7-3-1","1-7-3-1","1-7-3-1"});
 				waves1.Add (new List<string> (){"1-7-4-1","1-7-4-1","1-7-4-1","1-7-4-1","1-7-4-1"});
 				waves2.Add (new List<string> (){"1-6-0-1","2-6-1-2"});
-				//waves1.Add (new List<string> (){"1-6-0-1","2-10-1-2","2-7-2-2","1-12-3-2","4-5-4-2"});
+				waves1.Add (new List<string> (){"1-6-0-1","2-10-1-2","2-7-2-2","1-12-3-2","4-5-4-2"});
+				waves1.Add (new List<string> (){"1-100-0-0.1"});
+				waves1.Add (new List<string> (){"1-100-0-0.1"});
+				waves1.Add (new List<string> (){"1-100-0-0.1"});
+				waves1.Add (new List<string> (){"1-100-0-0.1"});
+				waves1.Add (new List<string> (){"1-100-0-0.1"});
+				waves1.Add (new List<string> (){"1-100-0-0.1"});
+				waves1.Add (new List<string> (){"1-100-0-0.1"});
+				waves1.Add (new List<string> (){"1-100-0-0.1"});
+				waves1.Add (new List<string> (){"1-100-0-0.1"});
+				waves1.Add (new List<string> (){"1-100-0-0.1"});
+				waves1.Add (new List<string> (){"1-100-0-0.1"});
+				waves1.Add (new List<string> (){"1-100-0-0.1"});
 
 				selected_Wave.Add (waves1);
 				selected_Wave.Add (waves2);
