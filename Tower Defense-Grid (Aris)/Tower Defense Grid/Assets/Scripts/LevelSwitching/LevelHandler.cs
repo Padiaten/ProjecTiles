@@ -92,7 +92,7 @@ public static class LevelHandler{
 
 				selected_Wave.Add (waves1);
 
-				selectedLives = 11 + GameData.Difficulty * 1;
+				selectedLives = 11 + GameData.Difficulty;
 				selectedMoneys = 100 + 25*GameData.Difficulty;
 
 				break;
@@ -115,32 +115,71 @@ public static class LevelHandler{
 				selected_Level.Add(new List<string>(){"E","L","L","L","L","L","X","X","X","R","R","R","R","R","E"});
 				selected_Level.Add(new List<string>(){"X","X","X","X","X","X","X","X","X","X","X","X","X","X","X"});
 
-				waves1.Add (new List<string> (){"1-100-0-0.1"});
-				waves1.Add (new List<string> (){"1-7-0-1","1-7-0-1","1-7-0-1","1-7-0-1","1-7-0-1"});
-				waves2.Add (new List<string> (){"1-7-1-1","1-7-1-1","1-7-1-1","1-7-1-1","1-7-1-1"});
-				waves1.Add (new List<string> (){"1-7-2-1","1-7-2-1","1-7-2-1","1-7-2-1","1-7-2-1"});
-				waves2.Add (new List<string> (){"1-7-3-1","1-7-3-1","1-7-3-1","1-7-3-1","1-7-3-1"});
-				waves1.Add (new List<string> (){"1-7-4-1","1-7-4-1","1-7-4-1","1-7-4-1","1-7-4-1"});
-				waves2.Add (new List<string> (){"1-6-0-1","2-6-1-2"});
-				waves1.Add (new List<string> (){"1-6-0-1","2-10-1-2","2-7-2-2","1-12-3-2","4-5-4-2"});
-				waves1.Add (new List<string> (){"1-100-0-0.1"});
-				waves1.Add (new List<string> (){"1-100-0-0.1"});
-				waves1.Add (new List<string> (){"1-100-0-0.1"});
-				waves1.Add (new List<string> (){"1-100-0-0.1"});
-				waves1.Add (new List<string> (){"1-100-0-0.1"});
-				waves1.Add (new List<string> (){"1-100-0-0.1"});
-				waves1.Add (new List<string> (){"1-100-0-0.1"});
-				waves1.Add (new List<string> (){"1-100-0-0.1"});
-				waves1.Add (new List<string> (){"1-100-0-0.1"});
-				waves1.Add (new List<string> (){"1-100-0-0.1"});
-				waves1.Add (new List<string> (){"1-100-0-0.1"});
-				waves1.Add (new List<string> (){"1-100-0-0.1"});
+				waves1.Add (new List<string> (){"1-5-0-1"});
+				waves2.Add (new List<string> (){"1-5-0-1"});//1
+
+				waves1.Add (new List<string> (){"1-7-0-0.8","3-9-0-0.5","5-5-1-1.5"});
+				waves2.Add (new List<string> (){"1-7-0-0.8","3-9-0-0.5","5-5-1-1.5"});//2
+
+				waves1.Add (new List<string> (){"1-7-0-0.9","2-7-1-1.3","3-10-0-0.3"});
+				waves2.Add (new List<string> (){"1-7-0-0.9","2-7-1-1.3","3-10-0-0.3"});//3
+
+				waves1.Add (new List<string> (){"1-15-1-1.5","5-20-0-0.4"});
+				waves2.Add (new List<string> (){"1-15-1-1.5","5-20-0-0.4"});//4
+
+				waves1.Add (new List<string> (){"1-5-0-0.2","2-5-1-0.8","3-15-0-0.2","5-25-1-0.3"});
+				waves2.Add (new List<string> (){"1-5-0-0.2","2-5-1-0.8","3-15-0-0.2","5-25-1-0.3"});//5
+
+				waves1.Add (new List<string> (){"1-1-2-0.1","1-3-0-0.1","2-3-1-0.1","3-5-2-1.1"});
+				waves2.Add (new List<string> (){"1-1-2-0.1","1-3-0-0.1","2-3-1-0.1","3-5-2-1.1"});//6
+
+				waves1.Add (new List<string> (){"1-20-1-0.2","4-20-0-0.1"});
+				waves2.Add (new List<string> (){"1-20-1-0.2","4-20-0-0.1"});//7
+
+				waves1.Add (new List<string> (){"1-10-2-1","3-7-0-0.1","3-7-1-0.1"});
+				waves2.Add (new List<string> (){"1-10-2-1","3-7-0-0.1","3-7-1-0.1"});//8
+
+				waves1.Add (new List<string> (){"1-3-3-0.1","2-10-2-0.3"});
+				waves2.Add (new List<string> (){"1-3-3-0.1","2-10-2-0.3"});//9
+
+				waves1.Add (new List<string> (){"1-5-3-1","3-10-2-0.2"});
+				waves2.Add (new List<string> (){"1-5-3-1","3-10-2-0.2"});//10
+
+				waves1.Add (new List<string> (){"1-25-1-0.1","3-10-0-0.1","3-10-2-0.2","4-10-3-0.5","5-20-2-0.1"});
+				waves2.Add (new List<string> (){"1-25-1-0.1","3-10-0-0.1","3-10-2-0.2","4-10-3-0.5","5-20-2-0.1"});//11
+
+				waves1.Add (new List<string> (){"1-12-3-0.2","2-10-2-0.1"});
+				waves2.Add (new List<string> (){"1-12-3-0.2","2-10-2-0.1"});//12
+
+				waves1.Add (new List<string> (){"1-5-4-0.3","1-20-3-0.2","1-15-2-0.1","1-15-3-0.1"});
+				waves2.Add (new List<string> (){"1-5-4-0.3","1-20-3-0.2","1-15-2-0.1","1-15-3-0.1"});//13
+
+				waves1.Add (new List<string> (){"1-25-1-0.01","3-50-0-0.01","5-10-4-0.1"});
+				waves2.Add (new List<string> (){"1-25-1-0.01","3-50-0-0.01","5-10-4-0.1"});//14
+
+				waves1.Add (new List<string> (){"1-20-0-0.01","1-20-1-0.01"});
+				waves2.Add (new List<string> (){"1-20-0-0.01","1-20-1-0.01"});//15  ******************************
+
+				waves1.Add (new List<string> (){"1-20-2-0.01","1-20-3-0.01"});
+				waves2.Add (new List<string> (){"1-20-2-0.01","1-20-3-0.01"});//16
+
+				waves1.Add (new List<string> (){"1-30-2-0.1","4-50-1-0.1"});
+				waves2.Add (new List<string> (){"1-30-2-0.1","4-50-1-0.1"});//17
+
+				waves1.Add (new List<string> (){"1-20-4-0.01","4-30-0-0.1","4-30-1-0.1","4-30-2-0.1","4-30-3-0.1","4-30-4-0.1"});
+				waves2.Add (new List<string> (){"1-20-4-0.01","4-30-0-0.1","4-30-1-0.1","4-30-2-0.1","4-30-3-0.1","4-30-4-0.1"});//18
+
+				waves1.Add (new List<string> (){"1-30-3-0.01","3-25-4-0.01","3-20-1-0.2","3-15-2-0.1"});
+				waves2.Add (new List<string> (){"1-30-3-0.01","3-25-4-0.01","3-20-1-0.2","3-15-2-0.1"});//19
+
+				waves1.Add (new List<string> (){"1-70-0-0.1","5-20-1-0.01","3-15-1-0.001","3-20-4-0.01","3-30-2-0.1","4-15-3-0.1","3-20-3-0.01","4-10-0-0.01","3-50-1-0.001","4-30-4-0.1","2-30-1-0.1","2-30-2-0.1","2-30-3-0.1","2-50-4-0.001"});
+				waves2.Add (new List<string> (){"1-70-0-0.1","5-20-1-0.01","3-15-1-0.001","3-20-4-0.01","3-30-2-0.1","4-15-3-0.1","3-20-3-0.01","4-10-0-0.01","3-50-1-0.001","4-30-4-0.1","2-30-1-0.1","2-30-2-0.1","2-30-3-0.1","2-50-4-0.001"});//20
 
 				selected_Wave.Add (waves1);
 				selected_Wave.Add (waves2);
 
-				selectedLives = 100;
-				selectedMoneys = 10000;
+				selectedLives = 12 + GameData.Difficulty;
+				selectedMoneys = 100 + 25*GameData.Difficulty;
 
 				break;	
 			}

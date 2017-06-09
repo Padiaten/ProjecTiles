@@ -5,7 +5,9 @@ using UnityEngine;
 //διαχειρίζεται τα wave του survival mode.κληρονομεί την Wave
 public class SurvivalWaves : Wave {
 	private static int InitiaEnemiesNumber = 10;//με ποσα enemies/κυμα θα ξεκινησει το παιχνιδι 
-	private static int EnemyAdder = 10;//ποσα παραπανω enemies θα βγαινουν σε καθε κυμα
+	private static int EnemyAdder = 5;//ποσα παραπανω enemies θα βγαινουν σε καθε κυμα
+	private static int EnemyAdderPerWaves = 5;//ανα ποσα κυματα θα αλλαζει το EnemyAdder
+	private static int CoefAdder = 2;//μετα απο EnemyAdderPerWaves επι ποσο θα πολαπλασιαζεται το EnemyAdder
 	private static float StartPercentage = 0.5f;//αρχικο ποσοστο του dominantEnemy στο κυμα
 	private static float EndPercentage = 1.0f;//τελικο ποσοστο του dominantEnemy στο κυμα, προτεινεται να μην παιρνει τιμη μεγαλυτερη απο 1.0f
 	// x= EndPercentage-StartPercentage. Αν x > WavesPerEnemy τοτε για x κυματα το percentage θα είναι ισο με EndPercentage
@@ -26,7 +28,7 @@ public class SurvivalWaves : Wave {
 	private float percentage;//ποσοστο του dominantEnemy στο κυμα
 
 	private int dominantEnemiesNumber,otherEnemiesNumber;
-	private float subtracter, startTime, endTime;
+	private float subtracter, startTime, endTime; 
 	private int listOfTimesIndex = 0;
 	private int listTimeCount;
 	      
@@ -60,7 +62,6 @@ public class SurvivalWaves : Wave {
 				ReadData ();
 			}
 		}
-		print("enemies -"+dominantEnemiesNumber);
 		for(int i=0; i<dominantEnemiesNumber; i++)
 		{
 			if (numberStartiles > 1) {
@@ -70,7 +71,6 @@ public class SurvivalWaves : Wave {
 			CreateEnemy (dominantEnemy);
 			yield return new WaitForSeconds (timeBetweenEnemies);
 		}
-		print("other -"+otherEnemiesNumber);
 		for(int i = 0; i<otherEnemiesNumber; i++)
 		{
 			if (numberStartiles > 1) {
@@ -82,7 +82,14 @@ public class SurvivalWaves : Wave {
 			if(i != (otherEnemiesNumber-1))
 				yield return new WaitForSeconds (timeBetweenEnemies);
 		}
-
+			
+		waveIndex++;//πρωτα να αυξανεται ο waveIndex και μετα να γινονται οι παρακατω ελεγχοι αλλιως αν αυξανεται μετα θα αλλαζει το dominantEnemy ενα κυμα αργοτερα
+		/*ο παρακατω ελεγχος να γινεται αφου εχει αυξηθει το waveIndex αλλιως οταν θα ειναι 0 η συνθηκη θα ειναι αληθης
+		 * πραγμα το οποιο δεν το θελουμε
+		 */ 
+		if ((waveIndex % EnemyAdderPerWaves) == 0) {
+			EnemyAdder = EnemyAdder * CoefAdder;
+		}
 		enemiesNumber += EnemyAdder;
 		if (timeBetweenEnemies != endTime) {
 			timeBetweenEnemies -= subtracter;
@@ -90,10 +97,7 @@ public class SurvivalWaves : Wave {
 				timeBetweenEnemies = endTime;
 			}
 		}
-		waveIndex++;//πρωτα να αυξανεται ο waveIndex και μετα να γινονται οι παρακατω ελεγχοι αλλιως αν αυξανεται μετα θα αλλαζει το dominantEnemy ενα κυμα αργοτερα
-		/*ο παρακατω ελεγχος να γινεται αφου εχει αυξηθει το waveIndex αλλιως οταν θα ειναι 0 η συνθηκη θα ειναι αληθης
-		 * πραγμα το οποιο δεν το θελουμε
-		 */ 
+
 		if ((waveIndex % WavesPerEnemy) == 0) {
 			percentage = StartPercentage;
 			if (enemyIndex < (enemies.Count - 1)) {
@@ -109,7 +113,9 @@ public class SurvivalWaves : Wave {
 			random_Perce_OfNum += Random_Perce_Adder;
 		}
 		outWave = true;
-		//if(waveIndex >= 30)
+		if (waveIndex >= 30) {
+			EnemyAdder = 100;
+		}
 	}
 
 	public void ReadData()

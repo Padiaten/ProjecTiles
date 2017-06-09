@@ -31,13 +31,13 @@ public static class TowerUpgrades {
 			}else{
 				damage = 12;
 				atk_cool = 0.6f;
-				range = 1.3f;
+				range = 1.5f;
 			}
 			break;
 		//Slow
 		case 2:
 			if(lvl == 1){
-				range = 1.5f;
+				range = 1.7f;
 			}else{
 				eff_val = 3;
 			}
@@ -45,7 +45,7 @@ public static class TowerUpgrades {
 		//Buff
 		case 3:
 			if(lvl == 1){
-				range = 2;
+				range = 2.2f;
 			}else{
 				eff_val = 3;
 			}
@@ -59,7 +59,7 @@ public static class TowerUpgrades {
 			}else{
 				damage = 7;
 				atk_cool = 1.2f;
-				range = 2;
+				range = 2.2f;
 			}
 			break;
 		//Global
@@ -81,7 +81,7 @@ public static class TowerUpgrades {
 			}else{
 				damage = 7;
 				atk_cool = 1.8f;
-				range = 2;
+				range = 2.2f;
 			}
 			break;
 		}
