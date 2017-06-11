@@ -8,103 +8,55 @@ Direct3D:
     VRAM:     1010 MB
     Driver:   15.200.1062.0
 Begin MonoManager ReloadAssembly
-Platform assembly: C:\Users\Aris\Documents\Github\Tower-Defense\Tower Defense-Grid (Aris)\Executable\ProjecTiles_Data\Managed\UnityEngine.dll (this message is harmless)
-Loading C:\Users\Aris\Documents\Github\Tower-Defense\Tower Defense-Grid (Aris)\Executable\ProjecTiles_Data\Managed\UnityEngine.dll into Unity Child Domain
-Platform assembly: C:\Users\Aris\Documents\Github\Tower-Defense\Tower Defense-Grid (Aris)\Executable\ProjecTiles_Data\Managed\Assembly-CSharp.dll (this message is harmless)
-Loading C:\Users\Aris\Documents\Github\Tower-Defense\Tower Defense-Grid (Aris)\Executable\ProjecTiles_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
-Platform assembly: C:\Users\Aris\Documents\Github\Tower-Defense\Tower Defense-Grid (Aris)\Executable\ProjecTiles_Data\Managed\UnityEngine.UI.dll (this message is harmless)
-Loading C:\Users\Aris\Documents\Github\Tower-Defense\Tower Defense-Grid (Aris)\Executable\ProjecTiles_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
-Platform assembly: C:\Users\Aris\Documents\Github\Tower-Defense\Tower Defense-Grid (Aris)\Executable\ProjecTiles_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
-Loading C:\Users\Aris\Documents\Github\Tower-Defense\Tower Defense-Grid (Aris)\Executable\ProjecTiles_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
-Platform assembly: C:\Users\Aris\Documents\Github\Tower-Defense\Tower Defense-Grid (Aris)\Executable\ProjecTiles_Data\Managed\UnityEngine.PlaymodeTestsRunner.dll (this message is harmless)
-Loading C:\Users\Aris\Documents\Github\Tower-Defense\Tower Defense-Grid (Aris)\Executable\ProjecTiles_Data\Managed\UnityEngine.PlaymodeTestsRunner.dll into Unity Child Domain
-- Completed reload, in  0.037 seconds
-Platform assembly: C:\Users\Aris\Documents\Github\Tower-Defense\Tower Defense-Grid (Aris)\Executable\ProjecTiles_Data\Managed\System.Core.dll (this message is harmless)
-Platform assembly: C:\Users\Aris\Documents\Github\Tower-Defense\Tower Defense-Grid (Aris)\Executable\ProjecTiles_Data\Managed\System.dll (this message is harmless)
+Platform assembly: C:\Users\Aris\Documents\Github\Tower-Defense\ProjectTiles Complete\Executable\ProjecTiles_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\Aris\Documents\Github\Tower-Defense\ProjectTiles Complete\Executable\ProjecTiles_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\Aris\Documents\Github\Tower-Defense\ProjectTiles Complete\Executable\ProjecTiles_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\Aris\Documents\Github\Tower-Defense\ProjectTiles Complete\Executable\ProjecTiles_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\Aris\Documents\Github\Tower-Defense\ProjectTiles Complete\Executable\ProjecTiles_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\Aris\Documents\Github\Tower-Defense\ProjectTiles Complete\Executable\ProjecTiles_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\Aris\Documents\Github\Tower-Defense\ProjectTiles Complete\Executable\ProjecTiles_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\Users\Aris\Documents\Github\Tower-Defense\ProjectTiles Complete\Executable\ProjecTiles_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: C:\Users\Aris\Documents\Github\Tower-Defense\ProjectTiles Complete\Executable\ProjecTiles_Data\Managed\UnityEngine.PlaymodeTestsRunner.dll (this message is harmless)
+Loading C:\Users\Aris\Documents\Github\Tower-Defense\ProjectTiles Complete\Executable\ProjecTiles_Data\Managed\UnityEngine.PlaymodeTestsRunner.dll into Unity Child Domain
+- Completed reload, in  0.036 seconds
+Platform assembly: C:\Users\Aris\Documents\Github\Tower-Defense\ProjectTiles Complete\Executable\ProjecTiles_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\Aris\Documents\Github\Tower-Defense\ProjectTiles Complete\Executable\ProjecTiles_Data\Managed\System.dll (this message is harmless)
 desktop: 1680x1050 60Hz; virtual: 3360x1050 at -1680,0
 <RI> Initializing input.
 <RI> Input initialized.
 <RI> Initialized touch support.
-UnloadTime: 1.102210 ms
+UnloadTime: 1.162510 ms
+Executing finally block.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
 Executing finally block.
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
 Unloading 6 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 2.086568 ms
+UnloadTime: 1.907658 ms
 
-Unloading 151 unused Assets to reduce memory usage. Loaded Objects now: 364.
-Total: 0.337794 ms (FindLiveObjects: 0.047291 ms CreateObjectMapping: 0.019767 ms MarkObjects: 0.224946 ms  DeleteObjects: 0.044538 ms)
+Unloading 151 unused Assets to reduce memory usage. Loaded Objects now: 313.
+Total: 0.323531 ms (FindLiveObjects: 0.059301 ms CreateObjectMapping: 0.018516 ms MarkObjects: 0.199423 ms  DeleteObjects: 0.044288 ms)
 
-0 -Difficulty
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.357811 ms
+
+Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 346.
+Total: 0.334040 ms (FindLiveObjects: 0.050043 ms CreateObjectMapping: 0.014762 ms MarkObjects: 0.256973 ms  DeleteObjects: 0.011009 ms)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.367819 ms
+
+Unloading 9 unused Assets to reduce memory usage. Loaded Objects now: 313.
+Total: 0.265981 ms (FindLiveObjects: 0.045289 ms CreateObjectMapping: 0.014512 ms MarkObjects: 0.192917 ms  DeleteObjects: 0.012010 ms)
 
 Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
-Executing finally block.
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-UnloadTime: 0.602275 ms
-
-Unloading 9 unused Assets to reduce memory usage. Loaded Objects now: 349.
-Total: 0.314524 ms (FindLiveObjects: 0.057800 ms CreateObjectMapping: 0.017765 ms MarkObjects: 0.225946 ms  DeleteObjects: 0.012010 ms)
-
-Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 0.403852 ms
-
-Unloading 3 unused Assets to reduce memory usage. Loaded Objects now: 329.
-Total: 0.296008 ms (FindLiveObjects: 0.058050 ms CreateObjectMapping: 0.014512 ms MarkObjects: 0.212435 ms  DeleteObjects: 0.009508 ms)
-
-Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 0.358562 ms
+UnloadTime: 0.546224 ms
 
 Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 349.
-Total: 0.332289 ms (FindLiveObjects: 0.057049 ms CreateObjectMapping: 0.018265 ms MarkObjects: 0.250968 ms  DeleteObjects: 0.004754 ms)
-
-Executing finally block.
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 2.751398 ms
-
-Unloading 174 unused Assets to reduce memory usage. Loaded Objects now: 332.
-Total: 0.389589 ms (FindLiveObjects: 0.091329 ms CreateObjectMapping: 0.019266 ms MarkObjects: 0.225946 ms  DeleteObjects: 0.052045 ms)
-
-Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 0.422117 ms
-
-Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 365.
-Total: 0.333790 ms (FindLiveObjects: 0.060302 ms CreateObjectMapping: 0.014762 ms MarkObjects: 0.247715 ms  DeleteObjects: 0.009758 ms)
-
-Executing finally block.
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 0.571748 ms
-
-Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 329.
-Total: 0.305516 ms (FindLiveObjects: 0.053546 ms CreateObjectMapping: 0.016764 ms MarkObjects: 0.227948 ms  DeleteObjects: 0.004253 ms)
-
-Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 0.485172 ms
-
-Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 463.
-Total: 0.386086 ms (FindLiveObjects: 0.057049 ms CreateObjectMapping: 0.016264 ms MarkObjects: 0.305516 ms  DeleteObjects: 0.006005 ms)
-
-Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 0.725632 ms
-
-Unloading 29 unused Assets to reduce memory usage. Loaded Objects now: 329.
-Total: 0.310520 ms (FindLiveObjects: 0.042787 ms CreateObjectMapping: 0.015263 ms MarkObjects: 0.231952 ms  DeleteObjects: 0.018766 ms)
-
-Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 0.509944 ms
-
-Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 349.
-Total: 0.304515 ms (FindLiveObjects: 0.051294 ms CreateObjectMapping: 0.014762 ms MarkObjects: 0.232953 ms  DeleteObjects: 0.004503 ms)
+Total: 0.320528 ms (FindLiveObjects: 0.049042 ms CreateObjectMapping: 0.025021 ms MarkObjects: 0.239958 ms  DeleteObjects: 0.005504 ms)
 
 Executing finally block.
  
@@ -115,4 +67,4 @@ Quit
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
 Setting up 1 worker threads for Enlighten.
-  Thread -> id: 1134 -> priority: 1 
+  Thread -> id: 1528 -> priority: 1 
