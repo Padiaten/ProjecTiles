@@ -1,7 +1,6 @@
-# Tower-Defense
+# ProjecTiles
  
  A Tower Defense-like game
- 
-UNDER CONSTRUCTION
 
-PROCEED WITH CAUTION
+Δημιουργήθηκε από το αTEAMo team.
+Το παρόν αποτελεί παραδοτέα εργασία για το μάθημα "Τεχνολογία Λογισμικού" του τμήματος Εφαρμοσμένης Πληροφορικής του Πανεπιστημίου Μακεδονίας.

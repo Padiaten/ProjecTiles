@@ -18,14 +18,14 @@ Platform assembly: C:\Users\Aris\Documents\Github\Tower-Defense\ProjectTiles Com
 Loading C:\Users\Aris\Documents\Github\Tower-Defense\ProjectTiles Complete\Executable\ProjecTiles_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
 Platform assembly: C:\Users\Aris\Documents\Github\Tower-Defense\ProjectTiles Complete\Executable\ProjecTiles_Data\Managed\UnityEngine.PlaymodeTestsRunner.dll (this message is harmless)
 Loading C:\Users\Aris\Documents\Github\Tower-Defense\ProjectTiles Complete\Executable\ProjecTiles_Data\Managed\UnityEngine.PlaymodeTestsRunner.dll into Unity Child Domain
-- Completed reload, in  0.036 seconds
+- Completed reload, in  0.037 seconds
 Platform assembly: C:\Users\Aris\Documents\Github\Tower-Defense\ProjectTiles Complete\Executable\ProjecTiles_Data\Managed\System.Core.dll (this message is harmless)
 Platform assembly: C:\Users\Aris\Documents\Github\Tower-Defense\ProjectTiles Complete\Executable\ProjecTiles_Data\Managed\System.dll (this message is harmless)
 desktop: 1680x1050 60Hz; virtual: 3360x1050 at -1680,0
 <RI> Initializing input.
 <RI> Input initialized.
 <RI> Initialized touch support.
-UnloadTime: 1.162510 ms
+UnloadTime: 1.147997 ms
 Executing finally block.
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
@@ -35,28 +35,28 @@ Executing finally block.
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
 Unloading 6 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 1.907658 ms
+UnloadTime: 1.944189 ms
 
 Unloading 151 unused Assets to reduce memory usage. Loaded Objects now: 313.
-Total: 0.323531 ms (FindLiveObjects: 0.059301 ms CreateObjectMapping: 0.018516 ms MarkObjects: 0.199423 ms  DeleteObjects: 0.044288 ms)
+Total: 0.315023 ms (FindLiveObjects: 0.042286 ms CreateObjectMapping: 0.024020 ms MarkObjects: 0.202926 ms  DeleteObjects: 0.044788 ms)
 
 Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 0.357811 ms
+UnloadTime: 0.430624 ms
 
 Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 346.
-Total: 0.334040 ms (FindLiveObjects: 0.050043 ms CreateObjectMapping: 0.014762 ms MarkObjects: 0.256973 ms  DeleteObjects: 0.011009 ms)
+Total: 0.282245 ms (FindLiveObjects: 0.032027 ms CreateObjectMapping: 0.019516 ms MarkObjects: 0.223694 ms  DeleteObjects: 0.006005 ms)
 
 Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 0.367819 ms
+UnloadTime: 0.648313 ms
 
 Unloading 9 unused Assets to reduce memory usage. Loaded Objects now: 313.
-Total: 0.265981 ms (FindLiveObjects: 0.045289 ms CreateObjectMapping: 0.014512 ms MarkObjects: 0.192917 ms  DeleteObjects: 0.012010 ms)
+Total: 0.308017 ms (FindLiveObjects: 0.032528 ms CreateObjectMapping: 0.016013 ms MarkObjects: 0.239708 ms  DeleteObjects: 0.018766 ms)
 
 Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 0.546224 ms
+UnloadTime: 0.586760 ms
 
 Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 349.
-Total: 0.320528 ms (FindLiveObjects: 0.049042 ms CreateObjectMapping: 0.025021 ms MarkObjects: 0.239958 ms  DeleteObjects: 0.005504 ms)
+Total: 0.305765 ms (FindLiveObjects: 0.055798 ms CreateObjectMapping: 0.019016 ms MarkObjects: 0.225195 ms  DeleteObjects: 0.004503 ms)
 
 Executing finally block.
  
@@ -67,4 +67,4 @@ Quit
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
 Setting up 1 worker threads for Enlighten.
-  Thread -> id: 1528 -> priority: 1 
+  Thread -> id: 117c -> priority: 1 
