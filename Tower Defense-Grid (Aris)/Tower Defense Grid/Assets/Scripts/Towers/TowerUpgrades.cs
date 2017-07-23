@@ -26,11 +26,11 @@ public static class TowerUpgrades {
 		case 1:
 			if(lvl == 1){
 				damage = 10;
-				atk_cool = 0.8f;
+				atk_cool = 0.6f;
 				proj_sp = 10;
 			}else{
-				damage = 15;
-				atk_cool = 0.5f;
+				damage = 12;
+				atk_cool = 0.6f;
 				range = 1.3f;
 			}
 			break;
@@ -54,11 +54,11 @@ public static class TowerUpgrades {
 		case 4:
 			if(lvl == 1){
 				damage = 5;
-				atk_cool = 0.8f;
+				atk_cool = 1.4f;
 				proj_sp = 7;
 			}else{
 				damage = 7;
-				atk_cool = 0.5f;
+				atk_cool = 1.2f;
 				range = 2;
 			}
 			break;
@@ -76,11 +76,11 @@ public static class TowerUpgrades {
 		case 6:
 			if(lvl == 1){
 				damage = 5;
-				atk_cool = 0.8f;
+				atk_cool = 2f;
 				proj_sp = 10;
 			}else{
 				damage = 7;
-				atk_cool = 0.5f;
+				atk_cool = 1.8f;
 				range = 2;
 			}
 			break;

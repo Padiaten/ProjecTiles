@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//Διαχειρίζεται την οθόνη με τα highscores
 public class ScoreSceneController : MonoBehaviour {
 
 	// Use this for initialization
@@ -10,6 +11,7 @@ public class ScoreSceneController : MonoBehaviour {
 		ShowScore ();
 	}
 
+	//Τυπώνει στα αντίστοιχα frames τις αντίστοιχες τιμές
 	public void ShowScore(){
 		string numScore = "", numDif = "";
 		for(int i = 0; i<3; i++){
@@ -21,8 +23,9 @@ public class ScoreSceneController : MonoBehaviour {
 		}
 	}
 
+	//Καλείται όταν πατηθέι το κουμπι για τον μηδενισμό των highscores 
 	public void Reset(){
-		StatisticsData.ResetHighscores ();
-		ShowScore ();
+		StatisticsData.ResetHighscores ();//τα μηδενίζει
+		ShowScore ();//τα ξαναεμφανίζει αλλά τώρα πλέον έχουν μηδενικές τιμες
 	}
 }

@@ -6,18 +6,17 @@ using System;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Serialization;
 
+//Διαχειρίζεται τα δεδομένα του παιχνιδιού 
 public static class GameData{
 	//FILE
 	private static string filePath;
 	//DATA
 	private static int difficulty = 0;
-	private static int progress = 1;
+	private static int progress = 1;//μέχρι ποιο level έχει ξεκλειδώσει
 	private static float musicVolume = 0.5f;
-	//μελλοντικα μπορει να δεχτει ακόμα πολλα ακομη στοιχεια οπως towers που εχει αγορασει κ.τ.λ.
+	//μελλοντικα μπορει να δεχτει πολλα ακομη στοιχεια οπως towers που εχει αγορασει κ.τ.λ.
 
 	public static void Initialize(){
-		Debug.Log ("INITIALIZE DATA");
-
 		string directoryPath = System.IO.Directory.GetCurrentDirectory() + "\\Saves";
 		filePath = directoryPath + "\\savedData.svd";
 
@@ -42,15 +41,14 @@ public static class GameData{
 		}
 	}
 
-
+	//Μεταφορά των δεδομένων από το αρχείο
 	public static void TransferDataFromFile(){
-		Debug.Log ("TRANSFER DATA");
 		try 
 		{
-			AssistantClassGameData acla = new AssistantClassGameData();
+			AssistantClassGameData acla = new AssistantClassGameData();//δημιουργία αντικειμένου από την βοηθητικη κλάση
 			IFormatter formatter = new BinaryFormatter();
 			Stream stream = new FileStream (filePath,FileMode.Open);
-			acla = (AssistantClassGameData)formatter.Deserialize(stream);
+			acla = (AssistantClassGameData)formatter.Deserialize(stream);//αποσειριοποίηση
 			stream.Close ();
 			acla.Load();
 		}
@@ -64,14 +62,14 @@ public static class GameData{
 		}
 	}
 
+	//Αποθήκευση των δεδομένων
 	public static void Save(){
-		Debug.Log ("SAVE DATA");
 		try {
-			AssistantClassGameData acla = new AssistantClassGameData();
+			AssistantClassGameData acla = new AssistantClassGameData();//δημιουργία αντικειμένου από την βοηθητικη κλάση
 			acla.TransferDataFromGameData();
 			IFormatter formatter = new BinaryFormatter();
 			Stream stream = new FileStream (filePath,FileMode.Truncate);
-			formatter.Serialize (stream,acla);
+			formatter.Serialize (stream,acla);//σειριοποίηση
 			stream.Close ();
 		}
 		catch(Exception e)
@@ -100,6 +98,11 @@ public static class GameData{
 	}
 }
 
+/*βοηθητική κλάση. Χρησιμοποιείται διότι η GameData λόγω του ότι είναι στατική δεν γίνεται να σειριοποιηθεί
+*υπηρχε και άλλος τρόπος για την αποθηκευση της αλλά έπρεπε όλα τα πεδία της να γίνουν public οπότε προτίμησα αυτόν
+*τραβάει ουσιαστικά όλες τις τιμές από την GameData σειριοποιείται και αποθηκεύεται
+*όταν "αποσειριοποιηθεί" περνάει τις τιμές της στην GameData
+*/
 [Serializable]
 public class AssistantClassGameData{
 
@@ -110,12 +113,14 @@ public class AssistantClassGameData{
 	public AssistantClassGameData(){
 	}
 
+	//μεταφορά των τιμών των πεδίων της στα πεδία της GameData. Είναι το αντίστροφο της TransferDataFromGameData
 	public void Load(){
 		GameData.Difficulty = difficulty;
 		GameData.Progress = progress;
 		GameData.MusicVolume = musicVolume;
 	}
 
+	//μεταφορα των δεδομένων από την GameData στα δικά της πεδία
 	public void TransferDataFromGameData(){
 		difficulty = GameData.Difficulty;
 		progress = GameData.Progress;

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//διαχειρίζεται τα wave του survival mode
+//διαχειρίζεται τα wave του survival mode.κληρονομεί την Wave
 public class SurvivalWaves : Wave {
 	private static int InitiaEnemiesNumber = 10;//με ποσα enemies/κυμα θα ξεκινησει το παιχνιδι 
 	private static int EnemyAdder = 10;//ποσα παραπανω enemies θα βγαινουν σε καθε κυμα

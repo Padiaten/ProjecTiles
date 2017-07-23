@@ -128,10 +128,10 @@ public class FlowController : MonoBehaviour {
 		
 	//SCENES IN GAME
 	//Handles game over conditions
+	//Τερματίζει το παιχνίδι εμφανίζει την κατάλληλη οθόνη και κάνει τις απαραίτητες ενέργειες πριν το τερματίσει
 	public void EndGame()
 	{
 		BeforeGameEnds (false);
-		//εχασες μετεφερε τα δεδομενα αποθηκευσε
 		Time.timeScale = 0;
 		gameOverUI.SetActive (true);
 		GameObject.Find ("TextScoreGameOver").GetComponent<Text> ().text = gameFlow.GetComponent<Player> ().EndScore.ToString ();
@@ -141,13 +141,13 @@ public class FlowController : MonoBehaviour {
 			GameObject.Find("ScoreOrHighscoreGO").GetComponent<Text>().text = "SCORE";
 	}
 	//Handles level complete conditions
+	//Καλείται όταν συμπληρωθει το level εμφανίζει την κατάλληλη οθόνη και κάνει τις απαραίτητες ενέργειες πριν γίνει αυτό
 	public void LevelComplete(){
 		BeforeGameEnds (true);
 		if(LevelHandler.Selected_level >= GameData.Progress){
 			GameData.Progress = LevelHandler.Selected_level + 1;
 			GameData.Save ();
 		}
-		//νικησες μετεφερε τα δεδομενα αποθηκευσε
 		Time.timeScale = 0;
 		levelCompleteUI.SetActive (true);
 		GameObject.Find ("TextScoreLevelComplete").GetComponent<Text> ().text = gameFlow.GetComponent<Player> ().EndScore.ToString (); 
@@ -157,12 +157,10 @@ public class FlowController : MonoBehaviour {
 			GameObject.Find("ScoreOrHighscoreLC").GetComponent<Text>().text = "SCORE";
 	}
 	//Handles pause menu
+	//Καλειται όταν πατηθεί το escape και εμφανίζει το μενού της παύσης
 	public void Pause()
 	{
-
-		//αποθηκευσε τα δεδομενα στο if οχι μεταφορα λογω διπλοεγγραφης
 		pauseUI.SetActive (!pauseUI.activeSelf);
-	
 		if (pauseUI.activeSelf) {
 			GameObject cover = new GameObject("Cover");
 			cover.transform.position = new Vector3(0,0,-5);
@@ -182,6 +180,7 @@ public class FlowController : MonoBehaviour {
 
 	//MENU BUTTON IN GAME
 	//Gets triggered by "CONTINUE" button on pause menu
+	//Καλείται όταν πατήθεί το κουμπι continue κάνοντας τις απαραίτητες ενέργειες
 	public void Continue(){
 		pauseUI.SetActive (false);
 		GameObject cov = GameObject.Find("Cover");
@@ -191,14 +190,12 @@ public class FlowController : MonoBehaviour {
 	}
 
 	//Handles restarting
+	//Καλείται όταν πατήθεί το κουμπι restart κάνοντας τις απαραίτητες ενέργειες
 	public void Restart()
 	{
 		if(pauseUI.activeSelf)
 		{
 			BeforeGameEnds (false);
-		//σε καθε load MainGame numberOfGames++
-		//αν καλειται απο την παυση
-		//τελος εχασες μετεφερε τα δεδομενα αποθηκευσε
 		}
 		SceneManager.LoadScene ("MainGame");
 		Time.timeScale = 1f;
@@ -206,25 +203,26 @@ public class FlowController : MonoBehaviour {
 	}
 
 	//Goto main menu
+	//Καλείται όταν πατήθεί το κουμπι menu κάνοντας τις απαραίτητες ενέργειες
 	public void Menu()
 	{
 		if(pauseUI.activeSelf){
 			BeforeGameEnds (false);
-		//τελος εχασε μετεφερε τα δεδομενα αποθηκευσε
 		}
 		SceneManager.LoadScene ("MainMenu");
 		Time.timeScale = 1f;
 	}
 
 	//Goto level select menu
+	//Καλείται όταν πατήθεί το κουμπι continue από την οθόνη levelComplete κάνοντας τις απαραίτητες ενέργειες
 	public void ContinueLevelCompleteUI()
 	{
-		//analoga survivval or story na bgazei kai scene
 		SceneManager.LoadScene ("LevelSelect");
 		Time.timeScale = 1f;
 	}
 
 	//Gets triggered by "STATISTICS" button,shows statistics 
+	//Καλείται όταν πατήθεί το κουμπι Statistics κάνοντας τις απαραίτητες ενέργειες
 	public void StatisticsButton(bool mainStatistics)
 	{
 		if (levelCompleteUI.activeSelf) {
@@ -240,6 +238,7 @@ public class FlowController : MonoBehaviour {
 	}
 
 	//Gets triggered by "RETURN" button,hides statistics 
+	//Καλείται όταν πατήθεί το κουμπι return κάνοντας τις απαραίτητες ενέργειες
 	public void Return()
 	{
 		GetComponent<StatisticsMenuController> ().enabled = false;
@@ -251,6 +250,7 @@ public class FlowController : MonoBehaviour {
 	}
 
 	//Some statistics handling
+	//Καλείται πριν τερματιστεί ένα παιχνίδι κάνοντας τις απαραίτητες ενέργειες
 	public void BeforeGameEnds(bool win)
 	{
 		if(win)

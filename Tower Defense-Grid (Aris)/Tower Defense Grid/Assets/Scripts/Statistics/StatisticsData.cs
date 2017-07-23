@@ -6,10 +6,10 @@ using System;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Serialization;
 
-//αποθηκεύονται όλα τα στατιστικά του παιχνιδιού
+//Διαχειρίζεται όλα τα στατιστικά του παιχνιδιού
 public static class StatisticsData {
 
-	private static int maxValueOfDifficulty = 3;//π;όσες διαφορετικες διακριτες τιμε μπορει να παρει η δυσκολία
+	private static int maxValueOfDifficulty = 3;//πόσες διαφορετικες διακριτες τιμε μπορει να παρει η δυσκολία
 	private static int numOfHighscores = 3;//πόσα highscore να υπολογίζει
 	private static int lengthTowers;
 	private static int lengthEnemies;
@@ -209,7 +209,7 @@ public static class StatisticsData {
 		set{ numberOfGames = value; }
 	}
 
-	public static int EndScore{//προσοχη στην χρηση της
+	public static int EndScore{//προσοχη στην χρηση της σε αντιδιαστολή με την SetEndScoreAndHighscores
 		get{ return endScore;}
 		set{ endScore = value; }
 	}
@@ -316,9 +316,8 @@ public static class StatisticsData {
 /*βοηθητική κλάση. Χρησιμοποιείται διότι η StatisticsData λόγω του ότι είναι στατική δεν γίνεται να σειριοποιηθεί
 *υπηρχε και άλλος τρόπος για την αποθηκευση της αλλά έπρεπε όλα τα πεδία της να γίνουν public οπότε προτίμησα αυτόν
 *τραβάει ουσιαστικά όλες τις τιμές από τη StatisticsData σειριοποιείται και αποθηκεύεται
-*όταν "αποσειριοποιηθεί" περνάει τις τιμές τις στην StatisticsData
+*όταν "αποσειριοποιηθεί" περνάει τις τιμές της στην StatisticsData
 */
-
 [Serializable]
 public class AssistantClassStatistics{
 
@@ -343,7 +342,7 @@ public class AssistantClassStatistics{
 	public AssistantClassStatistics(){
 	}
 
-	//μεταφορα των δεδομένων από την StatisticsData στα πεδία της
+	//μεταφορα των δεδομένων από την StatisticsData στα δικά της πεδία
 	public void TransferDataFromStatistics(){
 		numberOfGames = StatisticsData.NumbersOfGames;
 		highscores = StatisticsData.HighScores;

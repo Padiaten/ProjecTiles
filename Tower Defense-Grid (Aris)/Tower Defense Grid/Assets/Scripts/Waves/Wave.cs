@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Περιέχει τις ιδιότητες και τις μεθόδους ενός κύματος 
 public class Wave : MonoBehaviour {
 	public List<GameObject> enemies = new List<GameObject> ();
 
@@ -16,7 +17,8 @@ public class Wave : MonoBehaviour {
 	protected GameObject gameFlow;
 	protected int starTileIndex;
 	protected Transform spawnPoint;
-
+	
+	//Αρχικοποίηση
 	public void Init(int i)
 	{
 		enemyIndex = 0;
@@ -37,6 +39,7 @@ public class Wave : MonoBehaviour {
 		StartCoroutine (WaveSpawner());
 	}
 
+	//Δημιουργει το κύμα
 	IEnumerator WaveSpawner()
 	{
 		outWave = false;
@@ -44,7 +47,7 @@ public class Wave : MonoBehaviour {
 			List<string> wave = waves [waveIndex];
 			for (int i = 0; i < wave.Count; i++) {	
 				ReadList (i,wave);
-
+				//Διαχειρίζεται τον χρόνο μεταξύ των enemies
 				yield return new WaitForSeconds (countdown - oldTiBeEn);
 				for (int j = 0; j < enemiesNumber; j++) {
 					CreateEnemy (enemyIndex);
@@ -60,6 +63,7 @@ public class Wave : MonoBehaviour {
 		outWave = true;
 	}
 
+	//Διαβάζει ένα στοιχείο της λίστας με τα waves
 	public void ReadList(int i,List<string> wave)
 	{
 		int index, oldindex;
@@ -85,6 +89,7 @@ public class Wave : MonoBehaviour {
 		timeBetweenEnemies = float.Parse (values);
 	}
 
+	//Δημιουργεί ένα enemy και κάνει τις απαραίτητες ενέργειες που το συνοδεύουν
 	public void CreateEnemy(int index)
 	{
 		GameObject enem = Instantiate (enemies [index], spawnPoint.position, spawnPoint.rotation);

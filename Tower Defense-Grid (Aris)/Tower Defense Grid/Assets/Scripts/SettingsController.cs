@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//Διαχειρίζεται την οθόνη των settings
 public class SettingsController : MonoBehaviour {
 
 	private GameObject Volume;
@@ -32,12 +33,13 @@ public class SettingsController : MonoBehaviour {
 		GameData.MusicVolume = Volume.GetComponent<Slider> ().value;
 	}
 
-	//Saves game
+	//Καλείται όταν πατηθεί το κουμπί return στην οθόνη των settings ώστε να αποθηκευτούν τυχόν αλλαγές που έχει κάνει ο παίκτης
 	public void SaveData(){
 		GameData.Save ();
 	}
 
 	//Changes difficulty according to slider
+	//όποτε μέσω του slider ο παίκτης αλλάχει τιμή στο επίπεδο δυσκολίας η αλλαγή περνάει και στην GameData
 	public void ChangeDiff(){
 		GameData.Difficulty = (int)Diffic.GetComponent<Slider> ().value;
 	}

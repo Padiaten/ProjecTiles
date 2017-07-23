@@ -17,10 +17,10 @@ public class StatisticsMenuController : MonoBehaviour {
 	private GameObject button;
 	private GameObject buttonPerGame;
 	private GameObject newButton;
-	private int colorPanelCount = 0;//χρησιμοποιείται για 
+	private int colorPanelCount = 0;//χρησιμοποιείται για τον καθορισμό του χρώματος των frame
 	private int lengthEnemiesList,lengthTowersList;
-	private UnityEngine.Object[] enemiesArray;
-	private UnityEngine.Object[] towersArray;
+	private UnityEngine.Object[] enemiesArray;//λίστα με τα towers που υπάρχουν
+	private UnityEngine.Object[] towersArray;//λίστα με τα enemies που υπάρχουν
 	private bool mainStat;
 	private int frameNumber = 0;//αριθμός frame
 	private List<GameObject> allFrames = new List<GameObject> ();//πεεριλαμβάνει όλα τα frames που έχουν δημιουργηθεί
@@ -61,7 +61,7 @@ public class StatisticsMenuController : MonoBehaviour {
 			Destroy (allFrames[i]);
 		}
 		frameNumber = 0;
-		//ξαναδημιουργεί τα frame τα οποία όμως τώρα έχουν τιμές 0
+		//ξαναδημιουργεί τα frame τα οποία όμως τώρα έχουν πάρει τιμές 0
 		FillGridMainStat (perGame);
 	}
 
@@ -79,14 +79,15 @@ public class StatisticsMenuController : MonoBehaviour {
 			buttonPerGame.GetComponentInChildren<Text>().text = "TOTAL";
 		else
 			buttonPerGame.GetComponentInChildren<Text>().text = "PER GAME";
-		//δημιουργεί τα στατιστικά ανά παιχνίδι
+		//δημιουργεί τα frames που περιέχουν τα στατιστικά ανά παιχνίδι
 		FillGridMainStat (perGame);
 	}
 
-	//η κύρια κλάση για τη δημιουργία των frames για τα κύρια σταιστικά
+	//η κύρια μέθοδος για τη δημιουργία των frames για τα κύρια σταιστικά
 	public void FillGridMainStat(bool perGame)
 	{
-		float divisor = 1f;
+		float divisor = 1f;/*όλα τα στατιστικά διαιρούνται με τον divisor. Αν έχει πατηθεί το κουμπί perGame 
+		ο divisor γίνεται ίσος με τον αριθμό των παιχνιδιών αλλιώς 1*/
 		if (perGame) {
 			divisor = (float)StatisticsData.NumbersOfGames;
 			if (divisor <= 0f)
@@ -97,6 +98,7 @@ public class StatisticsMenuController : MonoBehaviour {
 		CreateTextFrameTime (StatisticsData.Hours,StatisticsData.Minutes,StatisticsData.Seconds,"Total game time");
 		CreateTextFrame ("Wins / Loses",StatisticsData.Wins+" / "+StatisticsData.Loses,1);
 		text = Mathf.RoundToInt ((StatisticsData.Lives / divisor));
+		//αν έχει πατηθεί το κουμπί perGame εμφάνισε και αυτά τα στατιστικά
 		if (perGame) {
 			CreateTextFrame ("Lives lost",text.ToString(),1);
 			text = Mathf.RoundToInt ((StatisticsData.EndScore / divisor));
@@ -118,7 +120,7 @@ public class StatisticsMenuController : MonoBehaviour {
 		CreateTextFrameTowers (StatisticsData.TotalTowers,StatisticsData.SellTowers,divisor);
 	}
 	
-	//η κύρια κλάση για τη δημιουργία των frames για τα στατιστικά κάθε παιχνιδιού
+	//η κύρια μέθοδος για τη δημιουργία των frames για τα στατιστικά κάθε παιχνιδιού
 	public void FillGrid(){
 		CreateTextFrameTime (GetComponent<Player> ().Hours,GetComponent<Player> ().Minutes,GetComponent<Player> ().Seconds,"Time");
 		CreateTextFrame ("End score",GetComponent<Player> ().EndScore.ToString(),1);
@@ -132,7 +134,7 @@ public class StatisticsMenuController : MonoBehaviour {
 		CreateButton ("MORE > >",true);
 	}
 
-	//δημιουργία κουμπιου
+	//δημιουργία κουμπιου more ή less
 	public void CreateButton(string nameButton,bool more){
 		newButton = Instantiate (button,new Vector3(0,0,0),Quaternion.identity);
 		newButton.transform.Find("TextMoreOrLess").GetComponent<Text>().text = nameButton;
@@ -146,20 +148,27 @@ public class StatisticsMenuController : MonoBehaviour {
 
 	//καλέιται όταν πατηθεί το κουμπί more
 	public void More(){
+		//καταστρέφει το υπάρχον κουμπί
 		Destroy (newButton);
+		//δημιουργεί τα επιπλέον στατιστικά και τα εμφανίζει
 		CreateTextFrameEnemies (GetComponent<Player> ().Killist,GetComponent<Player> ().FinishList,1);
 		CreateTextFrameTowers (GetComponent<Player> ().TotalTowers,GetComponent<Player> ().SellTowers,1);
+		//δημιουργεί το κουμπί less
 		CreateButton ("< < LESS",false);
 	}
 
 	//καλέιται όταν πατηθεί το κουμπί less
 	public void Less(){
+		//καταστρέφει το υπάρχον κουμπί
 		Destroy (newButton);
+		//καταστρέφει τα frames με τα επιπλέον στατιστικά
 		for (int i = StartDestroyFrame; i <= EndDestroyFrame; i++) {
 			Destroy (GameObject.Find("TextFrame"+i));
 			frameNumber--;
 		} 
+		//δημιουργεί το κουμπί more
 		CreateButton ("MORE > >",true);
+		//θέτει την τιμή 1 στο scrollbar έτσι ώστε να δείχνει στην αρχή της λίστας με τα στατιστικά
 		GameObject.Find ("Scrollbar").GetComponent<Scrollbar> ().value = 1;
 	}
 
@@ -186,12 +195,14 @@ public class StatisticsMenuController : MonoBehaviour {
 		CreateTextFrame (title,timeText,1);
 	}
 
+	//δημιουργεί τα frames που περιέχουν τα στατιστικά για τους πύργους
 	public void CreateTextFrameTowers(List<int> totalList,List<int> sellList,float divisor)
 	{
 		float sum = CountTotalOfList (totalList);
 		int percentage;
 		int text;
 
+		//πυργοί που έχει βάλει ο παίκτης στο παιχνίδι
 		sum = Mathf.RoundToInt((sum / divisor));
 		CreateTextFrame ("Towers built",sum.ToString(),1);
 		for (int i = 0; i < lengthTowersList; i++) {
@@ -206,6 +217,7 @@ public class StatisticsMenuController : MonoBehaviour {
 				CreateTextFrame ("-"+towersArray[i].name,text+" - "+percentage.ToString()+"%",4);
 		}
 
+		//πύργοι που έχουν πουληθεί
 		sum = CountTotalOfList (sellList);
 		sum = Mathf.RoundToInt((sum / divisor));
 		CreateTextFrame ("Towers sold",sum.ToString(),1);
@@ -222,6 +234,8 @@ public class StatisticsMenuController : MonoBehaviour {
 		}
 	}
 
+	/*Δημοιυργεί τα frames που περιέχουν τα στατιστικά για τα enemies συνολικά και καλεί την συνάρτηση για την 
+	δημιουργία των frames με τα σταιστικά για τα enemies που έχει σκοτώσει ο παίκτης και τα enemies που έχουν τερματίσει*/
 	public void CreateTextFrameEnemies(List<int> killist,List<int> finishlist,float divisor)
 	{ 
 		int percentage,text;
@@ -230,6 +244,7 @@ public class StatisticsMenuController : MonoBehaviour {
 		float sumOfFinish = CountTotalOfList (finishlist);
 		float totalEnemies = sumOfKills + sumOfFinish;
 
+		//Δημιουργεί τα frames με τα στατιστικά των enemies συνολικά
 		totalEnemies = Mathf.RoundToInt((totalEnemies/divisor));
 		CreateTextFrame ("Total enemies spawned",totalEnemies.ToString(),1);
 		for (int i = 0; i < lengthEnemiesList; i++) {
@@ -245,10 +260,12 @@ public class StatisticsMenuController : MonoBehaviour {
 				CreateTextFrame ("-"+enemiesArray[i].name,text.ToString()+" - "+percentage.ToString()+"%",4);
 		}
 
+		//Κλήση των συναρτήσεων για την δημιουργία των frames με τα σταιστικά για τα enemies που έχει σκοτώσει ο παίκτης και τα enemies που έχουν τερματίσει
 		CreateTextFrameEnemy (sumOfKills,totalEnemies,killist,"Enemies killed",4,lengthEnemiesList,divisor);
 		CreateTextFrameEnemy (sumOfFinish,totalEnemies,finishlist,"Enemies not killed",4,lengthEnemiesList,divisor);
 	}
 
+	//δημιουργεί τα frames με τα στατιστικά για την λίστα με τα enemies που θα του δοθεί ως όρισμα
 	public void CreateTextFrameEnemy(float sumOfList,float total,List<int> list,string title,int startSpaces,int size,float divisor)
 	{
 		//startSpaces: απο τι εσοχη θα ξεκιναει
@@ -276,9 +293,10 @@ public class StatisticsMenuController : MonoBehaviour {
 		}
 	}
 
+	//δημιουργεί ένα frame με τα δεδομένα που του δίνονται
 	public void CreateTextFrame (string textTitle,string textData,int numOfspaces)
 	{
-		//NumOfSpaces: ουσιαστικα δηλωνει πόσο μεσα θα βρισκεται(?).κατωτατο καλο ειναι να μπαινει το 1 και οχι το 0
+		//NumOfSpaces: ουσιαστικα δηλωνει πόσο μεσα θα βρισκεται(?).κατωτατο καλο(αισθητικά) ειναι να μπαινει το 1 και οχι το 0
 		string space = "";
 		for (int i = 0; i < numOfspaces; i++) {
 			space = space + " ";
@@ -288,15 +306,18 @@ public class StatisticsMenuController : MonoBehaviour {
 		newTextFrame.transform.Find ("TextData").GetComponent<Text> ().text = textData;
 		newTextFrame.transform.SetParent (Grid.transform);
 		newTextFrame.name = "TextFrame"+frameNumber;
+		//εναλλαγή των χρωμάτων των frames ώστε να είναι ποιο εύκολη η ανάγνωση τους από τον χρήστη
 		if (colorPanelCount % 2 == 0)
 			newTextFrame.transform.Find ("Panel").GetComponent<Image> ().color = new Color (0.5F, 0.5F, 0.5F, 0.5F);
 		else
 			newTextFrame.transform.Find ("Panel").GetComponent<Image> ().color = new Color (0.0F, 0.0F, 0.0F, 0.5F);
+		
 		allFrames.Add (newTextFrame);
 		colorPanelCount++;
 		frameNumber++;
 	} 
 
+	//Δέχεται μία λίστα ως όρισμα και επιστρέφει το άθροισμα των στοιχείων της
 	public float CountTotalOfList(List<int> list)
 	{
 		float total = 0f;

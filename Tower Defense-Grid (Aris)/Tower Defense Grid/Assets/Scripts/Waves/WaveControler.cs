@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
+//Ελέγχει τα κύματα
 public class WaveControler : MonoBehaviour {
 	public GameObject Wave;
 	public GameObject SurvivalWave;
@@ -22,6 +22,7 @@ public class WaveControler : MonoBehaviour {
 		survival = LevelHandler.IsSurvival;
 		numberStartiles = GetComponent<GridController> ().GetStartTiles ().Count;
 		if (!survival) {
+			//Για κάθε είσοδο δημιουργεί και ένα κύμα
 			for (int i = 0; i < numberStartiles; i++) {
 				WaveObjects.Add (Instantiate (Wave) as GameObject);
 				WaveObjects [i].name = "Wave_" + i;
@@ -34,6 +35,7 @@ public class WaveControler : MonoBehaviour {
 		}
 	}
 
+	//Καλεί το επόμενο κύμα αν υπάρχει επόμενο
 	public void callWave()
 	{
 		GameObject.Find ("WaveText").GetComponent<WaveTextController> ().updateText (wavesIndex + 1);
